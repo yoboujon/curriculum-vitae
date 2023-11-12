@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400;700&family=Urbanist:wght@500;600;900&display=swap');
+
+:root {
+    --color-title: #071952;
+    --color-subtitle: #0C356A;
+    --color-special: #0174BE;
+    --color-text: #261C2C;
+    --color-background: #F8F1F1;
+}

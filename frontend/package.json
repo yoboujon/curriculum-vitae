@@ -10,9 +10,13 @@
   "devDependencies": {
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/kit": "^1.20.4",
+    "autoprefixer": "10.4.16",
     "svelte": "^4.0.5",
-    "vite": "^4.4.2",
-    "autoprefixer": "10.4.16"
+    "vite": "^4.4.2"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@jamescoyle/svelte-icon": "^0.1.1",
+    "@mdi/js": "^7.3.67"
+  }
 }
