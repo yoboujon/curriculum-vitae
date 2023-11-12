@@ -5,13 +5,12 @@ use axum::{
 };
 use axum_error::Result;
 use dotenv::dotenv;
-use serde::{Deserialize, Serialize};
-use sqlx::{
-    postgres::{PgPool, PgPoolOptions},
-    types::chrono::NaiveDate,
-};
+use sqlx::postgres::{PgPool, PgPoolOptions};
 use std::net::SocketAddr;
 use tower_http::cors::CorsLayer;
+
+mod db;
+use db::{Education, Experience, Info, Project, Skills};
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -26,6 +25,9 @@ async fn main() -> Result<()> {
     // Creating a router
     let router = Router::new()
         .route("/info", get(info))
+        .route("/education", get(education))
+        .route("/experience", get(experience))
+        .route("/skills", get(skills))
         .with_state(pool)
         .layer(CorsLayer::very_permissive());
 
@@ -36,23 +38,54 @@ async fn main() -> Result<()> {
         .await?)
 }
 
-#[derive(Deserialize, Serialize)]
-struct Info {
-    id: i64,
-    full_name: Option<String>,
-    phone_number: Option<String>,
-    email: Option<String>,
-    softskills: Option<String>,
-    interests: Option<String>,
-    birth_year: Option<NaiveDate>,
-}
-
 async fn info(State(pool): State<PgPool>) -> Result<Json<Vec<Info>>> {
-    let infos = sqlx::query_as!(
+    let datas = sqlx::query_as!(
         Info,
         "SELECT id, full_name, phone_number, email, softskills, interests, birth_year FROM public.info"
     )
     .fetch_all(&pool)
     .await?;
-    Ok(Json(infos))
+    Ok(Json(datas))
+}
+
+async fn education(State(pool): State<PgPool>) -> Result<Json<Vec<Education>>> {
+    let datas = sqlx::query_as!(
+        Education,
+        "SELECT id, start_year, end_year, school, speciality, school_location, school_options FROM public.education"
+    )
+    .fetch_all(&pool)
+    .await?;
+    Ok(Json(datas))
+}
+
+async fn experience(State(pool): State<PgPool>) -> Result<Json<Vec<Experience>>> {
+    let datas = sqlx::query_as!(
+        Experience,
+        "SELECT id, job_position, job_description, enterprise, enterprise_location, start_year, end_year FROM public.experience"
+    )
+    .fetch_all(&pool)
+    .await?;
+    Ok(Json(datas))
+}
+
+async fn skills(State(pool): State<PgPool>) -> Result<Json<(Vec<Project>, Vec<Skills>)>> {
+    // Gathering skills
+    let skills = sqlx::query_as!(
+        Skills,
+        "SELECT id, programming_lang, software, languages FROM public.skills"
+    )
+    .fetch_all(&pool)
+    .await
+    .unwrap();
+
+    // Gathering Projects
+    let projects = sqlx::query_as!(
+        Project,
+        "SELECT id, date_done, title, description, github_link, id_skills FROM public.project"
+    )
+    .fetch_all(&pool)
+    .await
+    .unwrap();
+
+    Ok(Json((projects,skills)))
 }
