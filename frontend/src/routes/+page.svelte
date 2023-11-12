@@ -10,8 +10,8 @@
 	import { mdiAccount, mdiCogs, mdiEmailOutline, mdiLocationEnter, mdiMapMarker, mdiPhone, mdiStar } from '@mdi/js';
 
 	export let data;
-	let cv = processData(data);
-	let birth_year = formatDate(cv.info.birth_year);
+	const cv = data.status == 0 ? processData(data) : undefined;
+  	const birth_year = data.status == 0 ? formatDate(cv.info.birth_year) : undefined;
 </script>
 
 {#if data.status == 0}
