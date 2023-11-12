@@ -1,5 +1,6 @@
 <script>
 	import { processData } from '$lib/processdata.js';
+	import '$lib/cv.css';
 	export let data;
 	let cv = processData(data);
 </script>
