@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400;700&family=Urbanist:wght@500;600;900&display=swap');
 
+html {
+    scroll-behavior: smooth;
+  }
+
 :root {
     --color-title: #071952;
     --color-subtitle: #0C356A;

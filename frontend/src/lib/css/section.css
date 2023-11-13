@@ -1,0 +1,13 @@
+.section-container {
+    margin-top: 3rem;
+    margin-left: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--color-title);
+    filter: drop-shadow(0px 6px 4px rgba(0, 0, 0, 0.15));
+}
+
+.section-h1 {
+    margin-left: 2rem;
+}
