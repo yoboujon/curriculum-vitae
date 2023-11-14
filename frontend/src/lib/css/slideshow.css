@@ -12,7 +12,7 @@
     min-width: 5rem;
     min-height: 5rem;
     background-color: var(--color-special);
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    box-shadow: 0px 2px 5px -1px rgba(0, 0, 0, 0.2);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -20,4 +20,14 @@
     color: var(--color-background);
     border: 0;
     transition: all .3s ease 0s;
+}
+
+.slideshow_btn:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: 0 0.7px 3px -1px rgba(150,170,180,0.5) !important;
+}
+
+.slideshow_btn:active {
+    background-color: var(--color-subtitle);
+    transform: translateY(0);
 }

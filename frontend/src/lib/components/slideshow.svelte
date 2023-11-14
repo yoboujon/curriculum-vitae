@@ -22,7 +22,7 @@
             if (slideshow_hidden.includes(id)) {
                 transformValue = slideshow_index * 60;
             } else {
-                transformValue = slideshow_index * 47.7;
+                transformValue = slideshow_index * 54.75;
             }
             element.style.transform = `translateX(-${transformValue}rem)`;
         });
