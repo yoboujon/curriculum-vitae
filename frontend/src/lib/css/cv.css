@@ -14,7 +14,7 @@ html {
 .sidebar {
     width: 100%;
     height: 100%;
-    flex-basis: 25rem;
+    flex-basis: 20rem;
     background-color: var(--color-special);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     z-index: 2;
@@ -27,7 +27,7 @@ html {
 }
 
 .profile-picture {
-    width: 10rem;
+    width: 9rem;
     height: auto;
     margin: 2rem;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
@@ -49,36 +49,12 @@ h1 {
     color: var(--color-title);
     font-family: 'Urbanist', sans-serif;
     font-weight: 600;
-    font-size: 4rem;
+    font-size: 3rem;
 }
 
 h2 {
     color: var(--color-subtitle);
     font-family: 'Urbanist', sans-serif;
     font-weight: 500;
-    font-size: 2rem;
-}
-
-.education {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.education_btn {
-    z-index: 5;
-    position: absolute;
-    right: 0;
-    margin-right: 2.5rem;
-    min-width: 8rem;
-    min-height: 8rem;
-    background-color: var(--color-special);
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--color-background);
-    border: 0;
-    transition: all .3s ease 0s;
+    font-size: 1.5rem;
 }

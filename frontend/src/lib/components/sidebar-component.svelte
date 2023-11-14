@@ -11,7 +11,7 @@
 
 <div class="sc-container">
     <div class="sc-icon">
-        <SvgIcon size="50" path={icon} type="mdi"/>
+        <SvgIcon size="45" path={icon} type="mdi"/>
     </div>
     <h1 class="text sc-title">{title}</h1>
     {#each descriptionArray as text}

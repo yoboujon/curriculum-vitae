@@ -1,3 +1,4 @@
+
 <script>
     import "$lib/css/education.css";
 
