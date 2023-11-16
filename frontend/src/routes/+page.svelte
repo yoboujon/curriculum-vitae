@@ -18,21 +18,43 @@
 	// Main
 	import Section from "$lib/components/section.svelte";
 	import Education from "$lib/components/education.svelte";
-	import Experience from "$lib/components/experience.svelte"
+	import Experience from "$lib/components/experience.svelte";
 	import SlideShow from "$lib/components/slideshow.svelte";
-	import { mdiSchool,mdiBriefcase } from "@mdi/js";
+	import { mdiSchool, mdiBriefcase } from "@mdi/js";
+	import { onMount, afterUpdate } from "svelte";
 
 	export let data;
 	const cv = data.status == 0 ? processData(data) : undefined;
 	const birth_year =
 		data.status == 0 ? formatDate(cv.info.birth_year) : undefined;
-	console.log(cv.experience)
+
+	// Sidebar sticky
+	let sidebar;
+	let sidebar_height = 0;
+	$: scrollY = 0;
+	$: innerHeight = 0;
+	onMount(() => {
+		sidebar_height = sidebar.offsetHeight;
+		sidebarScrollingHandler();
+	});
+
+	function sidebarScrollingHandler() {
+		if(scrollY+innerHeight >= sidebar_height) {
+			const translateValue = (scrollY+innerHeight)-sidebar_height;
+			sidebar.style.transform = `translateY(${translateValue}px)`;
+		}
+		else {
+			sidebar.style.transform = '';
+		}
+	}
 </script>
+
+<svelte:window bind:scrollY bind:innerHeight on:scroll={sidebarScrollingHandler} />
 
 {#if data.status == 0}
 	<div class="container-cv">
 		<!-- SIDEBAR DIV (LEFT) -->
-		<div class="sidebar">
+		<div class="sidebar" bind:this={sidebar}>
 			<div class="profile-picture-container">
 				<img
 					class="profile-picture"
@@ -65,9 +87,19 @@
 			<h1 class="name">{cv.info.full_name}</h1>
 			<h2 class="name">Apprentice Engineer Automatic/Electronic</h2>
 			<Section icon={mdiSchool} title="Education" />
-			<SlideShow data={cv.education} type={Education} typename="education" timeline=true />
+			<SlideShow
+				data={cv.education}
+				type={Education}
+				typename="education"
+				timeline="true"
+			/>
 			<Section icon={mdiBriefcase} title="Experience" />
-			<SlideShow data={cv.experiences} type={Experience} typename="experience" timeline=true />
+			<SlideShow
+				data={cv.experiences}
+				type={Experience}
+				typename="experience"
+				timeline="true"
+			/>
 		</div>
 	</div>
 {:else}

@@ -28,7 +28,7 @@
                     top: element.offsetTop,
                 });
             }
-            for (const div of createTimeLine(bubbles,typename)) {
+            for (const div of createTimeLine(bubbles, typename)) {
                 slideshow.appendChild(div);
             }
         });
@@ -38,10 +38,10 @@
         const slideshowElements = document.querySelectorAll(
             `.${typename}-container`
         );
-        const slideshowTimeline =
-            document.querySelectorAll(`.${typename}-string`);
+        const slideshowTimeline = document.querySelectorAll(
+            `.${typename}-string`
+        );
 
-        console.log(slideshowTimeline);
         if (slideshow_index >= data.length - 1) {
             slideshow_hidden = [];
             slideshow_index = 0;
