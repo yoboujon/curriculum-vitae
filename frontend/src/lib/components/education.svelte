@@ -5,13 +5,12 @@
 
     export let active = false;
     export let data;
-    export let picture =
-        "https://bib.insa-toulouse.fr/_resource/info_pratiques/INSA-Venir-Bib-photo-8_0.jpg";
-
+    
     const title = data.school;
     const location = data.school_location;
     const speciality = data.speciality;
     const option = data.school_options;
+    const picture = data.picture_url;
 </script>
 
 <div class="education-main {active ? '' : 'education-unactive'}">

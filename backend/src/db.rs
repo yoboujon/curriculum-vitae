@@ -21,6 +21,7 @@ pub struct Education {
     pub speciality: Option<String>,
     pub school_location: Option<String>,
     pub school_options: Option<String>,
+    pub picture_url: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]

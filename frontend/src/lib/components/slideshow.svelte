@@ -17,14 +17,16 @@
             slideshow_hidden.push(slideshow_index);
             slideshow_index++;
         }
-        let transformValue;
-        slideshowElements.forEach((element, id) => {
-            if (slideshow_hidden.includes(id)) {
-                transformValue = slideshow_index * 60;
-            } else {
-                transformValue = slideshow_index * 54.75;
+        let transformValue = 0;
+        for (const id of slideshow_hidden) {
+                transformValue += (slideshowElements[id].clientWidth+(5*16));
             }
-            element.style.transform = `translateX(-${transformValue}rem)`;
+        slideshowElements.forEach((element, id) => {
+            let newtransformValue = transformValue;
+            if(slideshow_hidden.includes(id)) {
+                newtransformValue*=1.1;
+            }
+            element.style.transform = `translateX(-${newtransformValue}px)`;
         });
     }
 </script>
