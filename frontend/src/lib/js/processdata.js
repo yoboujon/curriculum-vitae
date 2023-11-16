@@ -9,7 +9,7 @@ function arrangeById(array) {
 export function processData(data) {
   if (data.status === 0) {
     const info = data.info[0];
-    const experiences = data.experience;
+    const experiences = arrangeById(data.experience);
     const education = arrangeById(data.education);
     const skills = data.skills[1];
     const projects = data.skills[0];

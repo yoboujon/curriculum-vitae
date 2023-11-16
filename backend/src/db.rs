@@ -33,6 +33,7 @@ pub struct Experience {
     pub enterprise_location: Option<String>,
     pub start_year: Option<NaiveDate>,
     pub end_year: Option<NaiveDate>,
+    pub picture_url: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]

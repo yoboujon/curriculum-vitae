@@ -61,7 +61,7 @@ async fn education(State(pool): State<PgPool>) -> Result<Json<Vec<Education>>> {
 async fn experience(State(pool): State<PgPool>) -> Result<Json<Vec<Experience>>> {
     let datas = sqlx::query_as!(
         Experience,
-        "SELECT id, job_position, job_description, enterprise, enterprise_location, start_year, end_year FROM public.experience"
+        "SELECT * FROM public.experience"
     )
     .fetch_all(&pool)
     .await?;

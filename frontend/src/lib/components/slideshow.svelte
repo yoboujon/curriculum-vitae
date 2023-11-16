@@ -8,6 +8,8 @@
     // Exported values
     export let data = [];
     export let type;
+    export let typename;
+    export let timeline = false;
 
     // Slideshow global variables
     let slideshow_index = 0;
@@ -16,32 +18,37 @@
     // Timeline global variables
     let slideshow;
     let bubbles = [];
-    onMount(() => {
-        for (const element of document.getElementsByClassName(
-            "education-bubble"
-        )) {
-            bubbles.push({
-                left: element.offsetLeft,
-                top: element.offsetTop,
-            });
-        }
-        for (const div of createTimeLine(bubbles)) {
-            slideshow.appendChild(div);
-        }
-    });
+    if (timeline) {
+        onMount(() => {
+            for (const element of document.getElementsByClassName(
+                `${typename}-bubble`
+            )) {
+                bubbles.push({
+                    left: element.offsetLeft,
+                    top: element.offsetTop,
+                });
+            }
+            for (const div of createTimeLine(bubbles,typename)) {
+                slideshow.appendChild(div);
+            }
+        });
+    }
 
-    function slideEducation() {
+    function slideCards() {
         const slideshowElements = document.querySelectorAll(
-            ".education-container"
+            `.${typename}-container`
         );
         const slideshowTimeline =
-            document.querySelectorAll(".education-string");
+            document.querySelectorAll(`.${typename}-string`);
 
+        console.log(slideshowTimeline);
         if (slideshow_index >= data.length - 1) {
             slideshow_hidden = [];
             slideshow_index = 0;
-            for(const timeline of slideshowTimeline) {
-                timeline.style.backgroundColor = '';
+            if (timeline) {
+                for (const timeline of slideshowTimeline) {
+                    timeline.style.backgroundColor = "";
+                }
             }
         } else {
             slideshow_hidden.push(slideshow_index);
@@ -58,10 +65,13 @@
                 newtransformValue *= 1.1;
             }
             element.style.transform = `translateX(-${newtransformValue}px)`;
-            if(slideshowTimeline[id] != undefined) {
-                slideshowTimeline[id].style.transform = `translateX(-${transformValue}px)`;
+            if (slideshowTimeline[id] != undefined) {
+                slideshowTimeline[
+                    id
+                ].style.transform = `translateX(-${transformValue}px)`;
                 if (slideshow_hidden.includes(id)) {
-                    slideshowTimeline[id].style.backgroundColor = 'var(--color-background)';
+                    slideshowTimeline[id].style.backgroundColor =
+                        "var(--color-background)";
                 }
             }
         });
@@ -69,7 +79,7 @@
 </script>
 
 <div class="slideshow" bind:this={slideshow}>
-    <button class="slideshow_btn" on:click={slideEducation}>
+    <button class="slideshow_btn" on:click={slideCards}>
         <div>
             <SvgIcon
                 size="45"
