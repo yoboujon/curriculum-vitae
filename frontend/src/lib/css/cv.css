@@ -12,13 +12,19 @@ html {
 }
 
 .sidebar {
-    width: 100%;
-    height: 100%;
-    flex-basis: 20rem;
+    position: absolute;
+    width: 16rem;
+    height: 75rem;
     background-color: var(--color-special);
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     z-index: 2;
     transition: all 0s ease 0s;
+}
+
+.fake-sidebar {
+    width: 100%;
+    flex-basis: 20rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    background-color: var(--color-special);
 }
 
 .profile-picture-container {

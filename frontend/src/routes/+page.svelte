@@ -33,23 +33,26 @@
 	let sidebar_height = 0;
 	$: scrollY = 0;
 	$: innerHeight = 0;
+	$: outerHeight = 0;
 	onMount(() => {
 		sidebar_height = sidebar.offsetHeight;
+		console.log(sidebar_height);
 		sidebarScrollingHandler();
 	});
 
 	function sidebarScrollingHandler() {
 		if(scrollY+innerHeight >= sidebar_height) {
-			const translateValue = (scrollY+innerHeight)-sidebar_height;
-			sidebar.style.transform = `translateY(${translateValue}px)`;
+			sidebar.style.position = 'fixed';
+			sidebar.style.top = `-${sidebar_height-innerHeight}px`;
 		}
 		else {
-			sidebar.style.transform = '';
+			sidebar.style.position = 'absolute';
+			sidebar.style.top = '';
 		}
 	}
 </script>
 
-<svelte:window bind:scrollY bind:innerHeight on:scroll={sidebarScrollingHandler} />
+<svelte:window bind:scrollY bind:innerHeight bind:outerHeight on:scroll={sidebarScrollingHandler} />
 
 {#if data.status == 0}
 	<div class="container-cv">
@@ -82,6 +85,7 @@
 				description={cv.info.softskills}
 			/>
 		</div>
+		<div class="fake-sidebar" />
 		<!-- MAIN DIV (RIGHT) -->
 		<div class="main">
 			<h1 class="name">{cv.info.full_name}</h1>
