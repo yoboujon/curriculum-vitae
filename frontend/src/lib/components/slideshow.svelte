@@ -3,45 +3,84 @@
     import { mdiArrowRight, mdiChevronLeft } from "@mdi/js";
     import "$lib/css/slideshow.css";
     import { onMount } from "svelte";
-    import { createTimeLine } from "$lib/js/timeline.js";
+    import {
+        createTimeLine,
+        slideContainerCount,
+        slideTimelineCount,
+        slideStringCount,
+    } from "$lib/js/slideshow.js";
 
     // Exported values
     export let data = [];
     export let type;
-    export let typename;
     export let timeline = false;
 
     // Slideshow global variables
+
     let slideshow_index = 0;
     let slideshow_hidden = [];
+
+    let slideshowTimeline;
+    let slideshowElements;
 
     // Timeline global variables
     let slideshow;
     let bubbles = [];
-    if (timeline) {
-        onMount(() => {
-            for (const element of document.getElementsByClassName(
-                `${typename}-bubble`
-            )) {
+    onMount(() => {
+        /*    Slideshow    */
+        //global writer count
+        const currentSlideCount = $slideContainerCount;
+        // Sliced array from currentSlideCount to data.length
+        slideshowElements = Array.from(
+            document.querySelectorAll(".slide-container")
+        ).slice(currentSlideCount, currentSlideCount + data.length);
+        // Updating with the current length
+        slideContainerCount.update((value) => {
+            return value + data.length;
+        });
+
+        if (timeline) {
+            /*    SlideTimeline    */
+            //global writer count
+            const currentTimelineCount = $slideTimelineCount;
+            // Creating the string between the bubbles
+            const slideshowBubbles = Array.from(
+                document.querySelectorAll(".slide-bubble")
+            ).slice(currentTimelineCount, currentTimelineCount + data.length);
+
+            // Creating strings
+            for (const element of slideshowBubbles) {
                 bubbles.push({
                     left: element.offsetLeft,
                     top: element.offsetTop,
                 });
             }
-            for (const div of createTimeLine(bubbles, typename)) {
+            const stringTimelineElements = createTimeLine(bubbles);
+            for (const div of stringTimelineElements) {
                 slideshow.appendChild(div);
             }
-        });
-    }
+            // Updating with the current length
+            slideTimelineCount.update((value) => {
+                return value + data.length;
+            });
+            //global writer count
+            const currentStringCount = $slideStringCount;
+            // Sliced array from currentTimelineCount to data.length
+            slideshowTimeline = Array.from(
+                document.querySelectorAll(".slide-string")
+            ).slice(
+                currentStringCount,
+                currentStringCount + stringTimelineElements.length
+            );
+            // Updating with the current length
+            slideStringCount.update((value) => {
+                return value + stringTimelineElements.length;
+            });
+        }
+    });
 
     function slideCards() {
-        const slideshowElements = document.querySelectorAll(
-            `.${typename}-container`
-        );
-        const slideshowTimeline = document.querySelectorAll(
-            `.${typename}-string`
-        );
-
+        // Set or reset slideshow index, hidden array and timeling.
         if (slideshow_index >= data.length - 1) {
             slideshow_hidden = [];
             slideshow_index = 0;
@@ -54,30 +93,41 @@
             slideshow_hidden.push(slideshow_index);
             slideshow_index++;
         }
+
+        // Incrementing the transformValue for each element
         let transformValue = 0;
         for (const id of slideshow_hidden) {
             transformValue += slideshowElements[id].clientWidth;
         }
+
+        // Translating elements
+        console.log(slideshowTimeline)
         slideshowElements.forEach((element, id) => {
+            /* Slideshow translating*/
             let newtransformValue = transformValue;
             if (slideshow_hidden.includes(id)) {
                 // 1.1 because when in 'unactive' state, the scale is 0.9, adjusting the actual ratio
                 newtransformValue *= 1.1;
             }
             element.style.transform = `translateX(-${newtransformValue}px)`;
-            if (slideshowTimeline[id] != undefined) {
-                slideshowTimeline[
-                    id
-                ].style.transform = `translateX(-${transformValue}px)`;
-                if (slideshow_hidden.includes(id)) {
-                    slideshowTimeline[id].style.backgroundColor =
-                        "var(--color-background)";
+
+            /* Slideshow Timeline trnaslating */
+            if (timeline) {
+                if (slideshowTimeline[id] != undefined) {
+                    slideshowTimeline[
+                        id
+                    ].style.transform = `translateX(-${transformValue}px)`;
+                    if (slideshow_hidden.includes(id)) {
+                        slideshowTimeline[id].style.backgroundColor =
+                            "var(--color-background)";
+                    }
                 }
             }
         });
     }
 </script>
 
+{@debug slideContainerCount}
 <div class="slideshow" bind:this={slideshow}>
     <button class="slideshow_btn" on:click={slideCards}>
         <div>

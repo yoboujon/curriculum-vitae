@@ -1,10 +1,10 @@
-.projects-container {
+.slide-container {
     display: flex;
     flex-direction: column;
     transition: all .3s ease 0s;
 }
 
-.projects-main {
+.slide-main {
     display: flex;
     border-radius: 0.4rem;
     box-shadow: 0px 20px 50px -10px rgba(0, 0, 0, 0.2);
@@ -16,42 +16,51 @@
     transition: all .3s ease 0s;
 }
 
-.projects-img-container {
+.slide-unactive {
+    scale: 0.9;
+    margin-left: 2.25rem !important;
+    margin-right: 2.25rem !important;
+    box-shadow: 0 7px 30px -10px rgba(150,170,180,0.5) !important;
+}
+
+.slide-img-container{
     display: flex;
     margin: 1.5rem;
     justify-content: center;
     align-items: center;
 }
 
-.projects-img {
+.slide-img {
     max-height: 15rem;
     min-width: 20rem;
     max-width: 25rem;
 }
 
-.projects-text-container {
+.slide-text-container {
     margin: 1.5rem;
     width: 25rem;
 }
 
-.projects-title {
+.slide-title {
     color: var(--color-text);
     font-family: 'Gabarito', sans-serif;
     font-weight: 600;
     font-size: 2rem;
 }
 
-.projects-subtitle-container {
+.slide-subtitle-container {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.projects-aftericon {
+/* When an icon is put after a subtitle*/
+.slide-aftericon {
     margin-left: 0.5rem;
 }
 
-.projects-subtitle {
+/* Any Subtitle */
+.slide-subtitle {
     color: var(--color-text);
     font-family: 'Gabarito', sans-serif;
     font-weight: 500;
@@ -63,7 +72,8 @@
     text-justify: auto;
 }
 
-.projects-text {
+/* Add it to any text that may overflow. (long texts)*/
+.slide-text {
     font-size: 1.25rem !important;
     overflow: hidden;
     display: -webkit-box;
@@ -72,19 +82,14 @@
     text-overflow: ellipsis;
 }
 
-.projects-unactive {
-    scale: 0.9;
-    margin-left: 2.25rem !important;
-    margin-right: 2.25rem !important;
-    box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5) !important;
-}
-
-.projects-button-container {
+/* For button at the end of the container*/
+.slide-button-container {
     display: flex;
     justify-content: flex-end;
 }
 
-.projects-more-button {
+/* Every button are centered to the right side of the component */
+.slide-button {
     padding-right: 1rem;
     padding-left: 1rem;
     padding-top: 0.5rem;
@@ -103,7 +108,7 @@
     transition: all .3s ease 0s;
 }
 
-.projects-more-button:hover {
+.slide-button:hover {
     color: var(--color-special);
     background-color: var(--color-background);
     box-shadow: 0 0.7px 3px -1px rgba(150,170,180,0.5);
@@ -111,7 +116,44 @@
     border-color: var(--color-special);
 }
 
-.projects-more-button:active {
+.slide-button:active {
     transform: translateY(0.25rem);
     background-color: var(--color-subtitle);
+}
+
+/* Timeline stuff */
+.slide-time {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide-bubble {
+    z-index: 2;
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--color-special);
+    box-shadow: 0px 2px 5px -1px rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    transition: all .3s ease 0s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Date text */
+.slide-date {
+    color: var(--color-special);
+    font-weight: 700;
+}
+
+.slide-string {
+    z-index: -1;
+    position: absolute;
+    height: 3rem;
+    background-color: var(--color-special);
+    opacity: 0.5;
+    transition: all .3s ease 0s;
 }

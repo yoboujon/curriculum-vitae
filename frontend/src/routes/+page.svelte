@@ -34,10 +34,8 @@
 	let sidebar_height = 0;
 	$: scrollY = 0;
 	$: innerHeight = 0;
-	$: outerHeight = 0;
 	onMount(() => {
 		sidebar_height = sidebar.offsetHeight;
-		console.log(sidebar_height);
 		sidebarScrollingHandler();
 	});
 
@@ -53,7 +51,7 @@
 	}
 </script>
 
-<svelte:window bind:scrollY bind:innerHeight bind:outerHeight on:scroll={sidebarScrollingHandler} />
+<svelte:window bind:scrollY bind:innerHeight on:scroll={sidebarScrollingHandler} />
 
 {#if data.status == 0}
 	<div class="container-cv">
@@ -95,22 +93,18 @@
 			<SlideShow
 				data={cv.education}
 				type={Education}
-				typename="education"
 				timeline="true"
 			/>
 			<Section icon={mdiBriefcase} title="Experience" />
 			<SlideShow
 				data={cv.experiences}
 				type={Experience}
-				typename="experience"
 				timeline="true"
 			/>
 			<Section icon={mdiWrench} title="Projects" />
 			<SlideShow
 				data={cv.projects}
 				type={Projects}
-				typename="projects"
-				timeline="false"
 			/>
 			<Section icon={mdiPencil} title="Skills" />
 		</div>

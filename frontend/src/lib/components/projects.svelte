@@ -1,7 +1,7 @@
 <script>
     import SvgIcon from "@jamescoyle/svelte-icon";
     import { mdiCalendarRange, mdiPlus } from "@mdi/js";
-    import "$lib/css/projects.css";
+    import "$lib/css/slide.css";
 
     export let active = false;
     export let data;
@@ -12,26 +12,26 @@
     const picture = data.picture_url;
 </script>
 
-<div class="projects-container">
-    <div class="projects-main {active ? '' : 'projects-unactive'}">
-        <div class="projects-img-container">
-            <img class="projects-img" src={picture} alt="projects" />
+<div class="slide-container">
+    <div class="slide-main {active ? '' : 'slide-unactive'}">
+        <div class="slide-img-container">
+            <img class="slide-img" src={picture} alt="projects" />
         </div>
-        <div class="projects-text-container">
-            <h1 class="projects-title">{title}</h1>
-            <div class="projects-subtitle-container">
+        <div class="slide-text-container">
+            <h1 class="slide-title">{title}</h1>
+            <div class="slide-subtitle-container">
                 <SvgIcon size="35" path={mdiCalendarRange} type="mdi" />
-                <p class="projects-subtitle projects-aftericon">
+                <p class="slide-subtitle slide-aftericon">
                     {issued_date}
                 </p>
             </div>
-            <div class="projects-subtitle-container">
-                <p class="projects-subtitle projects-text">
+            <div class="slide-subtitle-container">
+                <p class="slide-subtitle slide-text">
                     {description}
                 </p>
             </div>
-            <div class="projects-button-container">
-                <button class="projects-more-button">
+            <div class="slide-button-container">
+                <button class="slide-button">
                     <SvgIcon size="20" path={mdiPlus} type="mdi" />
                     More</button
                 >
