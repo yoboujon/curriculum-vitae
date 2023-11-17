@@ -1,0 +1,117 @@
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    transition: all .3s ease 0s;
+}
+
+.projects-main {
+    display: flex;
+    border-radius: 0.4rem;
+    box-shadow: 0px 20px 50px -10px rgba(0, 0, 0, 0.2);
+    background-color: var(--color-background);
+    height: 22rem;
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+    z-index: 1;
+    transition: all .3s ease 0s;
+}
+
+.projects-img-container {
+    display: flex;
+    margin: 1.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.projects-img {
+    max-height: 15rem;
+    min-width: 20rem;
+    max-width: 25rem;
+}
+
+.projects-text-container {
+    margin: 1.5rem;
+    width: 25rem;
+}
+
+.projects-title {
+    color: var(--color-text);
+    font-family: 'Gabarito', sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.projects-subtitle-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.projects-aftericon {
+    margin-left: 0.5rem;
+}
+
+.projects-subtitle {
+    color: var(--color-text);
+    font-family: 'Gabarito', sans-serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    width: 100%;
+    text-align: justify;
+    text-justify: auto;
+}
+
+.projects-text {
+    font-size: 1.25rem !important;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+.projects-unactive {
+    scale: 0.9;
+    margin-left: 2.25rem !important;
+    margin-right: 2.25rem !important;
+    box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5) !important;
+}
+
+.projects-button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.projects-more-button {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5rem;
+    color: var(--color-background);
+    background-color: var(--color-special);
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 700;
+    border: 0.05rem solid;
+    border-color: rgba(0, 0, 0, 0);
+    box-shadow: 0px 2px 5px -1px rgba(0, 0, 0, 0.2);
+    transition: all .3s ease 0s;
+}
+
+.projects-more-button:hover {
+    color: var(--color-special);
+    background-color: var(--color-background);
+    box-shadow: 0 0.7px 3px -1px rgba(150,170,180,0.5);
+    border: 0.05rem solid;
+    border-color: var(--color-special);
+}
+
+.projects-more-button:active {
+    transform: translateY(0.25rem);
+    background-color: var(--color-subtitle);
+}

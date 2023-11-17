@@ -19,9 +19,10 @@
 	import Section from "$lib/components/section.svelte";
 	import Education from "$lib/components/education.svelte";
 	import Experience from "$lib/components/experience.svelte";
+	import Projects from "$lib/components/projects.svelte"
 	import SlideShow from "$lib/components/slideshow.svelte";
-	import { mdiSchool, mdiBriefcase } from "@mdi/js";
-	import { onMount, afterUpdate } from "svelte";
+	import { mdiSchool, mdiBriefcase, mdiWrench, mdiPencil } from "@mdi/js";
+	import { onMount } from "svelte";
 
 	export let data;
 	const cv = data.status == 0 ? processData(data) : undefined;
@@ -104,6 +105,14 @@
 				typename="experience"
 				timeline="true"
 			/>
+			<Section icon={mdiWrench} title="Projects" />
+			<SlideShow
+				data={cv.projects}
+				type={Projects}
+				typename="projects"
+				timeline="false"
+			/>
+			<Section icon={mdiPencil} title="Skills" />
 		</div>
 	</div>
 {:else}
