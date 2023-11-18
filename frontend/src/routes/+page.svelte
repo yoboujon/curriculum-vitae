@@ -94,12 +94,14 @@
 				data={cv.education}
 				type={Education}
 				timeline="true"
+				reverse="true"
 			/>
 			<Section icon={mdiBriefcase} title="Experience" />
 			<SlideShow
 				data={cv.experiences}
 				type={Experience}
 				timeline="true"
+				reverse="true"
 			/>
 			<Section icon={mdiWrench} title="Projects" />
 			<SlideShow

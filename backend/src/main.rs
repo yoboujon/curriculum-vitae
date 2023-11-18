@@ -72,7 +72,7 @@ async fn skills(State(pool): State<PgPool>) -> Result<Json<(Vec<Project>, Vec<Sk
     // Gathering skills
     let skills = sqlx::query_as!(
         Skills,
-        "SELECT id, programming_lang, software, languages FROM public.skills"
+        "SELECT * FROM public.skills"
     )
     .fetch_all(&pool)
     .await
@@ -81,7 +81,7 @@ async fn skills(State(pool): State<PgPool>) -> Result<Json<(Vec<Project>, Vec<Sk
     // Gathering Projects
     let projects = sqlx::query_as!(
         Project,
-        "SELECT id, date_done, title, description, github_link, id_skills FROM public.project"
+        "SELECT * FROM public.project ORDER BY date_done DESC"
     )
     .fetch_all(&pool)
     .await

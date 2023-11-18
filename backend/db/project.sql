@@ -11,6 +11,7 @@ CREATE TABLE public.project (
 	description text NULL,
 	github_link text NULL,
 	id_skills serial4 NOT NULL,
+	picture_name text NULL,
 	CONSTRAINT project_pkey PRIMARY KEY (id),
 	CONSTRAINT project_fk FOREIGN KEY (id_skills) REFERENCES public.skills(id)
 );

@@ -14,6 +14,10 @@
     export let data = [];
     export let type;
     export let timeline = false;
+    export let reverse = false;
+    if(reverse) {
+        data = data.reverse();
+    }
 
     // Slideshow global variables
 
@@ -127,7 +131,6 @@
     }
 </script>
 
-{@debug slideContainerCount}
 <div class="slideshow" bind:this={slideshow}>
     <button class="slideshow_btn" on:click={slideCards}>
         <div>
@@ -140,7 +143,7 @@
             />
         </div>
     </button>
-    {#each data.reverse() as selected_data, index (index)}
+    {#each data as selected_data, index (index)}
         <svelte:component
             this={type}
             data={selected_data}

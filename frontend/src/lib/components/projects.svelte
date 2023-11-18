@@ -1,15 +1,20 @@
 <script>
+    import { onMount } from "svelte";
     import SvgIcon from "@jamescoyle/svelte-icon";
     import { mdiCalendarRange, mdiPlus } from "@mdi/js";
     import "$lib/css/slide.css";
+    import { formatMonth } from "$lib/js/date.js";
 
     export let active = false;
     export let data;
 
     const title = data.title;
     const description = data.description;
-    const issued_date = "2023";
-    const picture = data.picture_url;
+    const issued_date = formatMonth(data.date_done).charAt(0).toUpperCase()+formatMonth(data.date_done).slice(1);
+    let picture;
+    onMount(async () => {
+        picture = (await import(`/src/lib/img/${data.picture_name}`)).default;
+    });
 </script>
 
 <div class="slide-container">
