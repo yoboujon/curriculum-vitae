@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import SvgIcon from "@jamescoyle/svelte-icon";
-    import { mdiCalendarRange, mdiPlus } from "@mdi/js";
+    import { mdiCalendarRange, mdiPlus, mdiAccount, mdiSchool } from "@mdi/js";
     import "$lib/css/slide.css";
     import { formatMonth } from "$lib/js/date.js";
 
@@ -11,6 +11,7 @@
     const title = data.title;
     const description = data.description;
     const issued_date = formatMonth(data.date_done).charAt(0).toUpperCase()+formatMonth(data.date_done).slice(1);
+    const project_type = data.type_project;
     let picture;
     onMount(async () => {
         picture = (await import(`/src/lib/img/${data.picture_name}`)).default;
@@ -31,7 +32,13 @@
                 </p>
             </div>
             <div class="slide-subtitle-container">
-                <p class="slide-subtitle slide-text">
+                <SvgIcon size="35" path={project_type == "School" ? mdiSchool : mdiAccount} type="mdi" />
+                <p class="slide-subtitle slide-aftericon">
+                    {project_type}
+                </p>
+            </div>
+            <div class="slide-subtitle-container">
+                <p class="slide-subtitle slide-text slide-overflow slide-o2 slide-justify">
                     {description}
                 </p>
             </div>

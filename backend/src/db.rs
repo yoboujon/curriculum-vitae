@@ -44,7 +44,8 @@ pub struct Project {
     pub description: Option<String>,
     pub github_link: Option<String>,
     pub id_skills: i64,
-    pub picture_name: Option<String>
+    pub picture_name: Option<String>,
+    pub type_project: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]

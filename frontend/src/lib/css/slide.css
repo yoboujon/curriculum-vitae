@@ -46,6 +46,7 @@
     font-family: 'Gabarito', sans-serif;
     font-weight: 600;
     font-size: 2rem;
+    margin-bottom: 0.5rem;
 }
 
 .slide-subtitle-container {
@@ -68,18 +69,42 @@
     margin-top: 0.75rem;
     margin-bottom: 0.75rem;
     width: 100%;
-    text-align: justify;
-    text-justify: auto;
 }
 
+.slide-justify {
+    text-align: justify;
+    text-justify:auto;
+}
 /* Add it to any text that may overflow. (long texts)*/
 .slide-text {
     font-size: 1.25rem !important;
+}
+
+.slide-overflow {
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
+}
+
+.slide-o1 {
+    -webkit-line-clamp: 1;
+}
+
+.slide-o2 {
+    -webkit-line-clamp: 2;
+}
+
+.slide-o3 {
+    -webkit-line-clamp: 3;
+}
+
+.slide-o4 {
+    -webkit-line-clamp: 4;
+}
+
+.slide-o5 {
+    -webkit-line-clamp: 5;
 }
 
 /* For button at the end of the container*/
