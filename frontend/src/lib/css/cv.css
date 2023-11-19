@@ -73,3 +73,31 @@ h2 {
     flex-direction: row;
     flex-wrap: wrap;
 }
+
+.end {
+    padding-bottom: 3rem;
+}
+
+.footer {
+    position: relative;
+    display: flex;
+    margin-top: 1rem;
+    height: 10rem;
+    background-color: var(--color-text);
+    z-index: 3;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer p {
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--color-background);
+    margin: 0.5rem;
+}
+
+.footer svg {
+    margin: 0;
+}

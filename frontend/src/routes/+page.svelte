@@ -1,4 +1,5 @@
 <script>
+	import SvgIcon from "@jamescoyle/svelte-icon";
 	import { processData } from "$lib/js/processdata.js";
 	import { formatDate } from "$lib/js/date.js";
 	import "$lib/css/base.css";
@@ -15,7 +16,8 @@
 		mdiStar,
 		mdiXml,
 		mdiApplication,
-		mdiEarth
+		mdiEarth,
+		mdiHeart
 	} from "@mdi/js";
 
 	// Main
@@ -26,6 +28,7 @@
 	import Projects from "$lib/components/projects.svelte"
 	import SlideShow from "$lib/components/slideshow.svelte";
 	import Pill from "$lib/components/pill.svelte"
+	import FlagComponent from "$lib/components/flag-component.svelte"
 	import { mdiSchool, mdiBriefcase, mdiWrench, mdiPencil } from "@mdi/js";
 	import { onMount } from "svelte";
 
@@ -120,9 +123,23 @@
 					<Pill name={pilldata.lang} type_icon={pilldata.type_icon} icon={pilldata.icon} color={pilldata.color}/>
 				{/each}
 			</div>
-			<SubSection icon={mdiApplication} title="Softwares"/>
+			<SubSection icon={mdiApplication} title="Software"/>
+			<div class="subsection">
+				{#each cv.skills.softwares as pilldata}
+					<Pill name={pilldata.software} type_icon={pilldata.type_icon} icon={pilldata.icon} color={pilldata.color}/>
+				{/each}
+			</div>
 			<SubSection icon={mdiEarth} title="Languages"/>
+			<div class="subsection end">
+				{#each cv.skills.languages as langdata}
+					<FlagComponent lang={langdata.lang} level={langdata.level} icon={langdata.icon_alpha}/>
+				{/each}
+			</div>
 		</div>
+	</div>
+	<div class="footer">
+		<p>Made with <SvgIcon size="20" path={mdiHeart} type="mdi"/> and Svelte</p>
+		<p>© {new Date().getFullYear()} Copyright: Yohan Boujon</p>
 	</div>
 {:else}
 	<h1 class="h1 text-center">Oops, could not load database :/</h1>

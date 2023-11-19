@@ -4,7 +4,5 @@ export function shouldColorBeWhite(color) {
         green: parseInt(color.slice(2,4),16),
         blue: parseInt(color.slice(4,6),16)
     }
-    const total = colorHex.red*0.299 + colorHex.green*0.587 + colorHex.blue*0.114;
-    console.log(total <= 186);
-    return total <= 186;
+    return (colorHex.red*0.299 + colorHex.green*0.587 + colorHex.blue*0.114) <= 186;
 }
