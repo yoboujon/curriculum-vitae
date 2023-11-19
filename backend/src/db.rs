@@ -38,20 +38,33 @@ pub struct Experience {
 
 #[derive(Deserialize, Serialize)]
 pub struct Project {
-    pub id: i64,
     pub date_done: Option<NaiveDate>,
     pub title: Option<String>,
     pub description: Option<String>,
     pub github_link: Option<String>,
-    pub id_skills: i64,
     pub picture_name: Option<String>,
     pub type_project: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]
-pub struct Skills {
-    pub id: i64,
-    pub programming_lang: Option<String>,
-    pub software: Option<String>,
-    pub languages: Option<String>,
+pub struct ProgrammingLanguages {
+    pub lang: String,
+    pub icon: String,
+    pub type_icon: String,
+    pub color: Option<String>
+}
+
+#[derive(Deserialize, Serialize)]
+pub struct Softwares {
+    pub software: String,
+    pub icon: String,
+    pub type_icon: String,
+    pub color: Option<String>
+}
+
+#[derive(Deserialize, Serialize)]
+pub struct Languages {
+    pub lang: String,
+    pub icon_alpha: String,
+    pub level: String
 }

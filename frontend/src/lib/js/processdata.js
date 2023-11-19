@@ -11,10 +11,9 @@ export function processData(data) {
     const info = data.info[0];
     const experiences = arrangeById(data.experience);
     const education = arrangeById(data.education);
-    const skills = data.skills[1];
-    const projects = data.skills[0];
+    const skills = data.skills;
 
-    return {info, experiences, education, skills, projects};
+    return {info, experiences, education, skills};
   } else {
     return null;  // Indicates an error
   }

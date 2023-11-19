@@ -13,10 +13,14 @@
 		mdiEmailOutline,
 		mdiPhone,
 		mdiStar,
+		mdiXml,
+		mdiApplication,
+		mdiEarth
 	} from "@mdi/js";
 
 	// Main
 	import Section from "$lib/components/section.svelte";
+	import SubSection from "$lib/components/subsection.svelte";
 	import Education from "$lib/components/education.svelte";
 	import Experience from "$lib/components/experience.svelte";
 	import Projects from "$lib/components/projects.svelte"
@@ -105,10 +109,13 @@
 			/>
 			<Section icon={mdiWrench} title="Projects" />
 			<SlideShow
-				data={cv.projects}
+				data={cv.skills.project}
 				type={Projects}
 			/>
 			<Section icon={mdiPencil} title="Skills" />
+			<SubSection icon={mdiXml} title="Programming Languages"/>
+			<SubSection icon={mdiApplication} title="Softwares"/>
+			<SubSection icon={mdiEarth} title="Languages"/>
 		</div>
 	</div>
 {:else}

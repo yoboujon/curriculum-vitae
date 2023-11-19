@@ -10,7 +10,7 @@ use std::net::SocketAddr;
 use tower_http::cors::CorsLayer;
 
 mod db;
-use db::{Education, Experience, Info, Project, Skills};
+use db::{Education, Experience, Info, Languages, Project, ProgrammingLanguages, Softwares};
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -27,7 +27,7 @@ async fn main() -> Result<()> {
         .route("/info", get(info))
         .route("/education", get(education))
         .route("/experience", get(experience))
-        .route("/skills", get(skills))
+        .route("/skills/:id", get(skills))
         .with_state(pool)
         .layer(CorsLayer::very_permissive());
 
@@ -36,6 +36,12 @@ async fn main() -> Result<()> {
     Ok(axum::Server::bind(&address)
         .serve(router.into_make_service())
         .await?)
+}
+
+macro_rules! gather_data {
+    ($data_type:ty, $sql_cmd:expr, $pool:expr) => {
+        sqlx::query_as!($data_type, $sql_cmd).fetch_all($pool).await
+    };
 }
 
 async fn info(State(pool): State<PgPool>) -> Result<Json<Vec<Info>>> {
@@ -49,43 +55,51 @@ async fn info(State(pool): State<PgPool>) -> Result<Json<Vec<Info>>> {
 }
 
 async fn education(State(pool): State<PgPool>) -> Result<Json<Vec<Education>>> {
-    let datas = sqlx::query_as!(
-        Education,
-        "SELECT * FROM public.education"
-    )
-    .fetch_all(&pool)
-    .await?;
+    let datas = sqlx::query_as!(Education, "SELECT * FROM public.education")
+        .fetch_all(&pool)
+        .await?;
     Ok(Json(datas))
 }
 
 async fn experience(State(pool): State<PgPool>) -> Result<Json<Vec<Experience>>> {
-    let datas = sqlx::query_as!(
-        Experience,
-        "SELECT * FROM public.experience"
-    )
-    .fetch_all(&pool)
-    .await?;
+    let datas = sqlx::query_as!(Experience, "SELECT * FROM public.experience")
+        .fetch_all(&pool)
+        .await?;
     Ok(Json(datas))
 }
 
-async fn skills(State(pool): State<PgPool>) -> Result<Json<(Vec<Project>, Vec<Skills>)>> {
-    // Gathering skills
-    let skills = sqlx::query_as!(
-        Skills,
-        "SELECT * FROM public.skills"
-    )
-    .fetch_all(&pool)
-    .await
-    .unwrap();
-
-    // Gathering Projects
-    let projects = sqlx::query_as!(
+async fn skills(State(pool): State<PgPool>, Path(id): Path<i32>) -> Result<Json<(Vec<Project>,Vec<ProgrammingLanguages>,Vec<Softwares>,Vec<Languages>)>> {
+    let project = sqlx::query_as!(
         Project,
-        "SELECT * FROM public.project ORDER BY date_done DESC"
+        "SELECT date_done, title, description, github_link, picture_name, type_project FROM public.project WHERE project.info_id = $1 ORDER BY date_done DESC",
+        id
     )
     .fetch_all(&pool)
-    .await
-    .unwrap();
+    .await?;
+    
+    let programming_languages = sqlx::query_as!(
+        ProgrammingLanguages,
+        "SELECT lang, icon, type_icon, color FROM public.programming_languages WHERE programming_languages.info_id = $1",
+        id
+    )
+    .fetch_all(&pool)
+    .await?;
 
-    Ok(Json((projects,skills)))
+    let softwares = sqlx::query_as!(
+        Softwares,
+        "SELECT software, icon, type_icon, color FROM public.softwares WHERE softwares.info_id = $1",
+        id
+    )
+    .fetch_all(&pool)
+    .await?;
+
+    let languages = sqlx::query_as!(
+        Languages,
+        "SELECT lang, icon_alpha, level FROM public.languages WHERE languages.info_id = $1",
+        id
+    )
+    .fetch_all(&pool)
+    .await?;
+
+    Ok(Json((project,programming_languages,softwares,languages)))
 }
