@@ -79,7 +79,7 @@ async fn skills(State(pool): State<PgPool>, Path(id): Path<i32>) -> Result<Json<
     
     let programming_languages = sqlx::query_as!(
         ProgrammingLanguages,
-        "SELECT lang, icon, type_icon, color FROM public.programming_languages WHERE programming_languages.info_id = $1",
+        "SELECT lang, icon, type_icon, color FROM public.programming_languages WHERE programming_languages.info_id = $1 ORDER BY programming_languages.id",
         id
     )
     .fetch_all(&pool)
@@ -87,7 +87,7 @@ async fn skills(State(pool): State<PgPool>, Path(id): Path<i32>) -> Result<Json<
 
     let softwares = sqlx::query_as!(
         Softwares,
-        "SELECT software, icon, type_icon, color FROM public.softwares WHERE softwares.info_id = $1",
+        "SELECT software, icon, type_icon, color FROM public.softwares WHERE softwares.info_id = $1 ORDER BY softwares.id",
         id
     )
     .fetch_all(&pool)
@@ -95,7 +95,7 @@ async fn skills(State(pool): State<PgPool>, Path(id): Path<i32>) -> Result<Json<
 
     let languages = sqlx::query_as!(
         Languages,
-        "SELECT lang, icon_alpha, level FROM public.languages WHERE languages.info_id = $1",
+        "SELECT lang, icon_alpha, level FROM public.languages WHERE languages.info_id = $1 ORDER BY languages.id",
         id
     )
     .fetch_all(&pool)

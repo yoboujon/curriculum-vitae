@@ -4,7 +4,6 @@
     padding-left: 1rem;
     border-radius: 3rem;
     background-color: #000000;
-    color: var(--color-background);
     display: flex;
     flex-direction: row;
     width: fit-content;
@@ -15,9 +14,21 @@
 }
 
 .pill-white {
+    color: var(--color-background);
+}
+
+.pill-black {
+    color: var(--color-text);
+}
+
+.pill-white img {
     filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(19deg) brightness(116%) contrast(113%);
 }
 
+.pill-black img {
+    filter: invert(8%) sepia(21%) saturate(1187%) hue-rotate(234deg) brightness(101%) contrast(91%);
+}
+
 .pill-container img, svg {
-    margin: 0.5rem;
+    margin-right: 0.5rem;
 }
