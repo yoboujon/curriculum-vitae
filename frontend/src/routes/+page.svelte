@@ -25,6 +25,7 @@
 	import Experience from "$lib/components/experience.svelte";
 	import Projects from "$lib/components/projects.svelte"
 	import SlideShow from "$lib/components/slideshow.svelte";
+	import Pill from "$lib/components/pill.svelte"
 	import { mdiSchool, mdiBriefcase, mdiWrench, mdiPencil } from "@mdi/js";
 	import { onMount } from "svelte";
 
@@ -114,6 +115,11 @@
 			/>
 			<Section icon={mdiPencil} title="Skills" />
 			<SubSection icon={mdiXml} title="Programming Languages"/>
+			<div class="subsection">
+				{#each cv.skills.programming_languages as pilldata}
+					<Pill name={pilldata.lang} type_icon={pilldata.type_icon} icon={pilldata.icon} color={pilldata.color}/>
+				{/each}
+			</div>
 			<SubSection icon={mdiApplication} title="Softwares"/>
 			<SubSection icon={mdiEarth} title="Languages"/>
 		</div>

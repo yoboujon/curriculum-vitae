@@ -1,0 +1,23 @@
+.pill-container {
+    margin: 0.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    border-radius: 3rem;
+    background-color: #000000;
+    color: var(--color-background);
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 700;
+}
+
+.pill-white {
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(19deg) brightness(116%) contrast(113%);
+}
+
+.pill-container img, svg {
+    margin: 0.5rem;
+}
