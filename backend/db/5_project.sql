@@ -10,7 +10,7 @@ CREATE TABLE public.project (
 	title text NULL,
 	description text NULL,
 	github_link text NULL,
-	info_id int4 NOT NULL DEFAULT nextval('project_id_skills_seq'::regclass),
+	info_id int4 NOT NULL,
 	picture_name text NULL,
 	type_project text NULL,
 	CONSTRAINT project_pkey PRIMARY KEY (id),

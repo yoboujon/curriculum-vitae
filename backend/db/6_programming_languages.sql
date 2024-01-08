@@ -6,7 +6,7 @@
 
 CREATE TABLE public.programming_languages (
 	id serial4 NOT NULL,
-	info_id int4 NOT NULL DEFAULT nextval('programming_languages_skills_id_seq'::regclass),
+	info_id int4 NOT NULL,
 	lang text NOT NULL,
 	icon text NOT NULL,
 	type_icon text NOT NULL,

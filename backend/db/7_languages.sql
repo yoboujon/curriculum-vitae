@@ -6,7 +6,7 @@
 
 CREATE TABLE public.languages (
 	id serial4 NOT NULL,
-	info_id int4 NOT NULL DEFAULT nextval('languages_skills_id_seq'::regclass),
+	info_id int4 NOT NULL,
 	lang text NOT NULL,
 	icon_alpha varchar(3) NOT NULL,
 	"level" text NOT NULL,

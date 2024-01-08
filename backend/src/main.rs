@@ -1,7 +1,7 @@
 use axum::{
     extract::{Path, State},
-    routing::{get, post},
-    Form, Json, Router,
+    routing::get,
+    Json, Router,
 };
 use axum_error::Result;
 use dotenv::dotenv;
@@ -33,49 +33,50 @@ async fn main() -> Result<()> {
 
     // Server
     let address = SocketAddr::from(([0, 0, 0, 0], 8000));
-    Ok(axum::Server::bind(&address)
+    Ok(axum_server::bind(address)
         .serve(router.into_make_service())
         .await?)
 }
 
-macro_rules! gather_data {
+macro_rules! _gather_data {
     ($data_type:ty, $sql_cmd:expr, $pool:expr) => {
         sqlx::query_as!($data_type, $sql_cmd).fetch_all($pool).await
     };
 }
 
-async fn info(State(pool): State<PgPool>) -> Result<Json<Vec<Info>>> {
+async fn info(State(pool): State<PgPool>) -> Json<Vec<Info>> 
+{
     let datas = sqlx::query_as!(
         Info,
         "SELECT id, full_name, phone_number, email, softskills, interests, birth_year FROM public.info"
     )
     .fetch_all(&pool)
-    .await?;
-    Ok(Json(datas))
+    .await.unwrap_or(vec![]);
+    Json(datas)
 }
 
-async fn education(State(pool): State<PgPool>) -> Result<Json<Vec<Education>>> {
+async fn education(State(pool): State<PgPool>) -> Json<Vec<Education>> {
     let datas = sqlx::query_as!(Education, "SELECT * FROM public.education")
         .fetch_all(&pool)
-        .await?;
-    Ok(Json(datas))
+        .await.unwrap_or(vec![]);
+    Json(datas)
 }
 
-async fn experience(State(pool): State<PgPool>) -> Result<Json<Vec<Experience>>> {
+async fn experience(State(pool): State<PgPool>) -> Json<Vec<Experience>> {
     let datas = sqlx::query_as!(Experience, "SELECT * FROM public.experience")
         .fetch_all(&pool)
-        .await?;
-    Ok(Json(datas))
+        .await.unwrap_or(vec![]);
+    Json(datas)
 }
 
-async fn skills(State(pool): State<PgPool>, Path(id): Path<i32>) -> Result<Json<(Vec<Project>,Vec<ProgrammingLanguages>,Vec<Softwares>,Vec<Languages>)>> {
+async fn skills(Path(id): Path<i32>, State(pool): State<PgPool>) -> Json<(Vec<Project>,Vec<ProgrammingLanguages>,Vec<Softwares>,Vec<Languages>)> {
     let project = sqlx::query_as!(
         Project,
         "SELECT date_done, title, description, github_link, picture_name, type_project FROM public.project WHERE project.info_id = $1 ORDER BY date_done DESC",
         id
     )
     .fetch_all(&pool)
-    .await?;
+    .await.unwrap_or(vec![]);
     
     let programming_languages = sqlx::query_as!(
         ProgrammingLanguages,
@@ -83,7 +84,7 @@ async fn skills(State(pool): State<PgPool>, Path(id): Path<i32>) -> Result<Json<
         id
     )
     .fetch_all(&pool)
-    .await?;
+    .await.unwrap_or(vec![]);
 
     let softwares = sqlx::query_as!(
         Softwares,
@@ -91,7 +92,7 @@ async fn skills(State(pool): State<PgPool>, Path(id): Path<i32>) -> Result<Json<
         id
     )
     .fetch_all(&pool)
-    .await?;
+    .await.unwrap_or(vec![]);
 
     let languages = sqlx::query_as!(
         Languages,
@@ -99,7 +100,7 @@ async fn skills(State(pool): State<PgPool>, Path(id): Path<i32>) -> Result<Json<
         id
     )
     .fetch_all(&pool)
-    .await?;
+    .await.unwrap_or(vec![]);
 
-    Ok(Json((project,programming_languages,softwares,languages)))
+    Json((project,programming_languages,softwares,languages))
 }
