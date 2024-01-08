@@ -39,18 +39,25 @@
 
 	// Sidebar sticky
 	let sidebar;
-	let sidebar_height = 0;
+	let footer;
+	let moving_position = 0;
 	$: scrollY = 0;
 	$: innerHeight = 0;
 	onMount(() => {
-		sidebar_height = sidebar.offsetHeight;
 		sidebarScrollingHandler();
 	});
 
 	function sidebarScrollingHandler() {
-		if(scrollY+innerHeight >= sidebar_height) {
+		let isBottom = (scrollY+innerHeight  >= footer.offsetTop);
+		// Testing if sidebar is outside of scrolling scope
+		if(scrollY+innerHeight >= sidebar.offsetHeight && !isBottom) {
 			sidebar.style.position = 'fixed';
-			sidebar.style.top = `-${sidebar_height-innerHeight}px`;
+			sidebar.style.top = `-${sidebar.offsetHeight-innerHeight}px`;
+			moving_position = scrollY;
+		}
+		else if(isBottom) {
+			sidebar.style.position = 'absolute';
+			sidebar.style.top = `${moving_position-(sidebar.offsetHeight-innerHeight)}px`;
 		}
 		else {
 			sidebar.style.position = 'absolute';
@@ -137,9 +144,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="footer">
-		<p>Made with <SvgIcon size="20" path={mdiHeart} type="mdi"/> and Svelte</p>
-		<p>© {new Date().getFullYear()} Copyright: Yohan Boujon</p>
+	<div class="footer" bind:this={footer}>
+		<p>Made with <SvgIcon size="20" path={mdiHeart} type="mdi"/> using Svelte</p>
+		<p>All rights reserved, Yohan Boujon • {new Date().getFullYear()}</p>
 	</div>
 {:else}
 	<h1 class="h1 text-center">Oops, could not load database :/</h1>
