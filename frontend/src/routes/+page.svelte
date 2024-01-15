@@ -64,9 +64,15 @@
 			sidebar.style.top = '';
 		}
 	}
+
+	// Mobile check
+	$: innerWidth = 0;
+	function mobileCheck() {
+		//console.log(innerWidth);
+	}
 </script>
 
-<svelte:window bind:scrollY bind:innerHeight on:scroll={sidebarScrollingHandler} />
+<svelte:window bind:scrollY bind:innerHeight bind:innerWidth on:scroll={sidebarScrollingHandler} on:resize={mobileCheck} />
 
 {#if data.status == 0}
 	<div class="container-cv">

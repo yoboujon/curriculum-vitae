@@ -16,6 +16,16 @@ export function createTimeLine(positionsArray) {
   return divArray;
 }
 
+export function updateTimeLine(slideStringArray, positionsArray) {
+  for (let i = 0; i < positionsArray.length - 1; i++)
+  {
+    const left = positionsArray[i].offsetLeft + (2.5 * 16);
+    const top = positionsArray[i].offsetTop + 16;
+    slideStringArray[i].style.left = `${left}px`;
+    slideStringArray[i].style.top = `${top}px`;
+  }
+}
+
 export let slideContainerCount = writable(0);
 export let slideTimelineCount = writable(0);
 export let slideStringCount = writable(0);
