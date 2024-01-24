@@ -1,21 +1,48 @@
-.section-container {
-    margin-top: 3rem;
-    margin-left: 3rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: var(--color-title);
-    filter: drop-shadow(0px 6px 4px rgba(0, 0, 0, 0.15));
+@media screen and (min-width: 1000px)
+{
+    .section-container {
+        margin-top: 3rem;
+        margin-left: 3rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: var(--color-title);
+        filter: drop-shadow(0px 6px 4px rgba(0, 0, 0, 0.15));
+    }
+
+    .subsection-container {
+        margin-left: 3rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: var(--color-subtitle);
+        filter: drop-shadow(0px 6px 4px rgba(0, 0, 0, 0.15));
+    }
 }
 
-.subsection-container {
-    margin-left: 3rem;
-    margin-bottom: 0.5rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: var(--color-subtitle);
-    filter: drop-shadow(0px 6px 4px rgba(0, 0, 0, 0.15));
+@media screen and (max-width: 1000px)
+{
+    .section-container {
+        margin-top: 2rem;
+        margin-left: 1rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: var(--color-title);
+        filter: drop-shadow(0px 6px 4px rgba(0, 0, 0, 0.15));
+    }
+
+    .subsection-container {
+        margin-left: 1rem;
+        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: var(--color-subtitle);
+        filter: drop-shadow(0px 6px 4px rgba(0, 0, 0, 0.15));
+    }
 }
 
 .section-h1 {

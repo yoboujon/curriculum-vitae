@@ -45,6 +45,43 @@ html {
     }
 }
 
+@media screen and (min-width: 1000px) {
+    .name {
+        text-align: center;
+        text-shadow: -15px 5px 20px #00000030;
+    }
+
+    .footer p {
+        font-family: 'Urbanist', sans-serif;
+        font-weight: 600;
+        font-size: 1.25rem;
+        color: var(--color-background);
+        margin: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .name {
+        text-align: center;
+        text-shadow: -15px 5px 20px #00000030;
+        background-color: var(--color-special);
+        color: var(--color-background);
+        margin-top: 0;
+        padding-top: 1.5rem;
+        margin-bottom: 0;
+        padding-bottom: 1.5rem;
+        box-shadow: rgba(0, 14, 83, 0.12) 0px 30px 25px, rgba(0, 14, 83, 0.05) 0px 5px 10px;
+    }
+
+    .footer p {
+        font-family: 'Urbanist', sans-serif;
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--color-background);
+        margin: 0.5rem;
+    }
+}
+
 .profile-picture-container {
     display: flex;
     justify-content: center;
@@ -62,12 +99,6 @@ html {
     width: 100%;
     overflow-x: hidden;
     z-index: 0;
-    padding-right: 2rem;
-}
-
-.name {
-    text-align: center;
-    text-shadow: -15px 5px 20px #00000030;
 }
 
 h1 {
@@ -98,20 +129,12 @@ h2 {
 .footer {
     position: relative;
     display: flex;
-    height: 10rem;
+    height: 30vh;
     background-color: var(--color-text);
     z-index: 3;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-.footer p {
-    font-family: 'Urbanist', sans-serif;
-    font-weight: 600;
-    font-size: 1.25rem;
-    color: var(--color-background);
-    margin: 0.5rem;
 }
 
 .footer svg {

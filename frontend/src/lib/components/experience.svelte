@@ -28,6 +28,7 @@
         </div>
         <div class="slide-text-container">
             <h1 class="slide-title">{position}</h1>
+            <img class="slide-img-mobile" src={picture} alt="Experience" />
             <div class="slide-subtitle-container">
                 <SvgIcon size="35" path={mdiOfficeBuilding} type="mdi" />
                 <p class="slide-subtitle slide-aftericon">

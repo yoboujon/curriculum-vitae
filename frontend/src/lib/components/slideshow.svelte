@@ -20,13 +20,15 @@
     data = data.reverse();
   }
 
+  // Svelte bindings
+  let windowWidth = 0;
+
   // Resizing variables
   let resizing = false;
 
   // Slideshow global variables
   let slideshow_index = 0;
   let slideshow_hidden = [];
-
   let slideshowTimeline;
   let slideshowElements;
   let slideshowBubbles;
@@ -34,6 +36,7 @@
   // Timeline global variables
   let slideshow;
   let bubbles = [];
+
   onMount(() => {
     /*    Slideshow    */
     //global writer count
@@ -80,7 +83,7 @@
     // Incrementing the transformValue for each element
     let transformValue = 0;
     for (const id of slideshow_hidden) {
-      transformValue += slideshowElements[id].clientWidth;
+        transformValue += slideshowElements[id].clientWidth;
     }
 
     // Translating elements
@@ -166,13 +169,13 @@
   }
 </script>
 
-<svelte:window on:resize={changeSize} />
+<svelte:window on:resize={changeSize} bind:innerWidth={windowWidth}/>
 
 <div class="slideshow" bind:this={slideshow}>
   <button class="slideshow_btn" on:click={slideCards}>
     <div>
       <SvgIcon
-        size="45"
+        size={windowWidth < 1000 ? "30" : "45"}
         path={slideshow_index >= data.length - 1
           ? mdiChevronLeft
           : mdiArrowRight}

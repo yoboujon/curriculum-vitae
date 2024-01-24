@@ -21,10 +21,11 @@
 <div class="slide-container">
     <div class="slide-main {active ? '' : 'slide-unactive'}">
         <div class="slide-img-container">
-            <img class="slide-img" src={picture} alt="projects" />
+            <img class="slide-img" src={picture} alt="Projects" />
         </div>
         <div class="slide-text-container">
             <h1 class="slide-title">{title}</h1>
+            <img class="slide-img-mobile" src={picture} alt="Projects" />
             <div class="slide-subtitle-container">
                 <SvgIcon size="35" path={mdiCalendarRange} type="mdi" />
                 <p class="slide-subtitle slide-aftericon">

@@ -29,6 +29,10 @@
     filter: invert(8%) sepia(21%) saturate(1187%) hue-rotate(234deg) brightness(101%) contrast(91%);
 }
 
-.pill-container img, svg {
+.pill-container img {
+    margin-right: 0.5rem;
+}
+
+.pill-container svg {
     margin-right: 0.5rem;
 }
