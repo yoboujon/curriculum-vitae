@@ -1,15 +1,38 @@
-.flag-main {
-    display: flex;
-    border-radius: 0.4rem;
-    box-shadow: 0px 20px 50px -10px rgba(0, 0, 0, 0.2);
-    background-color: var(--color-background);
-    margin-left: 2.5rem;
-    margin-right: 2.5rem;
-    padding: 1rem;
-    z-index: 1;
-    transition: all .3s ease 0s;
-    justify-content: center;
-    align-items: center;
+@media screen and (min-width: 1000px) {
+    .flag-main {
+        display: flex;
+        border-radius: 0.4rem;
+        box-shadow: 0px 20px 50px -10px rgba(0, 0, 0, 0.2);
+        background-color: var(--color-background);
+        margin-left: 2.5rem;
+        margin-right: 2.5rem;
+        padding: 1rem;
+        z-index: 1;
+        transition: all .3s ease 0s;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .flag-main {
+        display: flex;
+        border-radius: 0.4rem;
+        box-shadow: 0px 20px 50px -10px rgba(0, 0, 0, 0.2);
+        background-color: var(--color-background);
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+        padding: 1rem;
+        transition: all .3s ease 0s;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .flag-container {
+        margin-left: 10vw !important;
+        margin-right: 10vw;
+    }
 }
 
 .flag-img {

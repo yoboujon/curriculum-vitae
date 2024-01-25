@@ -143,7 +143,7 @@
 				{/each}
 			</div>
 			<SubSection icon={mdiEarth} title="Languages"/>
-			<div class="subsection end">
+			<div class="subsection flag-container end">
 				{#each cv.skills.languages as langdata}
 					<FlagComponent lang={langdata.lang} level={langdata.level} icon={langdata.icon_alpha}/>
 				{/each}
