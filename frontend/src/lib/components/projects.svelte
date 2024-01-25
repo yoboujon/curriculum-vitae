@@ -41,7 +41,7 @@
                 </p>
             </div>
             <div class="slide-subtitle-container">
-                <p class="slide-subtitle slide-text slide-overflow slide-o2 slide-justify">
+                <p class="slide-subtitle slide-text slide-overflow slide-justify">
                     {description}
                 </p>
             </div>

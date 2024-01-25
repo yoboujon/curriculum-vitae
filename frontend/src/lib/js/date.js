@@ -5,6 +5,13 @@ export function formatDate(date) {
     return formattedDate;
 }
 
+export function formatDateMobile(date) {
+    const options = { month: 'numeric', year: 'numeric' };
+    const cool_date = new Date(date);
+    const formattedDate = cool_date.toLocaleString('fr-FR', options);
+    return formattedDate;
+}
+
 export function formatMonth(date) {
     const options = { month: 'long', year: 'numeric' };
     const cool_date = new Date(date);
