@@ -24,9 +24,10 @@
         max-width: 25rem;
     }
 
-    .slide-img-mobile {
-        height: 0;
+    .slide-img-mobile-container {
+        visibility: hidden;
         width: 0;
+        height: 0;
     }
 
     .slide-img-container{
@@ -66,6 +67,12 @@
         margin-right: 2.25rem !important;
         box-shadow: 0 7px 30px -10px rgba(150,170,180,0.5) !important;
     }
+
+    /* For button at the end of the container*/
+    .slide-button-container {
+        display: flex;
+        justify-content: flex-end;
+    }
 }
 
 @media screen and (max-width: 1000px)
@@ -81,17 +88,21 @@
         border-radius: 0.4rem;
         box-shadow: 0px 20px 50px -10px rgba(0, 0, 0, 0.2);
         background-color: var(--color-background);
-        height: 36rem;
+        height: 70dvh;
         width: 90dvw;
         margin-left: 5dvw;
         z-index: 1;
         transition: all .3s ease 0s;
     }
 
+    .slide-img-mobile-container {
+        display: flex;
+        justify-content: center;
+    }
+
     .slide-img-mobile {
-        max-height: 15rem;
-        min-width: 76dvw;
         max-width: 76dvw;
+        max-height: 30dvh;
         margin-top: 1.5rem;
         margin-bottom: 1.5rem;
     }
@@ -123,12 +134,20 @@
 
     .slide-text-container {
         margin: 1.5rem;
-        width: 75dvw;
+        position: relative;
+        width: 100%;
     }
 
     .slide-unactive {
         scale: 0.9;
         box-shadow: 0 7px 30px -10px rgba(150,170,180,0.5) !important;
+    }
+
+    /* For button at the end of the container*/
+    .slide-button-container {
+        bottom: 0;
+        right: 0;
+        position: absolute;
     }
 }
 
@@ -177,12 +196,6 @@
 
 .slide-o5 {
     -webkit-line-clamp: 5;
-}
-
-/* For button at the end of the container*/
-.slide-button-container {
-    display: flex;
-    justify-content: flex-end;
 }
 
 /* Every button are centered to the right side of the component */

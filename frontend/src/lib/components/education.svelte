@@ -23,7 +23,9 @@
         </div>
         <div class="slide-text-container">
             <h1 class="slide-title">{title}</h1>
-            <img class="slide-img-mobile" src={picture} alt="Education" />
+            <div class="slide-img-mobile-container">
+                <img class="slide-img-mobile" src={picture} alt="Education" />
+            </div>
             {#if location}
                 <div class="slide-subtitle-container">
                     <SvgIcon size="35" path={mdiMapMarker} type="mdi" />

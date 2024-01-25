@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400;700&family=Urbanist:wght@500;600;900&display=swap');
 
+body,
 html {
-  overflow-x: hidden;
+    height: 100%;
+    background: var(--color-background);
+    margin: 0;
+    padding: 0;
 }
 
 :root {
