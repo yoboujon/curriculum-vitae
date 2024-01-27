@@ -29,6 +29,7 @@
 	import SlideShow from "$lib/components/slideshow.svelte";
 	import Pill from "$lib/components/pill.svelte"
 	import FlagComponent from "$lib/components/flag-component.svelte"
+	import ProjectsPopup from "$lib/components/projects-popup.svelte"
 	import { mdiSchool, mdiBriefcase, mdiWrench, mdiPencil } from "@mdi/js";
 	import { onMount } from "svelte";
 
@@ -75,6 +76,7 @@
 <svelte:window bind:scrollY bind:innerHeight bind:innerWidth on:scroll={sidebarScrollingHandler} on:resize={mobileCheck} />
 
 {#if data.status == 0}
+	<ProjectsPopup/>
 	<div class="container-cv">
 		<!-- SIDEBAR DIV (LEFT) -->
 		<div class="sidebar" bind:this={sidebar}>

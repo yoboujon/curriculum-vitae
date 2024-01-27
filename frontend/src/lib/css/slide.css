@@ -93,11 +93,15 @@
         border-radius: 0.4rem;
         box-shadow: 0px 20px 50px -10px rgba(0, 0, 0, 0.2);
         background-color: var(--color-background);
-        min-height: 35rem;
+        min-height: 30rem;
         width: 90dvw;
         margin-left: 5dvw;
         z-index: 1;
         transition: all .3s ease 0s;
+    }
+
+    .slide-more {
+        min-height: 37rem !important;
     }
 
     .slide-img-mobile-container {

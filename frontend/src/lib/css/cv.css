@@ -67,7 +67,6 @@
         display: flex;
         height: 15rem;
         background-color: var(--color-text);
-        z-index: 3;
         justify-content: center;
         align-items: center;
         flex-direction: column;
@@ -111,7 +110,6 @@
         display: flex;
         height: 20rem;
         background-color: var(--color-text);
-        z-index: 3;
         justify-content: center;
         align-items: center;
         flex-direction: column;
