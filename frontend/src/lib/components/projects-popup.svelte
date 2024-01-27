@@ -13,7 +13,12 @@
     mdiTextBox,
   } from "@mdi/js";
 
+  // Variables
   const unsubscribe = popupDatas.subscribe(popupShowed);
+  let popupMain;
+  let active = false;
+
+  // Informations
   let title = "Title";
   let date = "Date";
   let type_project = "Type of project";
@@ -34,17 +39,48 @@
       type_project = data.type_project;
       picture = (await import(`/src/lib/img/${data.picture_name}`)).default;
       description = data.description;
+      // Active set to true after the await to avoid conflict when clicking outside while the popup hasn't showed yet.
+      active = true;
     }
   }
 
   onDestroy(() => {
     unsubscribe();
   });
+
+  function hidePopup(event) {
+    if (!active) {
+      return;
+    }
+
+    const x = event.clientX;
+    const popupXmin = popupMain.offsetLeft;
+    const popupXmax = popupXmin + popupMain.offsetWidth;
+
+    const y = event.clientY;
+    const popupYmin = popupMain.offsetTop;
+    const popupYmax = popupYmin + popupMain.offsetHeight;
+
+    if (
+      !(x >= popupXmin && x <= popupXmax && y >= popupYmin && y <= popupYmax)
+    ) {
+      active = false;
+      showPopup(false, null);
+    }
+  }
 </script>
 
-<div id="project-popup-main">
+<svelte:window on:click={hidePopup} />
+
+<div id="project-popup-main" bind:this={popupMain}>
   <!--Closing button-->
-  <button class="project-popup-close" on:click={() => showPopup(false, null)}>
+  <button
+    class="project-popup-close"
+    on:click={() => {
+      active = false;
+      showPopup(false, null);
+    }}
+  >
     <SvgIcon size="25" path={mdiClose} type="mdi" />
   </button>
 
