@@ -37,6 +37,7 @@
     position: absolute;
     right: 0.5rem;
     top: 0.5rem;
+    cursor: grab;
 }
 
 .project-popup-close:hover {
@@ -63,7 +64,7 @@
     /* Because the width of the popup is 50dvw and the picture has to take maximum half of the popup*/
     max-height: 100%;
     margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     object-fit: cover;
 }
 
@@ -78,7 +79,129 @@
     margin: 0.5rem;
 }
 
+.project-popup-subinfo-container {
+    display: flex;
+    flex-direction: row;
+    border-radius: 0.4rem;
+    box-shadow: rgba(50, 50, 93, 0.15) 0px 13px 27px -2px, rgba(0, 0, 0, 0.2) 0px 8px 16px -4px;
+    padding: 0.4rem;
+    justify-content: center;
+    width: fit-content;
+    margin-bottom: 1rem;
+}
+
+.project-popup-subinfo-container>div {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
 .project-popup-text {
     font-size: 1rem !important;
     text-align: justify;
+}
+
+.project-popup-link-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 0.25rem;
+}
+
+.project-popup-subtitle {
+    color: var(--color-text);
+    font-family: 'Gabarito', sans-serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+    width: 100%;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.project-popup-download {
+    padding: 0.4rem;
+    margin-right: 0.75rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5rem;
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 700;
+    border: 0;
+    transition: none;
+    color: var(--color-background);
+    cursor: grab;
+}
+
+.project-popup-download:hover {
+    transition: all .3s ease 0s;
+    background-color: var(--color-background);
+}
+
+.project-popup-download:active {
+    transform: translateY(3px);
+}
+
+.project-popup-download>p {
+    margin: 0;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.project-popup-download>svg {
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    margin-left: 0.5rem;
+}
+
+.project-popup-report {
+    background-color: #ed1c23;
+    box-shadow: 0px 8px 18px -1px #ed1c2350;
+}
+
+.project-popup-report:hover {
+    color: #ed1c23;
+}
+
+.project-popup-report:active {
+    box-shadow: 0px 4px 12px -1px #ed1c2370;
+}
+
+.project-popup-github {
+    background-color: #181717;
+    box-shadow: 0px 8px 18px -1px #18171750;
+}
+
+.project-popup-github:hover {
+    color: #181717;
+}
+
+.project-popup-github:active {
+    box-shadow: 0px 4px 12px -1px #18171770;
+}
+
+.project-popup-archive {
+    background-color: #4B1E78;
+    box-shadow: 0px 8px 18px -1px #4B1E7850;
+}
+
+.project-popup-archive:hover {
+    color: #4B1E78;
+}
+
+.project-popup-archive:active {
+    box-shadow: 0px 4px 12px -1px #4B1E7870;
+}
+
+.project-popup-application {
+    background-color: #0174BE;
+    box-shadow: 0px 8px 18px -1px #0174BE50;
+}
+
+.project-popup-application:hover {
+    color: #0174BE;
+}
+
+.project-popup-application:active {
+    box-shadow: 0px 4px 12px -1px #0174BE70;
 }

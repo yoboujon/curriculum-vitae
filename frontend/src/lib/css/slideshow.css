@@ -23,6 +23,7 @@
         color: var(--color-background);
         border: 0;
         transition: all .3s ease 0s;
+        cursor: grab;
     }
 }
 
@@ -44,6 +45,7 @@
         color: var(--color-background);
         border: 0;
         transition: all .3s ease 0s;
+        cursor: grab;
     }
 }
 

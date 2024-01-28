@@ -11,6 +11,12 @@
     mdiAccount,
     mdiCalendarRange,
     mdiTextBox,
+    mdiFileDocumentOutline,
+    mdiGithub,
+    mdiLink,
+    mdiTag,
+    mdiBookMultiple,
+    mdiDownload
   } from "@mdi/js";
 
   // Variables
@@ -86,26 +92,57 @@
 
   <div class="project-popup-container">
     <!-- Information -->
-    <div class="project-popup-info-container">
+    <div>
       <h1 class="slide-title">{title}</h1>
       <div class="project-popup-img-container">
         <img class="project-popup-img" src={picture} alt="Project Popup" />
       </div>
-      <div class="slide-subtitle-container">
-        <SvgIcon size="35" path={mdiCalendarRange} type="mdi" />
-        <p class="slide-subtitle slide-aftericon">{date}</p>
+      <!-- Subinfo (date, type...) -->
+      <div class="project-popup-subinfo-container">
+        <div class="slide-subtitle-container">
+          <SvgIcon size="35" path={mdiCalendarRange} type="mdi" />
+          <p class="project-popup-subtitle slide-aftericon">{date}</p>
+        </div>
+        <div class="slide-subtitle-container">
+          <SvgIcon
+            size="35"
+            path={type_project == "School" ? mdiSchool : mdiAccount}
+            type="mdi"
+          />
+          <p class="project-popup-subtitle slide-aftericon">{type_project}</p>
+        </div>
       </div>
+      <!-- Links -->
       <div class="slide-subtitle-container">
-        <SvgIcon
-          size="35"
-          path={type_project == "School" ? mdiSchool : mdiAccount}
-          type="mdi"
-        />
-        <p class="slide-subtitle slide-aftericon">{type_project}</p>
+        <SvgIcon size="35" path={mdiLink} type="mdi" />
+        <p class="slide-subtitle slide-aftericon">Links</p>
+      </div>
+      <div class="project-popup-link-container">
+        <button class="project-popup-download project-popup-report">
+          <SvgIcon size="20" path={mdiFileDocumentOutline} type="mdi" />
+          <p>See Report</p>
+        </button>
+        <button class="project-popup-download project-popup-github">
+          <SvgIcon size="20" path={mdiGithub} type="mdi" />
+          <p>Github Repository</p>
+        </button>
+        <button class="project-popup-download project-popup-archive">
+          <SvgIcon size="20" path={mdiBookMultiple} type="mdi" />
+          <p>Download Archive</p>
+        </button>
+        <button class="project-popup-download project-popup-application">
+          <SvgIcon size="20" path={mdiDownload} type="mdi" />
+          <p>Download Application</p>
+        </button>
+      </div>
+      <!-- Tags -->
+      <div class="slide-subtitle-container">
+        <SvgIcon size="35" path={mdiTag} type="mdi" />
+        <p class="slide-subtitle slide-aftericon">Tags</p>
       </div>
     </div>
     <!-- Text -->
-    <div class="project-popup-text-container">
+    <div>
       <div class="slide-subtitle-container">
         <SvgIcon size="35" path={mdiTextBox} type="mdi" />
         <p class="slide-subtitle slide-aftericon">Description</p>
