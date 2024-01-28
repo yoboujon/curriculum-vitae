@@ -134,14 +134,14 @@
 			<Section icon={mdiPencil} title="Skills" />
 			<SubSection icon={mdiXml} title="Programming Languages"/>
 			<div class="subsection">
-				{#each cv.skills.programming_languages as pilldata}
-					<Pill name={pilldata.lang} type_icon={pilldata.type_icon} icon={pilldata.icon} color={pilldata.color}/>
+				{#each cv.skills.programming_languages as pilldata, index (index)}
+					<Pill name={pilldata.lang} type_icon={pilldata.type_icon} icon={pilldata.icon} color={pilldata.color} show_tooltip={true} tooltip_data={cv.project_programming[index]}/>
 				{/each}
 			</div>
 			<SubSection icon={mdiApplication} title="Software"/>
 			<div class="subsection">
-				{#each cv.skills.softwares as pilldata}
-					<Pill name={pilldata.software} type_icon={pilldata.type_icon} icon={pilldata.icon} color={pilldata.color}/>
+				{#each cv.skills.softwares as pilldata, index (index)}
+					<Pill name={pilldata.software} type_icon={pilldata.type_icon} icon={pilldata.icon} color={pilldata.color} show_tooltip={true} tooltip_data={cv.project_software[index]}/>
 				{/each}
 			</div>
 			<SubSection icon={mdiEarth} title="Languages"/>

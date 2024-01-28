@@ -37,3 +37,35 @@
 .pill-container svg {
     margin-right: 0.5rem;
 }
+
+.pill-tooltip {
+    position: absolute;
+    z-index: 1;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    min-width: 5rem;
+    border-radius: 0.4rem;
+    display: flex;
+    justify-content: center;
+    visibility: hidden;
+    transition: all .3s ease 0s;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.pill-arrow {
+    position: absolute;
+    z-index: 2;
+    transform: translateY(-2.2rem);
+    width: 0px;
+    height: 0px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid var(--color-background);
+    visibility: hidden;
+    transition: all .3s ease 0s;
+    filter: none;
+}

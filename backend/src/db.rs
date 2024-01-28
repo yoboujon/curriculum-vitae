@@ -86,3 +86,9 @@ pub struct AllTags {
     pub type_icon: Option<String>,
     pub color: Option<String>
 }
+
+#[derive(Deserialize, Serialize)]
+pub struct SimpleProject {
+    pub project_id: Option<i32>,
+    pub title: Option<String>
+}

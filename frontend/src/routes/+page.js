@@ -18,12 +18,40 @@ export async function load(context) {
   }
 
   const infos = [];
-  const dataToGather = ['info', 'education', 'experience', 'skills/1', 'tags/1'];
-  for (const url of dataToGather) {
+  const project_software = [];
+  const project_programming = [];
+  const dataToGather =
+      ['info', 'education', 'experience', 'skills/1', 'tags/1'];
+  for (const [index, url] of dataToGather.entries()) {
     const res = await fetchData(url);
     if (res.status == 0) {
+      // Pushing data
       infos.push(res.data);
     } else {
+      return {
+        status: res.status
+      }
+    }
+  }
+
+  for (let i = 0; i < infos[3][2].length; i++) {
+    const res =
+        await fetchData(`getproject_software/${i + 1}`);
+    if (res.status == 0) {
+      project_software.push(res.data);
+    } else {
+      return {
+        status: res.status
+      }
+    }
+  }
+  for (let i = 0; i < infos[3][1].length; i++) {
+    const res =
+        await fetchData(`getproject_programming/${i + 1}`);
+    if (res.status == 0) {
+      project_programming.push(res.data);
+    }
+    else {
       return {
         status: res.status
       }
@@ -42,5 +70,7 @@ export async function load(context) {
       languages: infos[3][3],
     },
     tags: infos[4],
+    project_programming: project_programming,
+    project_software: project_software,
   };
 }

@@ -10,7 +10,10 @@ use std::net::SocketAddr;
 use tower_http::cors::CorsLayer;
 
 mod db;
-use db::{Education, Experience, Info, Languages, ProgrammingLanguages, Project, Softwares, Tags, AllTags};
+use db::{
+    AllTags, Education, Experience, Info, Languages, ProgrammingLanguages, Project, SimpleProject,
+    Softwares, Tags,
+};
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -30,6 +33,14 @@ async fn main() -> Result<()> {
         .route("/skills/:id", get(skills))
         .route("/tags/:info_id/:project_id", get(tags))
         .route("/tags/:id", get(alltags))
+        .route(
+            "/getproject_programming/:programming_id",
+            get(getproject_programming),
+        )
+        .route(
+            "/getproject_software/:software_id",
+            get(getproject_software),
+        )
         .with_state(pool)
         .layer(CorsLayer::very_permissive());
 
@@ -160,6 +171,44 @@ async fn alltags(Path(info_id): Path<i32>, State(pool): State<PgPool>) -> Json<V
         
     ",
         info_id
+    )
+    .fetch_all(&pool)
+    .await
+    .unwrap_or(vec![]);
+    Json(datas)
+}
+
+async fn getproject_programming(
+    Path(programming_id): Path<i32>,
+    State(pool): State<PgPool>,
+) -> Json<Vec<SimpleProject>> {
+    let datas = sqlx::query_as!(
+        SimpleProject,
+        "SELECT project_id, title
+        FROM public.project p
+        JOIN public.project_tags pt ON p.id = pt.project_id
+        WHERE pt.programming_languages_id = $1   
+    ",
+        programming_id
+    )
+    .fetch_all(&pool)
+    .await
+    .unwrap_or(vec![]);
+    Json(datas)
+}
+
+async fn getproject_software(
+    Path(software_id): Path<i32>,
+    State(pool): State<PgPool>,
+) -> Json<Vec<SimpleProject>> {
+    let datas = sqlx::query_as!(
+        SimpleProject,
+        "SELECT project_id, title
+        FROM public.project p
+        JOIN public.project_tags pt ON p.id = pt.project_id
+        WHERE pt.softwares_id = $1   
+    ",
+        software_id
     )
     .fetch_all(&pool)
     .await
