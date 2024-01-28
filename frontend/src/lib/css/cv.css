@@ -8,10 +8,9 @@
 {
     .sidebar {
         position: absolute;
-        width: 16rem;
+        width: 15rem;
         height: 75rem;
         background-color: var(--color-special);
-        z-index: 2;
         transition: all 0s ease 0s;
     }
 
@@ -20,19 +19,12 @@
         flex-basis: 20rem;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
         background-color: var(--color-special);
-        z-index: 1;
     }
 }
 
 @media screen and (max-width: 1200px)
 {
     .sidebar {
-        position: absolute;
-        width: 16rem;
-        height: 75rem;
-        background-color: var(--color-special);
-        z-index: 2;
-        transition: all 0s ease 0s;
         visibility: hidden;
     }
 }

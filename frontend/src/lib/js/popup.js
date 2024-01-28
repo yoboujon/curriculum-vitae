@@ -1,6 +1,6 @@
 import {writable} from 'svelte/store';
 
-export function showPopup(show, popupObject) {
+export function showPopup(show, projectId) {
   const background = document.getElementById('project-popup-background');
   const mainPopup = document.getElementById('project-popup-main');
   const body = document.getElementsByTagName('body');
@@ -14,11 +14,22 @@ export function showPopup(show, popupObject) {
     background.style.visibility = 'hidden';
     mainPopup.style.visibility = 'hidden';
   }
-  if (popupObject != null) {
-    popupDatas.update(() => {
-      return popupObject;
+  if (projectId != null) {
+    actualData.update(() => {
+      let popup;
+      const unsubscribe = popupDatas.subscribe(value => {
+        popup = value;
+      });
+      for (const p of popup) {
+        if (p.id == projectId) {
+          unsubscribe();
+          return p;
+        }
+      }
+      unsubscribe();
     });
   }
 }
 
-export let popupDatas = writable(0);
+export let popupDatas = writable([]);
+export let actualData = writable(0);

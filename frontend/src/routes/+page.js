@@ -22,7 +22,7 @@ export async function load(context) {
   const project_programming = [];
   const dataToGather =
       ['info', 'education', 'experience', 'skills/1', 'tags/1'];
-  for (const [index, url] of dataToGather.entries()) {
+  for (const url of dataToGather) {
     const res = await fetchData(url);
     if (res.status == 0) {
       // Pushing data

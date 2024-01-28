@@ -1,8 +1,9 @@
 <script>
   import SvgIcon from "@jamescoyle/svelte-icon";
   import "$lib/css/pill.css";
-  import { mdiHelp } from "@mdi/js";
+  import { mdiHelp, mdiPlus } from "@mdi/js";
   import { shouldColorBeWhite } from "$lib/js/color.js";
+  import { showPopup } from "$lib/js/popup.js";
 
   export let name = "Unknown";
   export let icon = mdiHelp;
@@ -32,15 +33,10 @@
       pill_arrow.style.visibility = "visible";
       // adjusting top
       pill_tooltip.style.top = `${
-        main_pill.offsetTop - pill_tooltip.offsetHeight - 17
+        main_pill.offsetTop - pill_tooltip.offsetHeight - 16
       }px`;
-      if (white) {
-        pill_tooltip.style.boxShadow = `0px 8px 18px -1px ${color}60`;
-        pill_arrow.style.filter = `drop-shadow(0px 8px 18px ${color}40)`;
-      } else {
-        pill_tooltip.style.boxShadow = `0px 8px 18px -1px #261C2C30`;
-        pill_arrow.style.filter = `drop-shadow(0px 8px 18px #261C2C20)`;
-      }
+      pill_tooltip.style.boxShadow = `0px 8px 18px -1px #261C2C30`;
+      pill_arrow.style.filter = `drop-shadow(0px 8px 18px #261C2C20)`;
     } else {
       pill_tooltip.style.visibility = "hidden";
       pill_arrow.style.visibility = "hidden";
@@ -62,7 +58,16 @@
     <div class="pill-arrow" bind:this={pill_arrow} />
     <div class="pill-tooltip" bind:this={pill_tooltip}>
       {#each tooltip_data as td}
-        <p>{td.title}</p>
+        <div>
+          <p>{td.title}</p>
+          <div class="pill-last">
+            <button
+              class="pill-view"
+              on:click={() => showPopup(true, td.project_id)}
+              ><SvgIcon size="20" path={mdiPlus} type="mdi" /></button
+            >
+          </div>
+        </div>
       {/each}
     </div>
   {/if}

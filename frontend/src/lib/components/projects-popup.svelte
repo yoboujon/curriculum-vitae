@@ -4,7 +4,7 @@
   import "$lib/css/project-popup.css";
   import "$lib/css/slide.css";
   import Pill from "$lib/components/pill.svelte";
-  import { showPopup, popupDatas } from "$lib/js/popup.js";
+  import { showPopup, actualData } from "$lib/js/popup.js";
   import SvgIcon from "@jamescoyle/svelte-icon";
   import {
     mdiClose,
@@ -21,7 +21,7 @@
   } from "@mdi/js";
 
   // Variables
-  const unsubscribe = popupDatas.subscribe(popupShowed);
+  const unsubscribe = actualData.subscribe(popupShowed);
   let popupMain;
   let active = false;
 

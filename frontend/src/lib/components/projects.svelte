@@ -4,7 +4,7 @@
   import { mdiCalendarRange, mdiPlus, mdiAccount, mdiSchool } from "@mdi/js";
   import "$lib/css/slide.css";
   import { formatMonth } from "$lib/js/date.js";
-  import { showPopup } from "$lib/js/popup.js";
+  import { showPopup, popupDatas } from "$lib/js/popup.js";
 
   export let active = false;
   export let data;
@@ -16,17 +16,23 @@
     formatMonth(data.date_done).slice(1);
   const project_type = data.type_project;
   let picture;
-  const popDataObject = {
-    id: data.id,
-    title: data.title,
-    date: issued_date,
-    type_project: data.type_project,
-    description: data.description,
-    picture_name: data.picture_name,
-  };
 
   onMount(async () => {
     picture = (await import(`/src/lib/img/${data.picture_name}`)).default;
+
+    popupDatas.update((value) => {
+      const newData = {
+        id: data.id,
+        title: data.title,
+        date: issued_date,
+        type_project: data.type_project,
+        description: data.description,
+        picture_name: data.picture_name,
+      };
+
+      value.push(newData);
+      return value;
+    });
   });
 </script>
 
@@ -62,10 +68,7 @@
         </p>
       </div>
       <div class="slide-button-container">
-        <button
-          class="slide-button"
-          on:click={() => showPopup(true, popDataObject)}
-        >
+        <button class="slide-button" on:click={() => showPopup(true, data.id)}>
           <SvgIcon size="20" path={mdiPlus} type="mdi" />
           More</button
         >
