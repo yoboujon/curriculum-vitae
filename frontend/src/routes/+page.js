@@ -18,7 +18,7 @@ export async function load(context) {
   }
 
   const infos = [];
-  const dataToGather = ['info', 'education', 'experience', 'skills/1'];
+  const dataToGather = ['info', 'education', 'experience', 'skills/1', 'tags/1'];
   for (const url of dataToGather) {
     const res = await fetchData(url);
     if (res.status == 0) {
@@ -41,5 +41,6 @@ export async function load(context) {
       softwares: infos[3][2],
       languages: infos[3][3],
     },
+    tags: infos[4],
   };
 }

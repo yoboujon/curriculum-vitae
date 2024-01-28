@@ -76,7 +76,7 @@
 <svelte:window bind:scrollY bind:innerHeight bind:innerWidth on:scroll={sidebarScrollingHandler} on:resize={mobileCheck} />
 
 {#if data.status == 0}
-	<ProjectsPopup/>
+	<ProjectsPopup tags={cv.tags} />
 	<div class="container-cv">
 		<!-- SIDEBAR DIV (LEFT) -->
 		<div class="sidebar" bind:this={sidebar}>

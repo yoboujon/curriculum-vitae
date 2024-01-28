@@ -12,8 +12,9 @@ export function processData(data) {
     const experiences = arrangeById(data.experience);
     const education = arrangeById(data.education);
     const skills = data.skills;
+    const tags = data.tags;
 
-    return {info, experiences, education, skills};
+    return {info, experiences, education, skills, tags};
   } else {
     return null;  // Indicates an error
   }

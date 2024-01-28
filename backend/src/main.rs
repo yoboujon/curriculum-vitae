@@ -83,7 +83,7 @@ async fn skills(
 )> {
     let project = sqlx::query_as!(
         Project,
-        "SELECT date_done, title, description, github_link, picture_name, type_project FROM public.project WHERE project.info_id = $1 ORDER BY date_done DESC",
+        "SELECT id, date_done, title, description, github_link, picture_name, type_project FROM public.project WHERE project.info_id = $1 ORDER BY date_done DESC",
         id
     )
     .fetch_all(&pool)
@@ -155,7 +155,8 @@ async fn alltags(Path(info_id): Path<i32>, State(pool): State<PgPool>) -> Json<V
         SELECT project_id, software, icon, type_icon, color
         FROM public.softwares s
         JOIN public.project_tags pt ON s.id = pt.softwares_id
-        WHERE pt.info_id = $1;
+        WHERE pt.info_id = $1
+        ORDER BY project_id;
         
     ",
         info_id

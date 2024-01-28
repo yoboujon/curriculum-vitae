@@ -3,6 +3,7 @@
 
   import "$lib/css/project-popup.css";
   import "$lib/css/slide.css";
+  import Pill from "$lib/components/pill.svelte";
   import { showPopup, popupDatas } from "$lib/js/popup.js";
   import SvgIcon from "@jamescoyle/svelte-icon";
   import {
@@ -16,7 +17,7 @@
     mdiLink,
     mdiTag,
     mdiBookMultiple,
-    mdiDownload
+    mdiDownload,
   } from "@mdi/js";
 
   // Variables
@@ -25,11 +26,13 @@
   let active = false;
 
   // Informations
+  export let tags;
   let title = "Title";
   let date = "Date";
   let type_project = "Type of project";
   let picture;
   let description = "Description";
+  let id = 0;
 
   async function popupShowed(data) {
     /**
@@ -45,6 +48,7 @@
       type_project = data.type_project;
       picture = (await import(`/src/lib/img/${data.picture_name}`)).default;
       description = data.description;
+      id = data.id;
       // Active set to true after the await to avoid conflict when clicking outside while the popup hasn't showed yet.
       active = true;
     }
@@ -139,6 +143,19 @@
       <div class="slide-subtitle-container">
         <SvgIcon size="35" path={mdiTag} type="mdi" />
         <p class="slide-subtitle slide-aftericon">Tags</p>
+      </div>
+      <div class="project-popup-link-container">
+        {#each tags as tag}
+          {#if tag.project_id === id}
+            <Pill
+              name={tag.lang}
+              type_icon={tag.type_icon}
+              icon={tag.icon}
+              color="#F8F1F1"
+              shadow_color="#261C2C"
+            />
+          {/if}
+        {/each}
       </div>
     </div>
     <!-- Text -->

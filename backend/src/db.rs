@@ -38,6 +38,7 @@ pub struct Experience {
 
 #[derive(Deserialize, Serialize)]
 pub struct Project {
+    pub id: Option<i32>,
     pub date_done: Option<NaiveDate>,
     pub title: Option<String>,
     pub description: Option<String>,

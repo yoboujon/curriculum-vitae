@@ -17,6 +17,7 @@
   const project_type = data.type_project;
   let picture;
   const popDataObject = {
+    id: data.id,
     title: data.title,
     date: issued_date,
     type_project: data.type_project,
