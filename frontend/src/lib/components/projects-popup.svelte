@@ -92,7 +92,7 @@
 
   <div class="project-popup-container">
     <!-- Information -->
-    <div>
+    <div class="prout">
       <h1 class="slide-title">{title}</h1>
       <div class="project-popup-img-container">
         <img class="project-popup-img" src={picture} alt="Project Popup" />
