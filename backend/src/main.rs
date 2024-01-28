@@ -10,7 +10,7 @@ use std::net::SocketAddr;
 use tower_http::cors::CorsLayer;
 
 mod db;
-use db::{Education, Experience, Info, Languages, Project, ProgrammingLanguages, Softwares};
+use db::{Education, Experience, Info, Languages, ProgrammingLanguages, Project, Softwares, Tags, AllTags};
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -28,6 +28,8 @@ async fn main() -> Result<()> {
         .route("/education", get(education))
         .route("/experience", get(experience))
         .route("/skills/:id", get(skills))
+        .route("/tags/:info_id/:project_id", get(tags))
+        .route("/tags/:id", get(alltags))
         .with_state(pool)
         .layer(CorsLayer::very_permissive());
 
@@ -44,8 +46,7 @@ macro_rules! _gather_data {
     };
 }
 
-async fn info(State(pool): State<PgPool>) -> Json<Vec<Info>> 
-{
+async fn info(State(pool): State<PgPool>) -> Json<Vec<Info>> {
     let datas = sqlx::query_as!(
         Info,
         "SELECT id, full_name, phone_number, email, softskills, interests, birth_year FROM public.info"
@@ -58,18 +59,28 @@ async fn info(State(pool): State<PgPool>) -> Json<Vec<Info>>
 async fn education(State(pool): State<PgPool>) -> Json<Vec<Education>> {
     let datas = sqlx::query_as!(Education, "SELECT * FROM public.education")
         .fetch_all(&pool)
-        .await.unwrap_or(vec![]);
+        .await
+        .unwrap_or(vec![]);
     Json(datas)
 }
 
 async fn experience(State(pool): State<PgPool>) -> Json<Vec<Experience>> {
     let datas = sqlx::query_as!(Experience, "SELECT * FROM public.experience")
         .fetch_all(&pool)
-        .await.unwrap_or(vec![]);
+        .await
+        .unwrap_or(vec![]);
     Json(datas)
 }
 
-async fn skills(Path(id): Path<i32>, State(pool): State<PgPool>) -> Json<(Vec<Project>,Vec<ProgrammingLanguages>,Vec<Softwares>,Vec<Languages>)> {
+async fn skills(
+    Path(id): Path<i32>,
+    State(pool): State<PgPool>,
+) -> Json<(
+    Vec<Project>,
+    Vec<ProgrammingLanguages>,
+    Vec<Softwares>,
+    Vec<Languages>,
+)> {
     let project = sqlx::query_as!(
         Project,
         "SELECT date_done, title, description, github_link, picture_name, type_project FROM public.project WHERE project.info_id = $1 ORDER BY date_done DESC",
@@ -77,7 +88,7 @@ async fn skills(Path(id): Path<i32>, State(pool): State<PgPool>) -> Json<(Vec<Pr
     )
     .fetch_all(&pool)
     .await.unwrap_or(vec![]);
-    
+
     let programming_languages = sqlx::query_as!(
         ProgrammingLanguages,
         "SELECT lang, icon, type_icon, color FROM public.programming_languages WHERE programming_languages.info_id = $1 ORDER BY programming_languages.id",
@@ -102,5 +113,55 @@ async fn skills(Path(id): Path<i32>, State(pool): State<PgPool>) -> Json<(Vec<Pr
     .fetch_all(&pool)
     .await.unwrap_or(vec![]);
 
-    Json((project,programming_languages,softwares,languages))
+    Json((project, programming_languages, softwares, languages))
+}
+
+async fn tags(Path(ids): Path<(i32, i32)>, State(pool): State<PgPool>) -> Json<Vec<Tags>> {
+    let (info_id, project_id) = ids;
+    let datas = sqlx::query_as!(
+        Tags,
+        "SELECT lang, icon, type_icon, color
+        FROM public.programming_languages pl
+        JOIN public.project_tags pt ON pl.id = pt.programming_languages_id
+        WHERE pt.info_id = $1 and pt.project_id = $2
+        
+        UNION ALL
+        
+        SELECT software, icon, type_icon, color
+        FROM public.softwares s
+        JOIN public.project_tags pt ON s.id = pt.softwares_id
+        WHERE pt.info_id = $1 and pt.project_id = $2;
+        
+    ",
+        info_id,
+        project_id
+    )
+    .fetch_all(&pool)
+    .await
+    .unwrap_or(vec![]);
+    Json(datas)
+}
+
+async fn alltags(Path(info_id): Path<i32>, State(pool): State<PgPool>) -> Json<Vec<AllTags>> {
+    let datas = sqlx::query_as!(
+        AllTags,
+        "SELECT project_id, lang, icon, type_icon, color
+        FROM public.programming_languages pl
+        JOIN public.project_tags pt ON pl.id = pt.programming_languages_id
+        WHERE pt.info_id = $1
+        
+        UNION ALL
+        
+        SELECT project_id, software, icon, type_icon, color
+        FROM public.softwares s
+        JOIN public.project_tags pt ON s.id = pt.softwares_id
+        WHERE pt.info_id = $1;
+        
+    ",
+        info_id
+    )
+    .fetch_all(&pool)
+    .await
+    .unwrap_or(vec![]);
+    Json(datas)
 }

@@ -68,3 +68,20 @@ pub struct Languages {
     pub icon_alpha: String,
     pub level: String
 }
+
+#[derive(Deserialize, Serialize)]
+pub struct Tags {
+    pub lang: Option<String>,
+    pub icon: Option<String>,
+    pub type_icon: Option<String>,
+    pub color: Option<String>
+}
+
+#[derive(Deserialize, Serialize)]
+pub struct AllTags {
+    pub project_id: Option<i32>,
+    pub lang: Option<String>,
+    pub icon: Option<String>,
+    pub type_icon: Option<String>,
+    pub color: Option<String>
+}
