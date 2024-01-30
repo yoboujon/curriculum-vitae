@@ -13,6 +13,9 @@ CREATE TABLE public.project (
 	info_id int4 NOT NULL,
 	picture_name text NULL,
 	type_project text NULL,
+	report_link text NULL,
+	archive_link text NULL,
+	app_link text NULL,
 	CONSTRAINT project_pkey PRIMARY KEY (id),
 	CONSTRAINT project_fk FOREIGN KEY (info_id) REFERENCES public.info(id)
 );
