@@ -37,7 +37,7 @@
     position: absolute;
     right: 0.5rem;
     top: 0.5rem;
-    cursor: grab;
+    cursor: pointer;
 }
 
 .project-popup-close:hover {
@@ -135,7 +135,7 @@
     border: 0;
     transition: none;
     color: var(--color-background);
-    cursor: grab;
+    cursor: pointer;
     text-decoration: none;
     text-align: center;
     font-size: 0.85rem;
