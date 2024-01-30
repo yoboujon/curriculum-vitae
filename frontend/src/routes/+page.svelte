@@ -51,7 +51,6 @@
     let isBottom = scrollY + innerHeight >= footer.offsetTop;
     let isMoved = scrollY + innerHeight >= sidebar.offsetHeight;
     let littleScreen = innerHeight < sidebar.offsetHeight;
-    console.log(littleScreen);
     // Only having the sticky sidebar if the size of the screen is too 'little'
 
     // Testing if sidebar is outside of scrolling scope

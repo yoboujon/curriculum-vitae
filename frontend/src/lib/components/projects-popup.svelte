@@ -64,7 +64,9 @@
       application_link = data.application_link;
       filteredTags = filterTag(tags, id);
       // Active set to true after the await to avoid conflict when clicking outside while the popup hasn't showed yet.
-      active = true;
+      setTimeout(() => {
+        active = true;
+      }, 10);
     }
   }
 
@@ -73,7 +75,7 @@
   });
 
   function hidePopup(event) {
-    if (!active) {
+    if (!active && popupMain.style.visibility === "visible") {
       return;
     }
 
