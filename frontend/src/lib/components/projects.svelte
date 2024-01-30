@@ -18,8 +18,6 @@
   let picture;
 
   onMount(async () => {
-    picture = (await import(`/src/lib/img/${data.picture_name}`)).default;
-
     popupDatas.update((value) => {
       value.push(data);
       return value;
@@ -30,7 +28,7 @@
 <div class="slide-container">
   <div class="slide-more slide-main {active ? '' : 'slide-unactive'}">
     <div class="slide-img-container">
-      <img class="slide-img" src={picture} alt="Projects" />
+      <img class="slide-img" src={data.picture_name} alt="Projects" />
     </div>
     <div class="slide-text-container">
       <h1 class="slide-title">{title}</h1>

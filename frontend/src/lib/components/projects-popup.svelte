@@ -55,7 +55,7 @@
         formatMonth(data.date_done).charAt(0).toUpperCase() +
         formatMonth(data.date_done).slice(1);
       type_project = data.type_project;
-      picture = (await import(`/src/lib/img/${data.picture_name}`)).default;
+      picture = data.picture_name;
       description = data.description;
       id = data.id;
       report_link = data.report_link;

@@ -92,10 +92,12 @@
 				icon={mdiEmailOutline}
 				description={cv.info.email}
 			/>
+			{#if cv.info.phone_number != null}
 			<SidebarComponent
 				icon={mdiPhone}
 				description={cv.info.phone_number}
 			/>
+			{/if}
 			<SidebarComponent
 				icon={mdiStar}
 				title="Interests"
