@@ -60,7 +60,7 @@ macro_rules! _gather_data {
 async fn info(State(pool): State<PgPool>) -> Json<Vec<Info>> {
     let datas = sqlx::query_as!(
         Info,
-        "SELECT id, full_name, phone_number, email, softskills, interests, birth_year FROM public.info"
+        "SELECT id, full_name, phone_number, email, softskills, interests, birth_year, profile_pic FROM public.info"
     )
     .fetch_all(&pool)
     .await.unwrap_or(vec![]);

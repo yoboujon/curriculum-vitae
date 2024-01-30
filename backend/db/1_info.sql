@@ -12,5 +12,6 @@ CREATE TABLE public.info (
 	email varchar NULL,
 	softskills text NULL,
 	interests text NULL,
+	profile_pic text NULL,
 	CONSTRAINT info_pkey PRIMARY KEY (id)
 );

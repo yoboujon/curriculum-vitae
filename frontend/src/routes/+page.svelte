@@ -6,7 +6,6 @@
 	import "$lib/css/cv.css";
 
 	// Sidebar
-	import profile_pic from "$lib/img/cvnQU1-W_nowhite_carre.jpg";
 	import SidebarComponent from "$lib/components/sidebar-component.svelte";
 	import {
 		mdiAccount,
@@ -83,7 +82,7 @@
 			<div class="profile-picture-container">
 				<img
 					class="profile-picture"
-					src={profile_pic}
+					src={cv.info.profile_pic}
 					alt={cv.info.full_name}
 				/>
 			</div>

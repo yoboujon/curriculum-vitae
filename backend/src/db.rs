@@ -10,6 +10,7 @@ pub struct Info {
     pub softskills: Option<String>,
     pub interests: Option<String>,
     pub birth_year: Option<NaiveDate>,
+    pub profile_pic: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]
