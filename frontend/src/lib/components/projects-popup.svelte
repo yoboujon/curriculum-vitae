@@ -4,7 +4,7 @@
   import "$lib/css/project-popup.css";
   import "$lib/css/slide.css";
   import Pill from "$lib/components/pill.svelte";
-  import { showPopup, actualData } from "$lib/js/popup.js";
+  import { showPopup, actualData, filterTag } from "$lib/js/popup.js";
   import SvgIcon from "@jamescoyle/svelte-icon";
   import {
     mdiClose,
@@ -19,6 +19,7 @@
     mdiBookMultiple,
     mdiDownload,
   } from "@mdi/js";
+  import { formatMonth } from "$lib/js/date.js";
 
   // Variables
   const unsubscribe = actualData.subscribe(popupShowed);
@@ -27,11 +28,18 @@
 
   // Informations
   export let tags;
+
+  // Not exported but still Informations
+  let filteredTags = [];
   let title = "Title";
   let date = "Date";
   let type_project = "Type of project";
   let picture;
   let description = "Description";
+  let report_link;
+  let github_link;
+  let archive_link;
+  let application_link;
   let id = 0;
 
   async function popupShowed(data) {
@@ -42,13 +50,19 @@
      * is not yet loaded.
      */
     if (data != 0) {
-      const superData = data;
-      title = superData.title;
-      date = data.date;
+      title = data.title;
+      date =
+        formatMonth(data.date_done).charAt(0).toUpperCase() +
+        formatMonth(data.date_done).slice(1);
       type_project = data.type_project;
       picture = (await import(`/src/lib/img/${data.picture_name}`)).default;
       description = data.description;
       id = data.id;
+      report_link = data.report_link;
+      github_link = data.github_link;
+      archive_link = data.archive_link;
+      application_link = data.application_link;
+      filteredTags = filterTag(tags, id);
       // Active set to true after the await to avoid conflict when clicking outside while the popup hasn't showed yet.
       active = true;
     }
@@ -117,36 +131,62 @@
         </div>
       </div>
       <!-- Links -->
-      <div class="slide-subtitle-container">
-        <SvgIcon size="35" path={mdiLink} type="mdi" />
-        <p class="slide-subtitle slide-aftericon">Links</p>
-      </div>
-      <div class="project-popup-link-container">
-        <button class="project-popup-download project-popup-report">
-          <SvgIcon size="20" path={mdiFileDocumentOutline} type="mdi" />
-          <p>See Report</p>
-        </button>
-        <button class="project-popup-download project-popup-github">
-          <SvgIcon size="20" path={mdiGithub} type="mdi" />
-          <p>Github Repository</p>
-        </button>
-        <button class="project-popup-download project-popup-archive">
-          <SvgIcon size="20" path={mdiBookMultiple} type="mdi" />
-          <p>Download Archive</p>
-        </button>
-        <button class="project-popup-download project-popup-application">
-          <SvgIcon size="20" path={mdiDownload} type="mdi" />
-          <p>Download Application</p>
-        </button>
-      </div>
+      {#if report_link != null || github_link != null || archive_link != null || application_link != null}
+        <div class="slide-subtitle-container">
+          <SvgIcon size="35" path={mdiLink} type="mdi" />
+          <p class="slide-subtitle slide-aftericon">Links</p>
+        </div>
+        <div class="project-popup-link-container">
+          {#if report_link != null}
+            <a
+              class="project-popup-download project-popup-report"
+              href={report_link}
+              target="_blank"
+            >
+              <SvgIcon size="20" path={mdiFileDocumentOutline} type="mdi" />
+              <p>See Report</p>
+            </a>
+          {/if}
+          {#if github_link != null}
+            <a
+              class="project-popup-download project-popup-github"
+              href={github_link}
+              target="_blank"
+            >
+              <SvgIcon size="20" path={mdiGithub} type="mdi" />
+              <p>Github Repository</p>
+            </a>
+          {/if}
+          {#if archive_link != null}
+            <a
+              class="project-popup-download project-popup-archive"
+              href={archive_link}
+              target="_blank"
+            >
+              <SvgIcon size="20" path={mdiBookMultiple} type="mdi" />
+              <p>Download Archive</p>
+            </a>
+          {/if}
+          {#if application_link != null}
+            <a
+              class="project-popup-download project-popup-application"
+              href={application_link}
+              target="_blank"
+            >
+              <SvgIcon size="20" path={mdiDownload} type="mdi" />
+              <p>Download Application</p>
+            </a>
+          {/if}
+        </div>
+      {/if}
       <!-- Tags -->
-      <div class="slide-subtitle-container">
-        <SvgIcon size="35" path={mdiTag} type="mdi" />
-        <p class="slide-subtitle slide-aftericon">Tags</p>
-      </div>
-      <div class="project-popup-link-container">
-        {#each tags as tag}
-          {#if tag.project_id === id}
+      {#if filteredTags.length != 0}
+        <div class="slide-subtitle-container">
+          <SvgIcon size="35" path={mdiTag} type="mdi" />
+          <p class="slide-subtitle slide-aftericon">Tags</p>
+        </div>
+        <div class="project-popup-link-container">
+          {#each filteredTags as tag}
             <Pill
               name={tag.lang}
               type_icon={tag.type_icon}
@@ -154,9 +194,9 @@
               color="#F8F1F1"
               shadow_color="#261C2C"
             />
-          {/if}
-        {/each}
-      </div>
+          {/each}
+        </div>
+      {/if}
     </div>
     <!-- Text -->
     <div>

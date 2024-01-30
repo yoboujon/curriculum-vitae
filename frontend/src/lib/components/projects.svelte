@@ -21,16 +21,7 @@
     picture = (await import(`/src/lib/img/${data.picture_name}`)).default;
 
     popupDatas.update((value) => {
-      const newData = {
-        id: data.id,
-        title: data.title,
-        date: issued_date,
-        type_project: data.type_project,
-        description: data.description,
-        picture_name: data.picture_name,
-      };
-
-      value.push(newData);
+      value.push(data);
       return value;
     });
   });

@@ -31,5 +31,18 @@ export function showPopup(show, projectId) {
   }
 }
 
+export function filterTag(tags, id)
+{
+  let returnTags = [];
+  for(const tag of tags)
+  {
+    if(tag.project_id == id)
+    {
+      returnTags.push(tag);
+    }
+  }
+  return returnTags;
+}
+
 export let popupDatas = writable([]);
 export let actualData = writable(0);
