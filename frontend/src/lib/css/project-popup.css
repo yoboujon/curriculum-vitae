@@ -1,17 +1,139 @@
-#project-popup-main {
-    height: 80dvh;
-    /* 100-height/2 */
-    top: calc(10vh - 1.5rem);
-    width: 60dvw;
-    /* 100-width/2 */
-    left: calc(20vw - 1.5rem);
-    border-radius: 0.4rem;
-    box-shadow: 0px 20px 50px -10px rgba(0, 0, 0, 0.2);
-    position: fixed;
-    background-color: var(--color-background);
-    z-index: 5;
-    padding: 1.5rem;
-    visibility: hidden;
+@media screen and (min-width: 1000px) {
+    #project-popup-main {
+        height: 80dvh;
+        /* 100-height/2 */
+        top: calc(10vh - 1.5rem);
+        width: 60dvw;
+        /* 100-width/2 */
+        left: calc(20vw - 1.5rem);
+        border-radius: 0.4rem;
+        box-shadow: 0px 20px 50px -10px rgba(0, 0, 0, 0.2);
+        position: fixed;
+        background-color: var(--color-background);
+        z-index: 5;
+        padding: 1.5rem;
+        visibility: hidden;
+    }
+
+    .project-popup-container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    /* style for child of container */
+    .project-popup-container>div {
+        width: 50%;
+        margin: 0.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 80dvh;
+    }
+
+    .project-popup-img {
+        max-height: 16rem;
+        max-width: 40dvh;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        object-fit: cover;
+    }
+
+    .popup-mobile {
+        display: none;
+    }
+
+    .project-popup-subinfo-container {
+        display: flex;
+        flex-direction: row;
+        border-radius: 0.4rem;
+        box-shadow: rgba(50, 50, 93, 0.15) 0px 13px 27px -2px, rgba(0, 0, 0, 0.2) 0px 8px 16px -4px;
+        padding: 0.4rem;
+        justify-content: center;
+        width: fit-content;
+        margin-bottom: 1rem;
+    }
+
+    .popup-subtitle-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #project-popup-main {
+        height: 87dvh;
+        top: calc(13dvh - 1.5rem);
+        width: 100dvw;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        box-shadow: 0px 20px 50px -10px rgba(0, 0, 0, 0.2);
+        position: fixed;
+        background-color: var(--color-background);
+        z-index: 5;
+        padding-top: 1.5rem;
+        visibility: hidden;
+    }
+
+    .project-popup-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* style for child of container */
+    .project-popup-container>div {
+        /* 100% - paddingMain - paddingDiv - marginDiv*/
+        width: calc(100dvw - 2*(3rem));
+        padding-left: 3rem;
+        padding-right: 3rem;
+        height: 87dvh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .project-popup-img {
+        max-width: 76dvw;
+        max-height: 100%;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        object-fit: cover;
+    }
+
+    .popup-desktop {
+        display: none;
+    }
+
+    .project-popup-subinfo-container {
+        display: flex;
+        flex-direction: row;
+        border-radius: 0.4rem;
+        box-shadow: rgba(50, 50, 93, 0.15) 0px 13px 27px -2px, rgba(0, 0, 0, 0.2) 0px 8px 16px -4px;
+        padding: 0.4rem;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .popup-subtitle-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding-top: 0.8rem;
+        padding-bottom: 0.4rem;
+    }
+
+    .project-popup-tag-container {
+        margin-bottom: 3rem !important;
+    }
+}
+
+.project-popup-link-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 0.25rem;
 }
 
 #project-popup-background {
@@ -56,43 +178,6 @@
 .project-popup-img-container {
     display: flex;
     justify-content: center;
-    height: 30dvh;
-}
-
-.project-popup-img {
-    max-width: 20dvw;
-    /* Because the width of the popup is 50dvw and the picture has to take maximum half of the popup*/
-    max-height: 100%;
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
-    object-fit: cover;
-}
-
-.project-popup-container {
-    display: flex;
-    flex-direction: row;
-}
-
-/* style for child of container */
-.project-popup-container>div {
-    width: 50%;
-    margin: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    overflow-y : scroll;
-    overflow-x: hidden;
-    height: 80dvh;
-}
-
-.project-popup-subinfo-container {
-    display: flex;
-    flex-direction: row;
-    border-radius: 0.4rem;
-    box-shadow: rgba(50, 50, 93, 0.15) 0px 13px 27px -2px, rgba(0, 0, 0, 0.2) 0px 8px 16px -4px;
-    padding: 0.4rem;
-    justify-content: center;
-    width: fit-content;
-    margin-bottom: 1rem;
 }
 
 .project-popup-subinfo-container>div {
@@ -103,13 +188,6 @@
 .project-popup-text {
     font-size: 1rem !important;
     text-align: justify;
-}
-
-.project-popup-link-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-bottom: 0.25rem;
 }
 
 .project-popup-subtitle {

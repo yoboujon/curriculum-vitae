@@ -112,7 +112,7 @@
 
   <div class="project-popup-container">
     <!-- Information -->
-    <div class="prout">
+    <div>
       <h1 class="slide-title">{title}</h1>
       <div class="project-popup-img-container">
         <img class="project-popup-img" src={picture} alt="Project Popup" />
@@ -132,9 +132,16 @@
           <p class="project-popup-subtitle slide-aftericon">{type_project}</p>
         </div>
       </div>
+      <div class="popup-mobile">
+        <div class="popup-subtitle-container">
+          <SvgIcon size="35" path={mdiTextBox} type="mdi" />
+          <p class="slide-subtitle slide-aftericon">Description</p>
+        </div>
+        <p class="slide-subtitle project-popup-text">{description}</p>
+      </div>
       <!-- Links -->
       {#if report_link != null || github_link != null || archive_link != null || application_link != null}
-        <div class="slide-subtitle-container">
+        <div class="popup-subtitle-container">
           <SvgIcon size="35" path={mdiLink} type="mdi" />
           <p class="slide-subtitle slide-aftericon">Links</p>
         </div>
@@ -183,11 +190,11 @@
       {/if}
       <!-- Tags -->
       {#if filteredTags.length != 0}
-        <div class="slide-subtitle-container">
+        <div class="popup-subtitle-container">
           <SvgIcon size="35" path={mdiTag} type="mdi" />
           <p class="slide-subtitle slide-aftericon">Tags</p>
         </div>
-        <div class="project-popup-link-container">
+        <div class="project-popup-link-container project-popup-tag-container">
           {#each filteredTags as tag}
             <Pill
               name={tag.lang}
@@ -201,8 +208,8 @@
       {/if}
     </div>
     <!-- Text -->
-    <div>
-      <div class="slide-subtitle-container">
+    <div class="popup-desktop">
+      <div class="popup-subtitle-container">
         <SvgIcon size="35" path={mdiTextBox} type="mdi" />
         <p class="slide-subtitle slide-aftericon">Description</p>
       </div>

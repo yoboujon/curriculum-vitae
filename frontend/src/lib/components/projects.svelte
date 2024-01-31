@@ -15,7 +15,6 @@
     formatMonth(data.date_done).charAt(0).toUpperCase() +
     formatMonth(data.date_done).slice(1);
   const project_type = data.type_project;
-  let picture;
 
   onMount(async () => {
     popupDatas.update((value) => {
@@ -33,7 +32,7 @@
     <div class="slide-text-container">
       <h1 class="slide-title">{title}</h1>
       <div class="slide-img-mobile-container">
-        <img class="slide-img-mobile" src={picture} alt="Projects" />
+        <img class="slide-img-mobile" src={data.picture_name} alt="Projects" />
       </div>
       <div class="slide-subtitle-container">
         <SvgIcon size="35" path={mdiCalendarRange} type="mdi" />
