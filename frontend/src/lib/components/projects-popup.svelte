@@ -75,7 +75,7 @@
   });
 
   function hidePopup(event) {
-    if (!active && popupMain.style.visibility === "visible") {
+    if (!active) {
       return;
     }
 

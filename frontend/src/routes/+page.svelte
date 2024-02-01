@@ -1,25 +1,12 @@
 <script>
   import SvgIcon from "@jamescoyle/svelte-icon";
   import { processData } from "$lib/js/processdata.js";
-  import { formatDate } from "$lib/js/date.js";
+  import { showSidebar } from "$lib/js/topbar.js";
   import "$lib/css/base.css";
   import "$lib/css/cv.css";
 
-  // Sidebar
-  import SidebarComponent from "$lib/components/sidebar-component.svelte";
-  import {
-    mdiAccount,
-    mdiCogs,
-    mdiEmailOutline,
-    mdiPhone,
-    mdiStar,
-    mdiXml,
-    mdiApplication,
-    mdiEarth,
-    mdiHeart,
-  } from "@mdi/js";
-
   // Main
+  import Sidebar from "$lib/components/sidebar.svelte";
   import Section from "$lib/components/section.svelte";
   import SubSection from "$lib/components/subsection.svelte";
   import Education from "$lib/components/education.svelte";
@@ -29,94 +16,92 @@
   import Pill from "$lib/components/pill.svelte";
   import FlagComponent from "$lib/components/flag-component.svelte";
   import ProjectsPopup from "$lib/components/projects-popup.svelte";
-  import { mdiSchool, mdiBriefcase, mdiWrench, mdiPencil } from "@mdi/js";
+  import {
+    mdiSchool,
+    mdiBriefcase,
+    mdiWrench,
+    mdiPencil,
+    mdiAccount,
+    mdiXml,
+    mdiApplication,
+    mdiEarth,
+    mdiHeart,
+  } from "@mdi/js";
   import { onMount } from "svelte";
 
   export let data;
   const cv = data.status == 0 ? processData(data) : undefined;
-  const birth_year =
-    data.status == 0 ? formatDate(cv.info.birth_year) : undefined;
 
-  // Sidebar sticky
-  let sidebar;
+  // Sidebar
   let containerCv;
   let footer;
-  $: scrollY = 0;
-  $: innerHeight = 0;
-  onMount(() => {
-    sidebarScrollingHandler();
-  });
 
-  function sidebarScrollingHandler() {
-    let isBottom = scrollY + innerHeight >= footer.offsetTop;
-    let isMoved = scrollY + innerHeight >= sidebar.offsetHeight;
-    let littleScreen = innerHeight < sidebar.offsetHeight;
-    // Only having the sticky sidebar if the size of the screen is too 'little'
-
-    // Testing if sidebar is outside of scrolling scope
-    if (isMoved && !isBottom) {
-      sidebar.style.position = "fixed";
-      sidebar.style.top = littleScreen
-        ? `${innerHeight - sidebar.offsetHeight}px`
-        : "0px";
-    }
-    // Checking if at the bottom, calculating the diff. between the cv and the sidebar heights
-    else if (isBottom && littleScreen) {
-      sidebar.style.position = "absolute";
-      sidebar.style.top = `${
-        containerCv.offsetHeight - sidebar.offsetHeight
-      }px`;
-    }
-    // Only putting absolute if on little screen
-    else if (littleScreen) {
-      sidebar.style.position = "absolute";
-      sidebar.style.top = "";
+  // Mobile top bar
+  function mobileTopBar() {
+    // 53 px or half the topbar size
+    if (scrollY > 53) {
+      topbar.style.height = "53px";
+      topbar.style.backgroundColor = "#F8F1F1AE";
+      topbar.style.boxShadow = "0px 8px 18px -1px #1d4a6560";
+      buttonTopbar.style.display = "flex";
+    } else {
+      topbar.style.height = "";
+      topbar.style.backgroundColor = "#F8F1F100";
+      topbar.style.boxShadow = "";
+      buttonTopbar.style.display = "none";
     }
   }
 
   // Mobile check
   $: innerWidth = 0;
+  $: scrollY = 0;
+  let topbar;
+  let sidebarContainer;
+  let buttonTopbar;
+
+  onMount(async () => {
+    mobileTopBar();
+  });
 </script>
 
 <svelte:window
   bind:scrollY
-  bind:innerHeight
   bind:innerWidth
-  on:scroll={sidebarScrollingHandler}
+  on:scroll={() => {
+    if (innerWidth < 1200) {
+      mobileTopBar();
+    }
+  }}
 />
 
 {#if data.status == 0}
   <ProjectsPopup tags={cv.tags} />
+  <!-- TOPBAR DIV (POPUP: mobile) -->
+  {#if innerWidth < 1200}
+    <Sidebar info={cv.info} bind:sidebarContainer />
+  {/if}
   <div class="container-cv" bind:this={containerCv}>
-    <!-- SIDEBAR DIV (LEFT) -->
-    <div class="sidebar" bind:this={sidebar}>
-      <div class="profile-picture-container">
-        <img
-          class="profile-picture"
-          src={cv.info.profile_pic}
-          alt={cv.info.full_name}
-        />
+    <!-- SIDEBAR DIV (LEFT: desktop) -->
+    {#if innerWidth >= 1200}
+      <Sidebar info={cv.info} {footer} {containerCv} />
+    {/if}
+    <!-- MOBILE TOP BAR -->
+    {#if innerWidth < 1000}
+      <div id="topbar" bind:this={topbar}>
+        <button on:click={() => showSidebar(true)} bind:this={buttonTopbar}>
+          <SvgIcon size="23" path={mdiAccount} type="mdi" />
+        </button>
+        <h1 class={scrollY <= 53 ? "topbar-name" : "topbar-name-little"}>
+          {cv.info.full_name}
+        </h1>
       </div>
-      <SidebarComponent icon={mdiAccount} description={birth_year} />
-      <SidebarComponent icon={mdiEmailOutline} description={cv.info.email} />
-      {#if cv.info.phone_number != null}
-        <SidebarComponent icon={mdiPhone} description={cv.info.phone_number} />
-      {/if}
-      <SidebarComponent
-        icon={mdiStar}
-        title="Interests"
-        description={cv.info.interests}
-      />
-      <SidebarComponent
-        icon={mdiCogs}
-        title="Soft-Skills"
-        description={cv.info.softskills}
-      />
-    </div>
-    <div class="fake-sidebar" />
-    <!-- MAIN DIV (RIGHT) -->
+      <div id="fake-topbar" />
+    {/if}
+    <!-- MAIN DIV (RIGHT: desktop/CENTER: mobile) -->
     <div class="main">
-      <h1 class="name">{cv.info.full_name}</h1>
+      {#if innerWidth >= 1000}
+        <h1 class="name">{cv.info.full_name}</h1>
+      {/if}
       <h2 class="name">Apprentice Engineer Automatic/Electronic</h2>
       <Section icon={mdiSchool} title="Education" />
       <SlideShow

@@ -5,7 +5,7 @@ export function showPopup(show, projectId) {
   const mainPopup = document.getElementById('project-popup-main');
   const body = document.getElementsByTagName('body');
 
-  if (show === true) {
+  if (show) {
     body[0].style.overflow = 'hidden';
     background.style.visibility = 'visible';
     mainPopup.style.visibility = 'visible';
