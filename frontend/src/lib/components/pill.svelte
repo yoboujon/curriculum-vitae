@@ -18,6 +18,7 @@
   let pill_arrow;
   let pill_tooltip;
   let main_pill;
+  let innerWidth;
 
   if (shadow_color === null) {
     style = `background-color: ${color};
@@ -28,21 +29,33 @@
   }
 
   function showingTooltip(visible) {
+    // Showing tooltip
+    const isOutofBoundLeft=(main_pill.offsetLeft+(main_pill.offsetWidth/2)<(pill_tooltip.offsetWidth/2));
+    const isOutofBoundRight=((pill_tooltip.offsetLeft+pill_tooltip.offsetWidth)>innerWidth);
     if (visible && tooltip_data.length > 0) {
       pill_tooltip.style.visibility = "visible";
       pill_arrow.style.visibility = "visible";
-      // adjusting top
+      if(isOutofBoundLeft)
+      {
+        pill_tooltip.style.left = "0";
+      }
+      if(isOutofBoundRight)
+      {
+        pill_tooltip.style.right = "0";
+      }
       pill_tooltip.style.top = `${
         main_pill.offsetTop - pill_tooltip.offsetHeight - 16
       }px`;
-      pill_tooltip.style.boxShadow = `0px 8px 18px -1px #261C2C30`;
-      pill_arrow.style.filter = `drop-shadow(0px 8px 18px #261C2C20)`;
-    } else {
+    }
+    // Hiding tooltip
+    else {
       pill_tooltip.style.visibility = "hidden";
       pill_arrow.style.visibility = "hidden";
     }
   }
 </script>
+
+<svelte:window bind:innerWidth />
 
 <div
   class={white ? "pill-container pill-white" : "pill-container pill-black"}
@@ -59,7 +72,7 @@
     <div class="pill-tooltip" bind:this={pill_tooltip}>
       {#each tooltip_data as td}
         <div>
-          <p>{td.title}</p>
+          <span>{td.title}</span>
           <div class="pill-last">
             <button
               class="pill-view"

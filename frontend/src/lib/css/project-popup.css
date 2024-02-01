@@ -59,6 +59,32 @@
         flex-direction: row;
         align-items: center;
     }
+
+    .project-popup-close {
+        min-width: 2.2rem;
+        min-height: 2.2rem;
+        background-color: var(--color-background);
+        color: var(--color-text);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 0;
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+        cursor: pointer;
+    }
+
+    .project-popup-subtitle {
+        color: var(--color-text);
+        font-family: 'Gabarito', sans-serif;
+        font-weight: 500;
+        font-size: 1.1rem;
+        width: 100%;
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -127,6 +153,32 @@
     .project-popup-tag-container {
         margin-bottom: 3rem !important;
     }
+
+    .project-popup-close {
+        min-width: 2.2rem;
+        min-height: 2.2rem;
+        background-color: #ffffff00;
+        color: var(--color-text);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 0;
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+        cursor: pointer;
+    }
+
+    .project-popup-subtitle {
+        color: var(--color-text);
+        font-family: 'Gabarito', sans-serif;
+        font-weight: 500;
+        font-size: 1rem;
+        width: 100%;
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
 }
 
 .project-popup-link-container {
@@ -144,22 +196,6 @@
     backdrop-filter: blur(1rem);
     z-index: 4;
     visibility: hidden;
-}
-
-.project-popup-close {
-    min-width: 2.2rem;
-    min-height: 2.2rem;
-    background-color: var(--color-background);
-    color: var(--color-text);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0;
-    position: absolute;
-    right: 0.5rem;
-    top: 0.5rem;
-    cursor: pointer;
 }
 
 .project-popup-close:hover {
@@ -188,16 +224,6 @@
 .project-popup-text {
     font-size: 1rem !important;
     text-align: justify;
-}
-
-.project-popup-subtitle {
-    color: var(--color-text);
-    font-family: 'Gabarito', sans-serif;
-    font-weight: 500;
-    font-size: 1.1rem;
-    width: 100%;
-    margin-top: 0.75rem;
-    margin-bottom: 0.75rem;
 }
 
 .project-popup-download {
