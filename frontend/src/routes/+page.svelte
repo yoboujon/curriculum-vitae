@@ -67,8 +67,8 @@
         containerCv.offsetHeight - sidebar.offsetHeight
       }px`;
     }
-	// Only putting absolute if on little screen 
-	else if (littleScreen) {
+    // Only putting absolute if on little screen
+    else if (littleScreen) {
       sidebar.style.position = "absolute";
       sidebar.style.top = "";
     }
@@ -76,9 +76,6 @@
 
   // Mobile check
   $: innerWidth = 0;
-  function mobileCheck() {
-    //console.log(innerWidth);
-  }
 </script>
 
 <svelte:window
@@ -86,7 +83,6 @@
   bind:innerHeight
   bind:innerWidth
   on:scroll={sidebarScrollingHandler}
-  on:resize={mobileCheck}
 />
 
 {#if data.status == 0}

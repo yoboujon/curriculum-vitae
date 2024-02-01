@@ -72,49 +72,70 @@
 
   afterUpdate(async () => {
     // 16 = arrow size + something
-    offsetUp = main_pill.offsetTop - pill_tooltip.offsetHeight - 16;
+    if (show_tooltip && tooltip_data.length > 0) {
+      offsetUp = main_pill.offsetTop - pill_tooltip.offsetHeight - 16;
+    }
   });
 </script>
 
-<svelte:window bind:innerWidth bind:scrollY/>
+<svelte:window bind:innerWidth bind:scrollY />
 
-<div
-  class={white ? "pill-container pill-white" : "pill-container pill-black"}
-  {style}
-  on:focus={() => true}
-  on:mouseover={() => showingTooltip(true)}
-  on:mouseleave={() => showingTooltip(false)}
-  role="link"
-  tabindex="0"
-  bind:this={main_pill}
->
-  {#if show_tooltip === true}
-    <div class="pill-arrow pill-arrow-up" bind:this={pill_arrowup} />
-    <div class="pill-arrow pill-arrow-down" bind:this={pill_arrowdown} />
-    <div class="pill-tooltip" bind:this={pill_tooltip}>
-      {#each tooltip_data as td}
-        <div>
-          <span>{td.title}</span>
-          <div class="pill-last">
-            <button
-              class="pill-view"
-              on:click={() => showPopup(true, td.project_id)}
-              ><SvgIcon size="20" path={mdiPlus} type="mdi" /></button
-            >
+{#if show_tooltip && tooltip_data.length > 0}
+  <div
+    class={white ? "pill-container pill-white" : "pill-container pill-black"}
+    {style}
+    on:focus={() => true}
+    on:mouseover={() => showingTooltip(true)}
+    on:mouseleave={() => showingTooltip(false)}
+    role="link"
+    tabindex="0"
+    bind:this={main_pill}
+  >
+    {#if show_tooltip === true}
+      <div class="pill-arrow pill-arrow-up" bind:this={pill_arrowup} />
+      <div class="pill-arrow pill-arrow-down" bind:this={pill_arrowdown} />
+      <div class="pill-tooltip" bind:this={pill_tooltip}>
+        {#each tooltip_data as td}
+          <div>
+            <span>{td.title}</span>
+            <div class="pill-last">
+              <button
+                class="pill-view"
+                on:click={() => showPopup(true, td.project_id)}
+                ><SvgIcon size="20" path={mdiPlus} type="mdi" /></button
+              >
+            </div>
           </div>
-        </div>
-      {/each}
-    </div>
-  {/if}
-  {#if type_icon === "simpleicons"}
-    <img
-      height="20"
-      width="20"
-      src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/{icon}.svg"
-      alt={name}
-    />
-  {:else}
-    <SvgIcon type="mdi" path={icon} size="20" />
-  {/if}
-  <p>{name}</p>
-</div>
+        {/each}
+      </div>
+    {/if}
+    {#if type_icon === "simpleicons"}
+      <img
+        height="20"
+        width="20"
+        src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/{icon}.svg"
+        alt={name}
+      />
+    {:else}
+      <SvgIcon type="mdi" path={icon} size="20" />
+    {/if}
+    <p>{name}</p>
+  </div>
+{:else}
+  <div
+    class={white ? "pill-container pill-white" : "pill-container pill-black"}
+    {style}
+  >
+    {#if type_icon === "simpleicons"}
+      <img
+        height="20"
+        width="20"
+        src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/{icon}.svg"
+        alt={name}
+      />
+    {:else}
+      <SvgIcon type="mdi" path={icon} size="20" />
+    {/if}
+    <p>{name}</p>
+  </div>
+{/if}
