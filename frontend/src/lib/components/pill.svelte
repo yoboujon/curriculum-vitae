@@ -27,6 +27,7 @@
   let pill_arrowdown;
   let pill_tooltip;
   let main_pill;
+  let pill_hitbox;
 
   // constants and variables
   let innerWidth;
@@ -42,9 +43,11 @@
       // forcing left or right depending on the out of bound situation
       if (isOutofBoundLeft) {
         pill_tooltip.style.left = "0";
+        pill_hitbox.style.left = "0";
       }
       if (isOutofBoundRight) {
         pill_tooltip.style.right = "0";
+        pill_hitbox.style.right = "0";
       }
       // Setting the top size depending on the situation
       if (scrollY > offsetUp) {
@@ -55,6 +58,7 @@
         pill_tooltip.style.top = `${offsetUp}px`;
         pill_arrowup.style.visibility = "visible";
       }
+      pill_hitbox.style.visibility = "visible";
       pill_tooltip.style.visibility = "visible";
     }
     // Hiding tooltip
@@ -62,6 +66,7 @@
       pill_tooltip.style.visibility = "hidden";
       pill_arrowup.style.visibility = "hidden";
       pill_arrowdown.style.visibility = "hidden";
+      pill_hitbox.style.visibility = "hidden";
     }
   }
 
@@ -87,8 +92,22 @@
     }
   }
 
+  function calculateHitbox() {
+    if (show_tooltip && tooltip_data.length > 0) {
+      pill_hitbox.style.width = `${
+        main_pill.clientWidth > pill_tooltip.clientWidth
+          ? main_pill.clientWidth
+          : pill_tooltip.clientWidth
+      }px`;
+      pill_hitbox.style.height = `${main_pill.clientHeight + 50}px`;
+      pill_hitbox.style.left = "";
+      pill_hitbox.style.right = "";
+    }
+  }
+
   onMount(async () => {
     calculateOffsetUp();
+    calculateHitbox();
   });
 </script>
 
@@ -96,8 +115,8 @@
   bind:innerWidth
   bind:scrollY
   on:resize={() => {
-    console.log("tamere");
     calculateOffsetUp();
+    calculateHitbox();
     calculateOutOfBounds();
   }}
 />
@@ -114,6 +133,7 @@
     bind:this={main_pill}
   >
     {#if show_tooltip === true}
+      <div class="pill-tooltip-hitbox" bind:this={pill_hitbox} />
       <div class="pill-arrow pill-arrow-up" bind:this={pill_arrowup} />
       <div class="pill-arrow pill-arrow-down" bind:this={pill_arrowdown} />
       <div class="pill-tooltip" bind:this={pill_tooltip}>
