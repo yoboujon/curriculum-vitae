@@ -1,5 +1,5 @@
 <script>
-  import { afterUpdate } from "svelte";
+  import { onMount } from "svelte";
   import SvgIcon from "@jamescoyle/svelte-icon";
   import "$lib/css/pill.css";
   import { mdiHelp, mdiPlus } from "@mdi/js";
@@ -32,16 +32,11 @@
   let innerWidth;
   let scrollY;
   let offsetUp;
+  let isOutofBoundLeft;
+  let isOutofBoundRight;
 
   function showingTooltip(visible) {
-    // outofbound for left
-    const isOutofBoundLeft =
-      main_pill.offsetLeft + main_pill.offsetWidth / 2 <
-      pill_tooltip.offsetWidth / 2;
-    // outofbound for right
-    const isOutofBoundRight =
-      pill_tooltip.offsetLeft + pill_tooltip.offsetWidth > innerWidth;
-
+    calculateOutOfBounds();
     // Showing tooltip
     if (visible && tooltip_data.length > 0) {
       // forcing left or right depending on the out of bound situation
@@ -70,15 +65,42 @@
     }
   }
 
-  afterUpdate(async () => {
+  function calculateOutOfBounds() {
+    if (show_tooltip && tooltip_data.length > 0) {
+      // outofbound for left
+      isOutofBoundLeft =
+        main_pill.offsetLeft + main_pill.offsetWidth / 2 <
+        pill_tooltip.offsetWidth / 2;
+      // outofbound for right
+      isOutofBoundRight =
+        pill_tooltip.offsetLeft + pill_tooltip.offsetWidth > innerWidth;
+    }
+  }
+
+  function calculateOffsetUp() {
     // 16 = arrow size + something
     if (show_tooltip && tooltip_data.length > 0) {
-      offsetUp = main_pill.offsetTop - pill_tooltip.offsetHeight - 16;
+      pill_tooltip.style.top = "";
+      pill_tooltip.style.left = "";
+      pill_tooltip.style.right = "";
+      offsetUp = main_pill.offsetTop - pill_tooltip.clientHeight - 16;
     }
+  }
+
+  onMount(async () => {
+    calculateOffsetUp();
   });
 </script>
 
-<svelte:window bind:innerWidth bind:scrollY />
+<svelte:window
+  bind:innerWidth
+  bind:scrollY
+  on:resize={() => {
+    console.log("tamere");
+    calculateOffsetUp();
+    calculateOutOfBounds();
+  }}
+/>
 
 {#if show_tooltip && tooltip_data.length > 0}
   <div
