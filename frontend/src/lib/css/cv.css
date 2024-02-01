@@ -23,7 +23,7 @@
 @media screen and (max-width: 1200px)
 {
     .sidebar {
-        visibility: hidden;
+        display: none;
     }
 }
 

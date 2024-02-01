@@ -52,7 +52,6 @@
     display: flex;
     justify-content: center;
     visibility: hidden;
-    transition: all .3s ease 0s;
     box-shadow: 0px 8px 18px -1px #261C2C30;
     display: flex;
     flex-direction: column;
@@ -115,13 +114,20 @@
 .pill-arrow {
     position: absolute;
     z-index: 2;
-    transform: translateY(-2.2rem);
-    width: 0px;
-    height: 0px;
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
-    border-top: 20px solid var(--color-background);
+    width: 0px;
+    height: 0px;
     visibility: hidden;
-    transition: all .3s ease 0s;
     filter: drop-shadow(0px 8px 18px #261C2C20);
+}
+
+.pill-arrow-up {
+    transform: translateY(-2.2rem);
+    border-top: 20px solid var(--color-background);
+}
+
+.pill-arrow-down {
+    transform: translateY(2.2rem);
+    border-bottom: 20px solid var(--color-background);
 }

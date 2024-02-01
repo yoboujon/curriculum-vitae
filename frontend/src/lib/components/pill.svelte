@@ -1,4 +1,5 @@
 <script>
+  import { afterUpdate } from "svelte";
   import SvgIcon from "@jamescoyle/svelte-icon";
   import "$lib/css/pill.css";
   import { mdiHelp, mdiPlus } from "@mdi/js";
@@ -14,48 +15,68 @@
   export let tooltip_data = [];
 
   const white = shouldColorBeWhite(color.slice(1));
-  let style;
-  let pill_arrow;
+  let style =
+    shadow_color === null
+      ? `background-color: ${color};
+    box-shadow: 0px 8px 18px -1px ${color}60;`
+      : `background-color: ${color};
+    box-shadow: 0px 8px 18px -1px ${shadow_color}60;`;
+
+  // pill elements from DOM
+  let pill_arrowup;
+  let pill_arrowdown;
   let pill_tooltip;
   let main_pill;
-  let innerWidth;
 
-  if (shadow_color === null) {
-    style = `background-color: ${color};
-    box-shadow: 0px 8px 18px -1px ${color}60;`;
-  } else {
-    style = `background-color: ${color};
-    box-shadow: 0px 8px 18px -1px ${shadow_color}60;`;
-  }
+  // constants and variables
+  let innerWidth;
+  let scrollY;
+  let offsetUp;
 
   function showingTooltip(visible) {
+    // outofbound for left
+    const isOutofBoundLeft =
+      main_pill.offsetLeft + main_pill.offsetWidth / 2 <
+      pill_tooltip.offsetWidth / 2;
+    // outofbound for right
+    const isOutofBoundRight =
+      pill_tooltip.offsetLeft + pill_tooltip.offsetWidth > innerWidth;
+
     // Showing tooltip
-    const isOutofBoundLeft=(main_pill.offsetLeft+(main_pill.offsetWidth/2)<(pill_tooltip.offsetWidth/2));
-    const isOutofBoundRight=((pill_tooltip.offsetLeft+pill_tooltip.offsetWidth)>innerWidth);
     if (visible && tooltip_data.length > 0) {
-      pill_tooltip.style.visibility = "visible";
-      pill_arrow.style.visibility = "visible";
-      if(isOutofBoundLeft)
-      {
+      // forcing left or right depending on the out of bound situation
+      if (isOutofBoundLeft) {
         pill_tooltip.style.left = "0";
       }
-      if(isOutofBoundRight)
-      {
+      if (isOutofBoundRight) {
         pill_tooltip.style.right = "0";
       }
-      pill_tooltip.style.top = `${
-        main_pill.offsetTop - pill_tooltip.offsetHeight - 16
-      }px`;
+      // Setting the top size depending on the situation
+      if (scrollY > offsetUp) {
+        // 51 represents the size of the pill
+        pill_tooltip.style.top = `${main_pill.offsetTop + 51 + 16}px`;
+        pill_arrowdown.style.visibility = "visible";
+      } else {
+        pill_tooltip.style.top = `${offsetUp}px`;
+        pill_arrowup.style.visibility = "visible";
+      }
+      pill_tooltip.style.visibility = "visible";
     }
     // Hiding tooltip
     else {
       pill_tooltip.style.visibility = "hidden";
-      pill_arrow.style.visibility = "hidden";
+      pill_arrowup.style.visibility = "hidden";
+      pill_arrowdown.style.visibility = "hidden";
     }
   }
+
+  afterUpdate(async () => {
+    // 16 = arrow size + something
+    offsetUp = main_pill.offsetTop - pill_tooltip.offsetHeight - 16;
+  });
 </script>
 
-<svelte:window bind:innerWidth />
+<svelte:window bind:innerWidth bind:scrollY/>
 
 <div
   class={white ? "pill-container pill-white" : "pill-container pill-black"}
@@ -68,7 +89,8 @@
   bind:this={main_pill}
 >
   {#if show_tooltip === true}
-    <div class="pill-arrow" bind:this={pill_arrow} />
+    <div class="pill-arrow pill-arrow-up" bind:this={pill_arrowup} />
+    <div class="pill-arrow pill-arrow-down" bind:this={pill_arrowdown} />
     <div class="pill-tooltip" bind:this={pill_tooltip}>
       {#each tooltip_data as td}
         <div>
