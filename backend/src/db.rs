@@ -48,7 +48,8 @@ pub struct Project {
     pub type_project: Option<String>,
     pub report_link: Option<String>,
     pub archive_link: Option<String>,
-    pub app_link: Option<String>
+    pub app_link: Option<String>,
+    pub short_description: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]

@@ -94,7 +94,7 @@ async fn skills(
 )> {
     let project = sqlx::query_as!(
         Project,
-        "SELECT id, date_done, title, description, github_link, picture_name, type_project, report_link, archive_link, app_link FROM public.project WHERE project.info_id = $1 ORDER BY date_done DESC",
+        "SELECT id, date_done, title, description, github_link, picture_name, type_project, report_link, archive_link, app_link, short_description FROM public.project WHERE project.info_id = $1 ORDER BY date_done DESC",
         id
     )
     .fetch_all(&pool)

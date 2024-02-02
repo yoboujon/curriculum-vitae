@@ -10,7 +10,7 @@
   export let data;
 
   const title = data.title;
-  const description = data.description;
+  const short_description = data.short_description;
   const issued_date =
     formatMonth(data.date_done).charAt(0).toUpperCase() +
     formatMonth(data.date_done).slice(1);
@@ -52,7 +52,7 @@
       </div>
       <div class="slide-subtitle-container">
         <p class="slide-subtitle slide-text slide-overflow slide-justify">
-          {description}
+          {short_description}
         </p>
       </div>
       <div class="slide-button-container">
