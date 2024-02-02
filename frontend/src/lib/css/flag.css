@@ -53,3 +53,8 @@
 .flag-text p {
     margin: 0.5rem;
 }
+
+.flag-size {
+    width: 2rem;
+    height: 2rem;
+}

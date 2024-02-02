@@ -19,6 +19,7 @@
     mdiBookMultiple,
     mdiDownload,
   } from "@mdi/js";
+  import SvelteMarkdown from "svelte-markdown";
   import { formatMonth } from "$lib/js/date.js";
 
   // Variables
@@ -213,7 +214,8 @@
         <SvgIcon size="35" path={mdiTextBox} type="mdi" />
         <p class="slide-subtitle slide-aftericon">Description</p>
       </div>
-      <p class="slide-subtitle project-popup-text">{description}</p>
+      <SvelteMarkdown source={description}/>
+      <!--<p class="slide-subtitle project-popup-text">{description}</p>-->
     </div>
   </div>
 </div>
