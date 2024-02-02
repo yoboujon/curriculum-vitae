@@ -3,6 +3,7 @@
 
   import "$lib/css/project-popup.css";
   import "$lib/css/slide.css";
+  import "$lib/css/markdown.css";
   import Pill from "$lib/components/pill.svelte";
   import { showPopup, actualData, filterTag } from "$lib/js/popup.js";
   import SvgIcon from "@jamescoyle/svelte-icon";
@@ -138,7 +139,9 @@
           <SvgIcon size="35" path={mdiTextBox} type="mdi" />
           <p class="slide-subtitle slide-aftericon">Description</p>
         </div>
-        <p class="slide-subtitle project-popup-text">{description}</p>
+        <div class="markdown">
+          <SvelteMarkdown source={description} />
+        </div>
       </div>
       <!-- Links -->
       {#if report_link != null || github_link != null || archive_link != null || application_link != null}
@@ -214,8 +217,9 @@
         <SvgIcon size="35" path={mdiTextBox} type="mdi" />
         <p class="slide-subtitle slide-aftericon">Description</p>
       </div>
-      <SvelteMarkdown source={description}/>
-      <!--<p class="slide-subtitle project-popup-text">{description}</p>-->
+      <div class="markdown">
+        <SvelteMarkdown source={description} />
+      </div>
     </div>
   </div>
 </div>
