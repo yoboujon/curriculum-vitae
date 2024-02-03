@@ -1,6 +1,6 @@
 <script>
   import SvgIcon from "@jamescoyle/svelte-icon";
-  import { mdiArrowRight, mdiChevronLeft } from "@mdi/js";
+  import { mdiArrowRight, mdiArrowLeft, mdiRestore } from "@mdi/js";
   import "$lib/css/slideshow.css";
   import { onMount } from "svelte";
   import {
@@ -71,19 +71,24 @@
     }
   });
 
-  function slideCards() {
+  function slideCards(advance) {
     // Set or reset slideshow index, hidden array and timeling.
-    if (slideshow_index >= data.length - 1) {
-      resetSlideCards();
+    if (advance) {
+      if (slideshow_index >= data.length - 1) {
+        resetSlideCards();
+      } else {
+        slideshow_hidden.push(slideshow_index);
+        slideshow_index++;
+      }
     } else {
-      slideshow_hidden.push(slideshow_index);
-      slideshow_index++;
+      slideshow_hidden.pop();
+      slideshow_index--;
     }
 
     // Incrementing the transformValue for each element
     let transformValue = 0;
     for (const id of slideshow_hidden) {
-        transformValue += slideshowElements[id].clientWidth;
+      transformValue += slideshowElements[id].clientWidth;
     }
 
     // Translating elements
@@ -104,6 +109,8 @@
           if (slideshow_hidden.includes(id)) {
             slideshowTimeline[id].style.backgroundColor =
               "var(--color-background)";
+          } else {
+            slideshowTimeline[id].style.backgroundColor = "";
           }
         }
       }
@@ -161,7 +168,7 @@
       resizing = true;
 
       await resetSlideCards();
-      await new Promise(resolve => setTimeout(resolve, 400));
+      await new Promise((resolve) => setTimeout(resolve, 400));
       updateTimeLine(slideshowTimeline, slideshowBubbles);
       resizing = false;
       //global writer count
@@ -169,19 +176,36 @@
   }
 </script>
 
-<svelte:window on:resize={changeSize} bind:innerWidth={windowWidth}/>
+<svelte:window on:resize={changeSize} bind:innerWidth={windowWidth} />
 
 <div class="slideshow" bind:this={slideshow}>
-  <button class="slideshow_btn" on:click={slideCards}>
+  <button
+    class={slideshow_index >= 1
+      ? "slideshow_btn"
+      : "slideshow_btn slideshow_btn_center"}
+    on:click={() => slideCards(true)}
+  >
     <div>
       <SvgIcon
         size={windowWidth < 1000 ? "30" : "45"}
-        path={slideshow_index >= data.length - 1
-          ? mdiChevronLeft
-          : mdiArrowRight}
+        path={slideshow_index >= data.length - 1 ? mdiRestore : mdiArrowRight}
         type="mdi"
       />
     </div>
+  </button>
+  <button
+    class={slideshow_index >= 1
+      ? "slideshow_btn slideshow_btn_low"
+      : "slideshow_btn slideshow_btn_low slideshow_btn_disabled"}
+    on:click={() => {
+      if (slideshow_index >= 1) slideCards(false);
+    }}
+  >
+    <SvgIcon
+      size={windowWidth < 1000 ? "30" : "45"}
+      path={mdiArrowLeft}
+      type="mdi"
+    />
   </button>
   {#each data as selected_data, index (index)}
     <svelte:component
