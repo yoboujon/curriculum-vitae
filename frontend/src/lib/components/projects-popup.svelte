@@ -21,6 +21,7 @@
     mdiDownload,
   } from "@mdi/js";
   import SvelteMarkdown from "svelte-markdown";
+  import MarkdownHighlight from "$lib/components/markdown-highlight.svelte";
   import { formatMonth } from "$lib/js/date.js";
 
   // Variables
@@ -65,6 +66,7 @@
       archive_link = data.archive_link;
       application_link = data.application_link;
       filteredTags = filterTag(tags, id);
+
       // Active set to true after the await to avoid conflict when clicking outside while the popup hasn't showed yet.
       setTimeout(() => {
         active = true;
@@ -140,7 +142,10 @@
           <p class="slide-subtitle slide-aftericon">Description</p>
         </div>
         <div class="markdown">
-          <SvelteMarkdown source={description} />
+          <SvelteMarkdown
+            source={description}
+            renderers={{ code: MarkdownHighlight }}
+          />
         </div>
       </div>
       <!-- Links -->
@@ -218,7 +223,10 @@
         <p class="slide-subtitle slide-aftericon">Description</p>
       </div>
       <div class="markdown">
-        <SvelteMarkdown source={description} />
+        <SvelteMarkdown
+          source={description}
+          renderers={{ code: MarkdownHighlight }}
+        />
       </div>
     </div>
   </div>
