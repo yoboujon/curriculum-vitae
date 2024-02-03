@@ -6,16 +6,15 @@
   import "$lib/css/cv.css";
 
   // Main
-  import Sidebar from "$lib/components/sidebar.svelte";
   import Section from "$lib/components/section.svelte";
   import SubSection from "$lib/components/subsection.svelte";
   import Education from "$lib/components/education.svelte";
   import Experience from "$lib/components/experience.svelte";
   import Projects from "$lib/components/projects.svelte";
   import SlideShow from "$lib/components/slideshow.svelte";
-  import Pill from "$lib/components/pill.svelte";
   import FlagComponent from "$lib/components/flag-component.svelte";
   import ProjectsPopup from "$lib/components/projects-popup.svelte";
+  import Pill from "$lib/components/pill.svelte";
   import {
     mdiSchool,
     mdiBriefcase,
@@ -35,6 +34,8 @@
   // Sidebar
   let containerCv;
   let footer;
+  let sidebarLoaded = false;
+  let Sidebar;
 
   // Mobile top bar
   function mobileTopBar() {
@@ -61,6 +62,8 @@
 
   onMount(async () => {
     mobileTopBar();
+    Sidebar = (await import('/src/lib/components/sidebar.svelte')).default;
+    sidebarLoaded = true;
   });
 </script>
 
@@ -77,12 +80,12 @@
 {#if data.status == 0}
   <ProjectsPopup tags={cv.tags} />
   <!-- TOPBAR DIV (POPUP: mobile) -->
-  {#if innerWidth < 1200}
-    <Sidebar info={cv.info} bind:sidebarContainer />
+  {#if innerWidth < 1200 && sidebarLoaded}
+  <Sidebar info={cv.info} bind:sidebarContainer />
   {/if}
   <div class="container-cv" bind:this={containerCv}>
     <!-- SIDEBAR DIV (LEFT: desktop) -->
-    {#if innerWidth >= 1200}
+    {#if innerWidth >= 1200 && sidebarLoaded}
       <Sidebar info={cv.info} {footer} {containerCv} />
     {/if}
     <!-- MOBILE TOP BAR -->
@@ -122,29 +125,33 @@
       <Section icon={mdiPencil} title="Skills" />
       <SubSection icon={mdiXml} title="Programming Languages" />
       <div class="subsection">
-        {#each cv.skills.programming_languages as pilldata, index (index)}
-          <Pill
-            name={pilldata.lang}
-            type_icon={pilldata.type_icon}
-            icon={pilldata.icon}
-            color={pilldata.color}
-            show_tooltip={true}
-            tooltip_data={cv.project_programming[index]}
-          />
-        {/each}
+        {#if sidebarLoaded}
+          {#each cv.skills.programming_languages as pilldata, index (index)}
+            <Pill
+              name={pilldata.lang}
+              type_icon={pilldata.type_icon}
+              icon={pilldata.icon}
+              color={pilldata.color}
+              show_tooltip={true}
+              tooltip_data={cv.project_programming[index]}
+            />
+          {/each}
+        {/if}
       </div>
       <SubSection icon={mdiApplication} title="Software" />
       <div class="subsection">
-        {#each cv.skills.softwares as pilldata, index (index)}
-          <Pill
-            name={pilldata.software}
-            type_icon={pilldata.type_icon}
-            icon={pilldata.icon}
-            color={pilldata.color}
-            show_tooltip={true}
-            tooltip_data={cv.project_software[index]}
-          />
-        {/each}
+        {#if sidebarLoaded}
+          {#each cv.skills.softwares as pilldata, index (index)}
+            <Pill
+              name={pilldata.software}
+              type_icon={pilldata.type_icon}
+              icon={pilldata.icon}
+              color={pilldata.color}
+              show_tooltip={true}
+              tooltip_data={cv.project_software[index]}
+            />
+          {/each}
+        {/if}
       </div>
       <SubSection icon={mdiEarth} title="Languages" />
       <div class="subsection flag-container end">
