@@ -27,7 +27,7 @@
       <img class="slide-img" src={picture} alt="Education" />
     </div>
     <div class="slide-text-container">
-      <h1 class="slide-title">{title}</h1>
+      <h1 class="slide-title slide-overflow-title">{title}</h1>
       <div class="slide-img-mobile-container">
         <img class="slide-img-mobile" src={picture} alt="Education" />
       </div>

@@ -198,7 +198,8 @@ async fn hard_skills(
         "SELECT
         l.lang,
         l.icon_alpha,
-        l.level
+        l.level,
+        l.url_name
     FROM public.languages l
     ORDER BY l.id;"
     )

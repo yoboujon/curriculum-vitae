@@ -30,7 +30,7 @@
       <img class="slide-img" src={data.picture_name} alt="Projects" />
     </div>
     <div class="slide-text-container">
-      <h1 class="slide-title">{title}</h1>
+      <h1 class="slide-title slide-overflow-title">{title}</h1>
       <div class="slide-img-mobile-container">
         <img class="slide-img-mobile" src={data.picture_name} alt="Projects" />
       </div>

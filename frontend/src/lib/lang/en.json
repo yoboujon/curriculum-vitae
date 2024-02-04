@@ -10,7 +10,9 @@
     "interests": "Interests",
     "softskills": "Soft-Skills",
 
+    "lang": "Language",
     "madewith": "Made with",
     "usingsvelte": "using Svelte",
-    "copyright": "All rights reserved, Yohan Boujon"
+    "copyright": "All rights reserved, Yohan Boujon",
+    "github": "Github Repo"
   }

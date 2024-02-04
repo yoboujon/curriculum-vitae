@@ -40,7 +40,7 @@
       <img class="slide-img" src={picture} alt="Experience" />
     </div>
     <div class="slide-text-container">
-      <h1 class="slide-title">{position}</h1>
+      <h1 class="slide-title slide-overflow-title">{position}</h1>
       <div class="slide-img-mobile-container">
         <img class="slide-img-mobile" src={picture} alt="Experience" />
       </div>

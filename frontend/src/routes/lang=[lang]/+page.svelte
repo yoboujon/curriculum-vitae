@@ -4,6 +4,7 @@
   import { showSidebar } from "$lib/js/topbar.js";
   import "$lib/css/base.css";
   import "$lib/css/cv.css";
+  import "/node_modules/flag-icons/css/flag-icons.min.css";
 
   // Main
   import Section from "$lib/components/section.svelte";
@@ -33,6 +34,12 @@
   const cv = data.status == 0 ? processData(data) : undefined;
   // Language specifications
   const text = data.text;
+  let flag;
+  let otherlang;
+  for (const lang of cv.skills.languages) {
+    if (lang.url_name == data.lang) flag = lang.icon_alpha;
+    else otherlang = lang.url_name;
+  }
 
   // Sidebar
   let containerCv;
@@ -65,7 +72,7 @@
 
   onMount(async () => {
     mobileTopBar();
-    Sidebar = (await import('/src/lib/components/sidebar.svelte')).default;
+    Sidebar = (await import("/src/lib/components/sidebar.svelte")).default;
     sidebarLoaded = true;
   });
 </script>
@@ -84,7 +91,7 @@
   <ProjectsPopup tags={cv.tags} />
   <!-- TOPBAR DIV (POPUP: mobile) -->
   {#if innerWidth < 1200 && sidebarLoaded}
-  <Sidebar info={cv.info} bind:sidebarContainer {text} />
+    <Sidebar info={cv.info} bind:sidebarContainer {text} />
   {/if}
   <div class="container-cv" bind:this={containerCv}>
     <!-- SIDEBAR DIV (LEFT: desktop) -->
@@ -169,10 +176,38 @@
     </div>
   </div>
   <div class="footer" bind:this={footer}>
-    <p>
-      {text.madewith} <SvgIcon size="20" path={mdiHeart} type="mdi" /> {text.usingsvelte}
-    </p>
-    <p>{text.copyright} • {new Date().getFullYear()}</p>
+    <div class="footer-btn-container">
+      <button
+        class="footer-btn"
+        on:click={() => (window.location.href = `/lang=${otherlang}`)}
+      >
+        <p>{text.lang}</p>
+        <span class={`fi fi-${flag} flag-size`}></span>
+      </button>
+    </div>
+    <div class="footer-text">
+      <p>
+        {text.madewith}
+        <SvgIcon size="20" path={mdiHeart} type="mdi" />
+        {text.usingsvelte}
+      </p>
+      <p>{text.copyright} • {new Date().getFullYear()}</p>
+    </div>
+    <div class="footer-btn-container">
+      <a
+        class="footer-btn footer-github"
+        href="https://github.com/yoboujon/curriculum-vitae"
+        target="_blank"
+      >
+        <img
+          height="30"
+          width="30"
+          src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"
+          alt="github"
+        />
+        <p>{text.github}</p>
+      </a>
+    </div>
   </div>
 {:else}
   <h1 class="h1 text-center">Oops, could not load database :/</h1>

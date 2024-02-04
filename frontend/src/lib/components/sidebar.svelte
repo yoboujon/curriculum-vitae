@@ -133,14 +133,14 @@
     {#if info.interests != null}
       <SidebarComponent
         icon={mdiStar}
-        title="Interests"
+        title={text.interests}
         description={info.interests}
       />
     {/if}
     {#if info.interests != null}
       <SidebarComponent
         icon={mdiCogs}
-        title="Soft-Skills"
+        title={text.softskills}
         description={info.softskills}
       />
     {/if}

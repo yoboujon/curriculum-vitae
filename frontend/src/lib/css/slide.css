@@ -131,7 +131,6 @@
         font-size: 1.8rem;
         margin-bottom: 0;
     }
-
     /* Any Subtitle */
     .slide-subtitle {
         color: var(--color-text);
@@ -172,6 +171,13 @@
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     -webkit-line-clamp: 2;
+}
+
+.slide-overflow-title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
 }
 
 .slide-subtitle-container {

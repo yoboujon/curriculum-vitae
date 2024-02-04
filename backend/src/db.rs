@@ -74,7 +74,8 @@ pub struct Softwares {
 pub struct Languages {
     pub lang: Option<String>,
     pub icon_alpha: Option<String>,
-    pub level: Option<String>
+    pub level: Option<String>,
+    pub url_name: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]
