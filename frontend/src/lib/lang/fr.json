@@ -1,0 +1,16 @@
+{
+    "education": "Éducation",
+    "experience": "Expérience",
+    "projects": "Projets",
+    "skills": "Compétences",
+    "programming_languages": "Langages de programmation",
+    "software": "Logiciels",
+    "languages": "Langues",
+    
+    "interests": "Centres d'intérêt",
+    "softskills": "Qualités personnelles",
+
+    "madewith": "Fait avec",
+    "usingsvelte": ", à l'aide de Svelte",
+    "copyright": "Tous droits réservés, Yohan Boujon"
+  }

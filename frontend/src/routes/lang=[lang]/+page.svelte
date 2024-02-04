@@ -29,7 +29,10 @@
   import { onMount } from "svelte";
 
   export let data;
+  // Database
   const cv = data.status == 0 ? processData(data) : undefined;
+  // Language specifications
+  const text = data.text;
 
   // Sidebar
   let containerCv;
@@ -81,12 +84,12 @@
   <ProjectsPopup tags={cv.tags} />
   <!-- TOPBAR DIV (POPUP: mobile) -->
   {#if innerWidth < 1200 && sidebarLoaded}
-  <Sidebar info={cv.info} bind:sidebarContainer />
+  <Sidebar info={cv.info} bind:sidebarContainer {text} />
   {/if}
   <div class="container-cv" bind:this={containerCv}>
     <!-- SIDEBAR DIV (LEFT: desktop) -->
     {#if innerWidth >= 1200 && sidebarLoaded}
-      <Sidebar info={cv.info} {footer} {containerCv} />
+      <Sidebar info={cv.info} {footer} {containerCv} {text} />
     {/if}
     <!-- MOBILE TOP BAR -->
     {#if innerWidth < 1000}
@@ -106,24 +109,24 @@
         <h1 class="name">{cv.info.full_name}</h1>
       {/if}
       <h2 class="name">Apprentice Engineer Automatic/Electronic</h2>
-      <Section icon={mdiSchool} title="Education" />
+      <Section icon={mdiSchool} title={text.education} />
       <SlideShow
         data={cv.education}
         type={Education}
         timeline="true"
         reverse="true"
       />
-      <Section icon={mdiBriefcase} title="Experience" />
+      <Section icon={mdiBriefcase} title={text.experience} />
       <SlideShow
         data={cv.experiences}
         type={Experience}
         timeline="true"
         reverse="true"
       />
-      <Section icon={mdiWrench} title="Projects" />
+      <Section icon={mdiWrench} title={text.projects} />
       <SlideShow data={cv.skills.project} type={Projects} />
-      <Section icon={mdiPencil} title="Skills" />
-      <SubSection icon={mdiXml} title="Programming Languages" />
+      <Section icon={mdiPencil} title={text.skills} />
+      <SubSection icon={mdiXml} title={text.programming_languages} />
       <div class="subsection">
         {#if sidebarLoaded}
           {#each cv.skills.programming_languages as pilldata, index (index)}
@@ -138,7 +141,7 @@
           {/each}
         {/if}
       </div>
-      <SubSection icon={mdiApplication} title="Software" />
+      <SubSection icon={mdiApplication} title={text.software} />
       <div class="subsection">
         {#if sidebarLoaded}
           {#each cv.skills.softwares as pilldata, index (index)}
@@ -153,7 +156,7 @@
           {/each}
         {/if}
       </div>
-      <SubSection icon={mdiEarth} title="Languages" />
+      <SubSection icon={mdiEarth} title={text.languages} />
       <div class="subsection flag-container end">
         {#each cv.skills.languages as langdata}
           <FlagComponent
@@ -167,9 +170,9 @@
   </div>
   <div class="footer" bind:this={footer}>
     <p>
-      Made with <SvgIcon size="20" path={mdiHeart} type="mdi" /> using Svelte
+      {text.madewith} <SvgIcon size="20" path={mdiHeart} type="mdi" /> {text.usingsvelte}
     </p>
-    <p>All rights reserved, Yohan Boujon • {new Date().getFullYear()}</p>
+    <p>{text.copyright} • {new Date().getFullYear()}</p>
   </div>
 {:else}
   <h1 class="h1 text-center">Oops, could not load database :/</h1>
