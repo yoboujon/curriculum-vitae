@@ -21,7 +21,8 @@ export async function load(context) {
 
   async function fetchJSON(lang) {
     try {
-      const resTemp = await context.fetch(`src/lib/lang/${lang}.json`);
+      const url = (import.meta.env.MODE === 'development') ? `lang/${lang}.json` :`static/lang/${lang}.json`;
+      const resTemp = await context.fetch(url);
       if (resTemp.ok == false) {
         return {
           status: resTemp.status,

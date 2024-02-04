@@ -12,6 +12,7 @@ Cargo.lock
 .DS_Store
 node_modules
 /build
+build
 /.svelte-kit
 .svelte-kit
 /package
