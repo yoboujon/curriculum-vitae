@@ -6,7 +6,6 @@
 
 CREATE TABLE public.softwares (
 	id serial4 NOT NULL,
-	info_id int4 NOT NULL,
 	software text NOT NULL,
 	icon text NOT NULL,
 	type_icon text NOT NULL,

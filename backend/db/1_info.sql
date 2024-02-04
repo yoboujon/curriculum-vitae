@@ -6,12 +6,8 @@
 
 CREATE TABLE public.info (
 	birth_year date NULL,
-	id serial4 NOT NULL,
-	full_name text NULL,
+	full_name text NOT NULL,
 	phone_number varchar NULL,
 	email varchar NULL,
-	softskills text NULL,
-	interests text NULL,
-	profile_pic text NULL,
-	CONSTRAINT info_pkey PRIMARY KEY (id)
+	profile_pic text NULL
 );

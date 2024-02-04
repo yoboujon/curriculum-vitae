@@ -1,40 +1,42 @@
 use serde::{Deserialize, Serialize};
 use sqlx::types::chrono::NaiveDate;
 
+#[derive(Deserialize, Serialize, Copy, Clone)]
+pub struct LangId {
+    pub id: Option<i32>
+}
+
 #[derive(Deserialize, Serialize)]
 pub struct Info {
-    pub id: i64,
     pub full_name: Option<String>,
     pub phone_number: Option<String>,
     pub email: Option<String>,
-    pub softskills: Option<String>,
-    pub interests: Option<String>,
     pub birth_year: Option<NaiveDate>,
-    pub profile_pic: Option<String>
+    pub profile_pic: Option<String>,
+    pub softskills: Option<String>,
+    pub interests: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]
 pub struct Education {
-    pub id: i64,
+    pub school: Option<String>,
     pub start_year: Option<NaiveDate>,
     pub end_year: Option<NaiveDate>,
-    pub school: Option<String>,
+    pub picture_url: Option<String>,
     pub speciality: Option<String>,
-    pub school_location: Option<String>,
     pub school_options: Option<String>,
-    pub picture_url: Option<String>
+    pub school_location: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]
 pub struct Experience {
-    pub id: i64,
-    pub job_position: Option<String>,
-    pub job_description: Option<String>,
     pub enterprise: Option<String>,
-    pub enterprise_location: Option<String>,
     pub start_year: Option<NaiveDate>,
     pub end_year: Option<NaiveDate>,
-    pub picture_url: Option<String>
+    pub picture_url: Option<String>,
+    pub job_position: Option<String>,
+    pub job_description: Option<String>,
+    pub enterprise_location: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]
@@ -54,25 +56,25 @@ pub struct Project {
 
 #[derive(Deserialize, Serialize)]
 pub struct ProgrammingLanguages {
-    pub lang: String,
-    pub icon: String,
-    pub type_icon: String,
+    pub lang: Option<String>,
+    pub icon: Option<String>,
+    pub type_icon: Option<String>,
     pub color: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]
 pub struct Softwares {
-    pub software: String,
-    pub icon: String,
-    pub type_icon: String,
+    pub software: Option<String>,
+    pub icon: Option<String>,
+    pub type_icon: Option<String>,
     pub color: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]
 pub struct Languages {
-    pub lang: String,
-    pub icon_alpha: String,
-    pub level: String
+    pub lang: Option<String>,
+    pub icon_alpha: Option<String>,
+    pub level: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]

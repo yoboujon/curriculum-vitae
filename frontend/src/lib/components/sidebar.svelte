@@ -20,7 +20,10 @@
   export let containerCv = null;
   export let sidebarContainer;
   let sidebar;
-  const birth_year = formatDate(info.birth_year);
+  let birth_year;
+  if (info.birth_year != null) {
+    birth_year = formatDate(info.birth_year);
+  }
   $: scrollY = 0;
   $: innerHeight = 0;
 
@@ -83,21 +86,29 @@
           alt={info.full_name}
         />
       </div>
-      <SidebarComponent icon={mdiAccount} description={birth_year} />
-      <SidebarComponent icon={mdiEmailOutline} description={info.email} />
+      {#if info.birth_year != null}
+        <SidebarComponent icon={mdiAccount} description={birth_year} />
+      {/if}
+      {#if info.email != null}
+        <SidebarComponent icon={mdiEmailOutline} description={info.email} />
+      {/if}
       {#if info.phone_number != null}
         <SidebarComponent icon={mdiPhone} description={info.phone_number} />
       {/if}
-      <SidebarComponent
-        icon={mdiStar}
-        title="Interests"
-        description={info.interests}
-      />
-      <SidebarComponent
-        icon={mdiCogs}
-        title="Soft-Skills"
-        description={info.softskills}
-      />
+      {#if info.interests != null}
+        <SidebarComponent
+          icon={mdiStar}
+          title="Interests"
+          description={info.interests}
+        />
+      {/if}
+      {#if info.interests != null}
+        <SidebarComponent
+          icon={mdiCogs}
+          title="Soft-Skills"
+          description={info.softskills}
+        />
+      {/if}
     </div>
   </div>
 {:else}
@@ -109,21 +120,29 @@
         alt={info.full_name}
       />
     </div>
-    <SidebarComponent icon={mdiAccount} description={birth_year} />
-    <SidebarComponent icon={mdiEmailOutline} description={info.email} />
+    {#if info.birth_year != null}
+      <SidebarComponent icon={mdiAccount} description={birth_year} />
+    {/if}
+    {#if info.email != null}
+      <SidebarComponent icon={mdiEmailOutline} description={info.email} />
+    {/if}
     {#if info.phone_number != null}
       <SidebarComponent icon={mdiPhone} description={info.phone_number} />
     {/if}
-    <SidebarComponent
-      icon={mdiStar}
-      title="Interests"
-      description={info.interests}
-    />
-    <SidebarComponent
-      icon={mdiCogs}
-      title="Soft-Skills"
-      description={info.softskills}
-    />
+    {#if info.interests != null}
+      <SidebarComponent
+        icon={mdiStar}
+        title="Interests"
+        description={info.interests}
+      />
+    {/if}
+    {#if info.interests != null}
+      <SidebarComponent
+        icon={mdiCogs}
+        title="Soft-Skills"
+        description={info.softskills}
+      />
+    {/if}
   </div>
   <div class="fake-sidebar" />
 {/if}

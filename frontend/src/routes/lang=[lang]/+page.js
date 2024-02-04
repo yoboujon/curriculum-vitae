@@ -17,11 +17,15 @@ export async function load(context) {
     }
   }
 
+  // Gathering the language
+  const lang = context.params.lang;
+  const lang_id = (await fetchData(`get_lang_id/${lang}`)).data.id;
+
   const infos = [];
   const project_software = [];
   const project_programming = [];
   const dataToGather =
-      ['info', 'education', 'experience', 'skills/1', 'tags/1'];
+      [`info/${lang_id}`, `education/${lang_id}`, `experience/${lang_id}`, `project/${lang_id}`, 'hard_skills', 'tags'];
   for (const url of dataToGather) {
     const res = await fetchData(url);
     if (res.status == 0) {
@@ -34,9 +38,11 @@ export async function load(context) {
     }
   }
 
-  for (let i = 0; i < infos[3][2].length; i++) {
+  // infos[4] = hardskills
+  // infos[4][1] = Softwares
+  for (let i = 0; i < infos[4][1].length; i++) {
     const res =
-        await fetchData(`getproject_software/${i + 1}`);
+        await fetchData(`getproject_software/${i + 1}/${lang_id}`);
     if (res.status == 0) {
       project_software.push(res.data);
     } else {
@@ -45,9 +51,10 @@ export async function load(context) {
       }
     }
   }
-  for (let i = 0; i < infos[3][1].length; i++) {
+  // infos[4][0] = Programming Languages
+  for (let i = 0; i < infos[4][0].length; i++) {
     const res =
-        await fetchData(`getproject_programming/${i + 1}`);
+        await fetchData(`getproject_programming/${i + 1}/${lang_id}`);
     if (res.status == 0) {
       project_programming.push(res.data);
     }
@@ -64,12 +71,12 @@ export async function load(context) {
     education: infos[1],
     experience: infos[2],
     skills: {
-      project: infos[3][0],
-      programming_languages: infos[3][1],
-      softwares: infos[3][2],
-      languages: infos[3][3],
+      project: infos[3],
+      programming_languages: infos[4][0],
+      softwares: infos[4][1],
+      languages: infos[4][2],
     },
-    tags: infos[4],
+    tags: infos[5],
     project_programming: project_programming,
     project_software: project_software,
   };
