@@ -118,7 +118,7 @@
       {#if innerWidth >= 1000}
         <h1 class="name">{cv.info.full_name}</h1>
       {/if}
-      <h2 class="name">Apprentice Engineer Automatic/Electronic</h2>
+      <h2 class="name">{cv.info.title}</h2>
       <Section icon={mdiSchool} title={text.education} />
       <SlideShow
         data={cv.education}

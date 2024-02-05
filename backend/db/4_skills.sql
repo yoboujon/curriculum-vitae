@@ -8,5 +8,6 @@ CREATE TABLE public.skills (
 	softskills text NULL,
 	interests text NULL,
 	lang_id serial4 NOT NULL,
+	title test NULL,
 	CONSTRAINT skills_languages_fk FOREIGN KEY (lang_id) REFERENCES public.languages(id)
 );

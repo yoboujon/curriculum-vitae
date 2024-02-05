@@ -60,6 +60,18 @@
         margin: 0.5rem;
     }
 
+    .footer-btn>p {
+        font-weight: 600;
+        font-size: 1rem;
+        font-family: 'Urbanist', sans-serif;
+        margin-right: 0.5rem;
+    }
+
+    .footer-github>img {
+        filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(19deg) brightness(116%) contrast(113%);
+        margin-right: 1rem;
+    }
+
     .end {
         padding-bottom: 5rem;
     }
@@ -141,9 +153,8 @@
         color: var(--color-background);
         background-color: var(--color-special);
         margin-top: 0;
-        padding-top: 1.5rem;
+        padding: 1.5rem;
         margin-bottom: 0;
-        padding-bottom: 1.5rem;
         box-shadow: rgba(0, 14, 83, 0.12) 0px 30px 25px, rgba(0, 14, 83, 0.05) 0px 5px 10px;
     }
 
@@ -172,8 +183,8 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        margin-left: 2rem;
-        margin-right: 2rem;
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
     }
 
     .footer-text p {
@@ -182,6 +193,21 @@
         font-size: minmax(2dvh, 1.25rem);
         color: var(--color-background);
         margin: 0.5rem;
+    }
+
+    .footer-btn>p {
+        font-weight: 600;
+        font-size: 0.8rem;
+        font-family: 'Urbanist', sans-serif;
+    }
+
+    .footer-github>img {
+        filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(19deg) brightness(116%) contrast(113%);
+        margin-right: 0.5rem;
+    }
+
+    .footer-btn>span {
+        margin-left: 0.5rem;
     }
 
     .subsection {
@@ -224,13 +250,6 @@ h2 {
     flex-direction: column;
 }
 
-.footer-btn>p {
-    font-weight: 600;
-    font-size: 1rem;
-    font-family: 'Urbanist', sans-serif;
-    margin-right: 0.5rem;
-}
-
 .footer-btn {
     display: flex;
     border-radius: 0.4rem;
@@ -246,11 +265,6 @@ h2 {
     margin-left: 0.5rem;
     cursor: pointer;
     text-decoration: none;
-}
-
-.footer-github>img {
-    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(19deg) brightness(116%) contrast(113%);
-    margin-right: 1rem;
 }
 
 .footer-text svg {

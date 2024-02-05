@@ -13,6 +13,7 @@ pub struct Info {
     pub email: Option<String>,
     pub birth_year: Option<NaiveDate>,
     pub profile_pic: Option<String>,
+    pub title: Option<String>,
     pub softskills: Option<String>,
     pub interests: Option<String>
 }
