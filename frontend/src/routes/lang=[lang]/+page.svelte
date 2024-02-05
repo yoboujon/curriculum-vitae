@@ -147,6 +147,7 @@
               color={pilldata.color}
               show_tooltip={true}
               tooltip_data={cv.project_programming[index]}
+              {text}
             />
           {/each}
         {/if}
@@ -162,6 +163,7 @@
               color={pilldata.color}
               show_tooltip={true}
               tooltip_data={cv.project_software[index]}
+              {text}
             />
           {/each}
         {/if}

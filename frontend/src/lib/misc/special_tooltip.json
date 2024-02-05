@@ -1,0 +1,11 @@
+{
+    "Rust": "backend",
+    "PostgresSQL": "backend",
+    "CSS": "frontend",
+    "HTML": "frontend",
+    "Svelte": "frontend",
+    "JavaScript": "frontend",
+    "VS Codium": "frontend",
+    "Github": "frontend",
+    "DBeaver": "backend"
+}

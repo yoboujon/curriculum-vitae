@@ -23,5 +23,8 @@
     "popup_description": "Description",
     "popup_dl_app": "Download App",
     "popup_dl_arc": "Download Archive",
-    "popup_dl_rep": "See Report"
+    "popup_dl_rep": "See Report",
+
+    "backend": "This backend",
+    "frontend": "This website"
   }

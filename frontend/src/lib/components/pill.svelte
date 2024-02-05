@@ -13,6 +13,16 @@
   export let shadow_color = null;
   export let show_tooltip = false;
   export let tooltip_data = [];
+  export let text;
+
+  // Special data on pill
+  import st_misc from "$lib/misc/special_tooltip.json";
+  for (const st in st_misc) {
+    if (st == name)
+      tooltip_data.push({
+        title: text[st_misc[st]],
+      });
+  }
 
   const white = shouldColorBeWhite(color.slice(1));
   let style =
@@ -140,6 +150,7 @@
         {#each tooltip_data as td}
           <div>
             <span>{td.title}</span>
+            {#if td.project_id != null}
             <div class="pill-last">
               <button
                 class="pill-view"
@@ -147,6 +158,7 @@
                 ><SvgIcon size="20" path={mdiPlus} type="mdi" /></button
               >
             </div>
+            {/if}
           </div>
         {/each}
       </div>

@@ -23,5 +23,8 @@
     "popup_description": "Description",
     "popup_dl_app": "Application",
     "popup_dl_arc": "Archive ZIP",
-    "popup_dl_rep": "Voir le Rapport"
+    "popup_dl_rep": "Voir le Rapport",
+
+    "backend": "Ce serveur",
+    "frontend": "Ce site web"
   }
