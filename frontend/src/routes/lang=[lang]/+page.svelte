@@ -180,39 +180,79 @@
       </div>
     </div>
   </div>
+  <!-- Footer -->
   <div class="footer" bind:this={footer}>
-    <div class="footer-btn-container">
-      <button
-        class="footer-btn"
-        on:click={() => (window.location.href = `/lang=${otherlang}`)}
-      >
-        <p>{text.lang}</p>
-        <span class={`fi fi-${flag} flag-size`}></span>
-      </button>
-    </div>
-    <div class="footer-text">
-      <p>
-        {text.madewith}
-        <SvgIcon size="20" path={mdiHeart} type="mdi" />
-        {text.usingsvelte}
-      </p>
-      <p>{text.copyright} • {new Date().getFullYear()}</p>
-    </div>
-    <div class="footer-btn-container">
-      <a
-        class="footer-btn footer-github"
-        href="https://github.com/yoboujon/curriculum-vitae"
-        target="_blank"
-      >
-        <img
-          height="30"
-          width="30"
-          src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"
-          alt="github"
-        />
-        <p>{text.github}</p>
-      </a>
-    </div>
+    <!-- Footer desktop -->
+    {#if innerWidth >= 1000}
+      <div class="footer-btn-container">
+        <button
+          class="footer-btn"
+          on:click={() => (window.location.href = `/lang=${otherlang}`)}
+        >
+          <p>{text.lang}</p>
+          <span class={`fi fi-${flag} flag-size`}></span>
+        </button>
+      </div>
+      <div class="footer-text">
+        <p>
+          {text.madewith}
+          <SvgIcon size="20" path={mdiHeart} type="mdi" />
+          {text.usingsvelte}
+        </p>
+        <p>{text.copyright} • {new Date().getFullYear()}</p>
+      </div>
+      <div class="footer-btn-container">
+        <a
+          class="footer-btn footer-github"
+          href="https://github.com/yoboujon/curriculum-vitae"
+          target="_blank"
+        >
+          <img
+            height="30"
+            width="30"
+            src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"
+            alt="github"
+          />
+          <p>{text.github}</p>
+        </a>
+      </div>
+      <!-- Footer mobile -->
+    {:else}
+      <div class="footer-text">
+        <p>
+          {text.madewith}
+          <SvgIcon size="20" path={mdiHeart} type="mdi" />
+          {text.usingsvelte}
+        </p>
+        <p>{text.copyright} • {new Date().getFullYear()}</p>
+      </div>
+      <div class="footer-mobile-btn">
+        <div class="footer-btn-container">
+          <button
+            class="footer-btn"
+            on:click={() => (window.location.href = `/lang=${otherlang}`)}
+          >
+            <p>{text.lang}</p>
+            <span class={`fi fi-${flag} flag-size`}></span>
+          </button>
+        </div>
+        <div class="footer-btn-container">
+          <a
+            class="footer-btn footer-github"
+            href="https://github.com/yoboujon/curriculum-vitae"
+            target="_blank"
+          >
+            <img
+              height="30"
+              width="30"
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"
+              alt="github"
+            />
+            <p>{text.github}</p>
+          </a>
+        </div>
+      </div>
+    {/if}
   </div>
 {:else}
   <h1 class="h1 text-center">Oops, could not load database :/</h1>

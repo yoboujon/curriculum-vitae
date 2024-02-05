@@ -45,6 +45,21 @@
         padding-right: 4rem;
     }
 
+    .footer-btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .footer-text p {
+        font-family: 'Urbanist', sans-serif;
+        font-weight: 600;
+        font-size: 1.25rem;
+        color: var(--color-background);
+        margin: 0.5rem;
+    }
+
     .end {
         padding-bottom: 5rem;
     }
@@ -145,6 +160,30 @@
         padding-bottom: 2rem;
     }
 
+    .footer-mobile-btn {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer-btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    .footer-text p {
+        font-family: 'Urbanist', sans-serif;
+        font-weight: 600;
+        font-size: minmax(2dvh, 1.25rem);
+        color: var(--color-background);
+        margin: 0.5rem;
+    }
+
     .subsection {
         margin-left: 5vw;
         display: flex;
@@ -190,21 +229,6 @@ h2 {
     font-size: 1rem;
     font-family: 'Urbanist', sans-serif;
     margin-right: 0.5rem;
-}
-
-.footer-text p {
-    font-family: 'Urbanist', sans-serif;
-    font-weight: 600;
-    font-size: 1.25rem;
-    color: var(--color-background);
-    margin: 0.5rem;
-}
-
-.footer-btn-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 
 .footer-btn {

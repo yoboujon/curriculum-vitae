@@ -103,7 +103,8 @@ async fn education(Path(lang_id): Path<i32>, State(pool): State<PgPool>) -> Json
     MAX(CASE WHEN et.lang_id = $1 THEN et.school_location END) AS school_location
 FROM public.education e
 JOIN public.education_text et ON e.id = et.education_id
-GROUP BY e.school, e.start_year, e.end_year, e.picture_url;
+GROUP BY e.school, e.start_year, e.end_year, e.picture_url
+ORDER BY e.start_year ASC;
 ",
         lang_id
     )
@@ -126,7 +127,8 @@ async fn experience(Path(lang_id): Path<i32>, State(pool): State<PgPool>) -> Jso
     MAX(CASE WHEN et.lang_id = $1 THEN et.enterprise_location END) AS enterprise_location
 FROM public.experience e
 JOIN public.experience_text et ON e.id = et.experience_id
-GROUP BY e.enterprise, e.start_year, e.end_year, e.picture_url;
+GROUP BY e.enterprise, e.start_year, e.end_year, e.picture_url
+ORDER BY e.start_year ASC;
 ",
         lang_id
     )
