@@ -9,9 +9,6 @@ CREATE TABLE public.education (
 	start_year date NULL,
 	end_year date NULL,
 	school text NULL,
-	speciality text NULL,
-	school_location text NULL,
-	school_options text NULL,
 	picture_url text NULL,
 	CONSTRAINT education_pkey PRIMARY KEY (id)
 );

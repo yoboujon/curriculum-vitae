@@ -1,4 +1,4 @@
-import {json} from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 
 export async function load(context) {
   async function fetchData(data) {
@@ -21,17 +21,14 @@ export async function load(context) {
 
   async function fetchJSON(lang) {
     try {
-      const url = (import.meta.env.MODE === 'development') ? `lang/${lang}.json` :`static/lang/${lang}.json`;
-      const resTemp = await context.fetch(url);
-      if (resTemp.ok == false) {
-        return {
-          status: resTemp.status,
-        }
-      }
+      const data = import.meta.glob('/src/lib/lang/*.json');
+      const file = data[`/src/lib/lang/${lang}.json`];
+      const jsonData = (await file()).default;
       return {
-        status: 0, data: await resTemp.json(),
+        status: 0,
+        data: jsonData
       }
-    } catch (error) {
+    } catch {
       return {
         status: 500,
       }
@@ -40,10 +37,24 @@ export async function load(context) {
 
   // Gathering the language
   const lang = context.params.lang;
-  const lang_id = (await fetchData(`get_lang_id/${lang}`)).data.id;
+  let lang_id;
+  const res = (await fetchData(`get_lang_id/${lang}`));
+  if (res.status == 500) return {
+    status: res.status
+  }
+  else {
+    lang_id = res.data.id;
+  }
 
   // Gathering texts for languages
-  const text = (await fetchJSON(lang)).data;
+  let text;
+  const jsonData = await fetchJSON(lang);
+  if (jsonData.status == 0) text = jsonData.data;
+  else {
+    return {
+      status: res.status
+    }
+  }
 
   // Gathering data from databse
   const infos = [];

@@ -32,13 +32,16 @@
   export let data;
   // Database
   const cv = data.status == 0 ? processData(data) : undefined;
+
   // Language specifications
   const text = data.text;
   let flag;
   let otherlang;
-  for (const lang of cv.skills.languages) {
-    if (lang.url_name == data.lang) flag = lang.icon_alpha;
-    else otherlang = lang.url_name;
+  if (data.status == 0) {
+    for (const lang of cv.skills.languages) {
+      if (lang.url_name == data.lang) flag = lang.icon_alpha;
+      else otherlang = lang.url_name;
+    }
   }
 
   // Sidebar
