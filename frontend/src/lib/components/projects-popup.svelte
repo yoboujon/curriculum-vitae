@@ -31,6 +31,8 @@
 
   // Informations
   export let tags;
+  // Lang text
+  export let text;
 
   // Not exported but still Informations
   let filteredTags = [];
@@ -38,7 +40,7 @@
   let date = "Date";
   let type_project = "Type of project";
   let picture;
-  let description = "Description";
+  $: description = null;
   let report_link;
   let github_link;
   let archive_link;
@@ -102,7 +104,11 @@
 
 <svelte:window on:click={hidePopup} />
 
-<div id="project-popup-main" bind:this={popupMain}>
+<div
+  id="project-popup-main"
+  class={description != null ? "" : "project-popup-main-min"}
+  bind:this={popupMain}
+>
   <!--Closing button-->
   <button
     class="project-popup-close"
@@ -116,7 +122,7 @@
 
   <div class="project-popup-container">
     <!-- Information -->
-    <div>
+    <div class={description != null ? "" : "project-popup-nodescription"}>
       <h1 class="slide-title">{title}</h1>
       <div class="project-popup-img-container">
         <img class="project-popup-img" src={picture} alt="Project Popup" />
@@ -133,26 +139,28 @@
             path={type_project == "School" ? mdiSchool : mdiAccount}
             type="mdi"
           />
-          <p class="project-popup-subtitle slide-aftericon">{type_project}</p>
+          <p class="project-popup-subtitle slide-aftericon">{type_project == "School" ? text.popup_school : text.popup_personal}</p>
         </div>
       </div>
-      <div class="popup-mobile">
-        <div class="popup-subtitle-container">
-          <SvgIcon size="35" path={mdiTextBox} type="mdi" />
-          <p class="slide-subtitle slide-aftericon">Description</p>
+      {#if description != null}
+        <div class="popup-mobile">
+          <div class="popup-subtitle-container">
+            <SvgIcon size="35" path={mdiTextBox} type="mdi" />
+            <p class="slide-subtitle slide-aftericon">{text.popup_description}</p>
+          </div>
+          <div class="markdown">
+            <SvelteMarkdown
+              source={description}
+              renderers={{ code: MarkdownHighlight }}
+            />
+          </div>
         </div>
-        <div class="markdown">
-          <SvelteMarkdown
-            source={description}
-            renderers={{ code: MarkdownHighlight }}
-          />
-        </div>
-      </div>
+      {/if}
       <!-- Links -->
       {#if report_link != null || github_link != null || archive_link != null || application_link != null}
         <div class="popup-subtitle-container">
           <SvgIcon size="35" path={mdiLink} type="mdi" />
-          <p class="slide-subtitle slide-aftericon">Links</p>
+          <p class="slide-subtitle slide-aftericon">{text.popup_links}</p>
         </div>
         <div class="project-popup-link-container">
           {#if report_link != null}
@@ -162,7 +170,7 @@
               target="_blank"
             >
               <SvgIcon size="20" path={mdiFileDocumentOutline} type="mdi" />
-              <p>See Report</p>
+              <p>{text.popup_dl_rep}</p>
             </a>
           {/if}
           {#if github_link != null}
@@ -172,7 +180,7 @@
               target="_blank"
             >
               <SvgIcon size="20" path={mdiGithub} type="mdi" />
-              <p>Github Repository</p>
+              <p>{text.github}</p>
             </a>
           {/if}
           {#if archive_link != null}
@@ -182,7 +190,7 @@
               target="_blank"
             >
               <SvgIcon size="20" path={mdiBookMultiple} type="mdi" />
-              <p>Download Archive</p>
+              <p>{text.popup_dl_arc}</p>
             </a>
           {/if}
           {#if application_link != null}
@@ -192,7 +200,7 @@
               target="_blank"
             >
               <SvgIcon size="20" path={mdiDownload} type="mdi" />
-              <p>Download Application</p>
+              <p>{text.popup_dl_app}</p>
             </a>
           {/if}
         </div>
@@ -201,7 +209,7 @@
       {#if filteredTags.length != 0}
         <div class="popup-subtitle-container">
           <SvgIcon size="35" path={mdiTag} type="mdi" />
-          <p class="slide-subtitle slide-aftericon">Tags</p>
+          <p class="slide-subtitle slide-aftericon">{text.popup_tags}</p>
         </div>
         <div class="project-popup-link-container project-popup-tag-container">
           {#each filteredTags as tag}
@@ -217,18 +225,20 @@
       {/if}
     </div>
     <!-- Text -->
-    <div class="popup-desktop">
-      <div class="popup-subtitle-container">
-        <SvgIcon size="35" path={mdiTextBox} type="mdi" />
-        <p class="slide-subtitle slide-aftericon">Description</p>
+    {#if description != null}
+      <div class="popup-desktop">
+        <div class="popup-subtitle-container">
+          <SvgIcon size="35" path={mdiTextBox} type="mdi" />
+          <p class="slide-subtitle slide-aftericon">{text.popup_description}</p>
+        </div>
+        <div class="markdown">
+          <SvelteMarkdown
+            source={description}
+            renderers={{ code: MarkdownHighlight }}
+          />
+        </div>
       </div>
-      <div class="markdown">
-        <SvelteMarkdown
-          source={description}
-          renderers={{ code: MarkdownHighlight }}
-        />
-      </div>
-    </div>
+    {/if}
   </div>
 </div>
 <div id="project-popup-background"></div>

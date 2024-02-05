@@ -1,4 +1,4 @@
-import { json } from '@sveltejs/kit';
+import { locale_lang } from "$lib/js/date.js"
 
 export async function load(context) {
   async function fetchData(data) {
@@ -35,8 +35,10 @@ export async function load(context) {
     }
   }
 
-  // Gathering the language
+  // Updating locale
   const lang = context.params.lang;
+  locale_lang.set(lang);
+  // Gathering language id
   let lang_id;
   const res = (await fetchData(`get_lang_id/${lang}`));
   if (res.status == 500) return {
@@ -45,8 +47,7 @@ export async function load(context) {
   else {
     lang_id = res.data.id;
   }
-
-  // Gathering texts for languages
+  // Updating json for locale text
   let text;
   const jsonData = await fetchJSON(lang);
   if (jsonData.status == 0) text = jsonData.data;

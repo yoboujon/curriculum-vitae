@@ -1,27 +1,41 @@
-export function formatDate(date) {
-    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+import { writable } from "svelte/store";
+
+export let locale_lang = writable("en");
+
+function getLocale(date)
+{
+    let locale;
+    const unsubscribe = locale_lang.subscribe(value => {
+        locale = value
+    });
+    unsubscribe();
     const cool_date = new Date(date);
-    const formattedDate = cool_date.toLocaleDateString('fr-FR', options);
-    return formattedDate;
+    return {
+        locale: locale,
+        date: cool_date
+    }
+}
+
+export function formatDate(date) {
+    let data = getLocale(date);
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    return data.date.toLocaleDateString(data.locale, options);
 }
 
 export function formatDateMobile(date) {
+    let data = getLocale(date);
     const options = { month: 'numeric', year: 'numeric' };
-    const cool_date = new Date(date);
-    const formattedDate = cool_date.toLocaleString('fr-FR', options);
-    return formattedDate;
+    return data.date.toLocaleDateString(data.locale, options);
 }
 
 export function formatMonth(date) {
+    let data = getLocale(date);
     const options = { month: 'long', year: 'numeric' };
-    const cool_date = new Date(date);
-    const formattedDate = cool_date.toLocaleDateString('fr-FR', options);
-    return formattedDate;
+    return data.date.toLocaleDateString(data.locale, options);
 }
 
 export function formatYear(date) {
+    let data = getLocale(date);
     const options = { year: 'numeric' };
-    const cool_date = new Date(date);
-    const formattedDate = cool_date.toLocaleDateString('fr-FR', options);
-    return formattedDate;
+    return data.date.toLocaleDateString(data.locale, options);
 }

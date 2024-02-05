@@ -14,5 +14,14 @@
     "madewith": "Made with",
     "usingsvelte": "using Svelte",
     "copyright": "All rights reserved, Yohan Boujon",
-    "github": "Github Repo"
+    "github": "Github Repo",
+
+    "popup_school": "School",
+    "popup_personal": "Personal",
+    "popup_links": "Links",
+    "popup_tags": "Tags",
+    "popup_description": "Description",
+    "popup_dl_app": "Download App",
+    "popup_dl_arc": "Download Archive",
+    "popup_dl_rep": "See Report"
   }

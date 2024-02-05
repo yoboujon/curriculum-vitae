@@ -47,7 +47,7 @@
   // Sidebar
   let containerCv;
   let footer;
-  let sidebarLoaded = false;
+  $: sidebarLoaded = false;
   let Sidebar;
 
   // Mobile top bar
@@ -91,7 +91,7 @@
 />
 
 {#if data.status == 0}
-  <ProjectsPopup tags={cv.tags} />
+  <ProjectsPopup tags={cv.tags} {text} />
   <!-- TOPBAR DIV (POPUP: mobile) -->
   {#if innerWidth < 1200 && sidebarLoaded}
     <Sidebar info={cv.info} bind:sidebarContainer {text} />

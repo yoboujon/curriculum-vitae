@@ -14,5 +14,14 @@
     "madewith": "Fait avec",
     "usingsvelte": "à l'aide de Svelte",
     "copyright": "Tous droits réservés, Yohan Boujon",
-    "github": "Lien Github"
+    "github": "Lien Github",
+
+    "popup_school": "École",
+    "popup_personal": "Personnel",
+    "popup_links": "Liens",
+    "popup_tags": "Compétences",
+    "popup_description": "Description",
+    "popup_dl_app": "Application",
+    "popup_dl_arc": "Archive ZIP",
+    "popup_dl_rep": "Voir le Rapport"
   }
