@@ -57,12 +57,12 @@
       topbar.style.height = "53px";
       topbar.style.backgroundColor = "#F8F1F1AE";
       topbar.style.boxShadow = "0px 8px 18px -1px #1d4a6560";
-      buttonTopbar.style.display = "flex";
+      buttonTopbar.style.backgroundImage = "";
     } else {
       topbar.style.height = "";
       topbar.style.backgroundColor = "#F8F1F100";
       topbar.style.boxShadow = "";
-      buttonTopbar.style.display = "none";
+      buttonTopbar.style.backgroundImage = `url('${cv.info.profile_pic}')`;
     }
   }
 
@@ -104,8 +104,16 @@
     <!-- MOBILE TOP BAR -->
     {#if innerWidth < 1000}
       <div id="topbar" bind:this={topbar}>
-        <button on:click={() => showSidebar(true)} bind:this={buttonTopbar}>
-          <SvgIcon size="23" path={mdiAccount} type="mdi" />
+        <button
+          class={scrollY <= 53
+            ? "topbar-button topbar-button-big"
+            : "topbar-button"}
+          on:click={() => showSidebar(true)}
+          bind:this={buttonTopbar}
+        >
+          {#if scrollY > 53}
+            <SvgIcon size="23" path={mdiAccount} type="mdi" />
+          {/if}
         </button>
         <h1 class={scrollY <= 53 ? "topbar-name" : "topbar-name-little"}>
           {cv.info.full_name}
@@ -134,7 +142,11 @@
         reverse="true"
       />
       <Section icon={mdiWrench} title={text.projects} />
-      <SlideShow data={cv.skills.project} type={Projects} show_max_index={true} />
+      <SlideShow
+        data={cv.skills.project}
+        type={Projects}
+        show_max_index={true}
+      />
       <Section icon={mdiPencil} title={text.skills} />
       <SubSection icon={mdiXml} title={text.programming_languages} />
       <div class="subsection">
