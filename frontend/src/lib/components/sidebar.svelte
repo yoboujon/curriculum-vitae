@@ -91,7 +91,7 @@
         <SidebarComponent icon={mdiAccount} description={birth_year} />
       {/if}
       {#if info.email != null}
-        <SidebarComponent icon={mdiEmailOutline} description={info.email} />
+        <SidebarComponent icon={mdiEmailOutline} description={info.email} maito="true"/>
       {/if}
       {#if info.phone_number != null}
         <SidebarComponent icon={mdiPhone} description={info.phone_number} />

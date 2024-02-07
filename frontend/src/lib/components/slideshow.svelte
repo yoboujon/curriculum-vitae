@@ -181,7 +181,7 @@
 
 <div
   class="slideshow"
-  use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: "pan-y" }}
+  use:swipe={{ timeframe: 3000, minSwipeDistance: 10, touchAction: "pan-y" }}
   on:swipe={mobileSwipe}
   bind:this={slideshow}
 >
