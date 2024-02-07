@@ -1,5 +1,4 @@
-@media screen and (min-width: 1000px)
-{
+@media screen and (min-width: 1000px) {
     .slide-container {
         display: flex;
         flex-direction: column;
@@ -30,7 +29,7 @@
         height: 0;
     }
 
-    .slide-img-container{
+    .slide-img-container {
         display: flex;
         margin: 1.5rem;
         justify-content: center;
@@ -65,7 +64,7 @@
         scale: 0.9;
         margin-left: 2.25rem !important;
         margin-right: 2.25rem !important;
-        box-shadow: 0 7px 30px -10px rgba(150,170,180,0.5) !important;
+        box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5) !important;
     }
 
     /* For button at the end of the container*/
@@ -82,10 +81,46 @@
     .slide-text {
         font-size: 1.25rem !important;
     }
+
+    .slide-bubble {
+        z-index: 2;
+        width: 5rem;
+        height: 5rem;
+        background-color: var(--color-special);
+        box-shadow: 0px 8px 18px -1px #0174BE60;
+        border-radius: 50%;
+        transition: all .3s ease 0s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Timeline stuff */
+    .slide-time {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .slide-string {
+        z-index: -1;
+        position: absolute;
+        height: 3rem;
+        background-color: var(--color-special);
+        opacity: 0.5;
+        transition: all .3s ease 0s;
+    }
+
+/* Date text */
+.slide-date {
+    color: var(--color-special);
+    font-weight: 700;
+}
 }
 
-@media screen and (max-width: 1000px)
-{
+@media screen and (max-width: 1000px) {
     .slide-container {
         display: flex;
         flex-direction: column;
@@ -122,7 +157,7 @@
         object-fit: cover;
     }
 
-    .slide-img-container{
+    .slide-img-container {
         visibility: hidden;
         width: 0;
         height: 0;
@@ -135,6 +170,7 @@
         font-size: 1.8rem;
         margin-bottom: 0;
     }
+
     /* Any Subtitle */
     .slide-subtitle {
         color: var(--color-text);
@@ -154,7 +190,7 @@
 
     .slide-unactive {
         scale: 0.9;
-        box-shadow: 0 7px 30px -10px rgba(150,170,180,0.5) !important;
+        box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5) !important;
     }
 
     /* For button at the end of the container*/
@@ -173,6 +209,44 @@
     .slide-text {
         font-size: 1rem;
     }
+
+    .slide-bubble {
+        z-index: 2;
+        width: 3rem;
+        height: 3rem;
+        background-color: var(--color-special);
+        box-shadow: 0px 8px 18px -1px #0174BE60;
+        border-radius: 50%;
+        transition: all .3s ease 0s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Timeline stuff */
+    .slide-time {
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .slide-string {
+        z-index: -1;
+        position: absolute;
+        height: 1.5rem;
+        background-color: var(--color-special);
+        opacity: 0.5;
+        transition: all .3s ease 0s;
+    }
+
+/* Date text */
+.slide-date {
+    color: var(--color-special);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
 }
 
 .slide-overflow {
@@ -203,7 +277,7 @@
 
 .slide-justify {
     text-align: justify;
-    text-justify:auto;
+    text-justify: auto;
 }
 
 /* Every button are centered to the right side of the component */
@@ -251,41 +325,4 @@
     font-family: 'Urbanist', sans-serif;
     font-weight: 700;
     box-shadow: 0px 8px 18px -1px #261C2C60;
-}
-
-/* Timeline stuff */
-.slide-time {
-    margin-top: 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.slide-bubble {
-    z-index: 2;
-    width: 5rem;
-    height: 5rem;
-    background-color: var(--color-special);
-    box-shadow: 0px 2px 5px -1px rgba(0, 0, 0, 0.2);
-    border-radius: 50%;
-    transition: all .3s ease 0s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Date text */
-.slide-date {
-    color: var(--color-special);
-    font-weight: 700;
-}
-
-.slide-string {
-    z-index: -1;
-    position: absolute;
-    height: 3rem;
-    background-color: var(--color-special);
-    opacity: 0.5;
-    transition: all .3s ease 0s;
 }

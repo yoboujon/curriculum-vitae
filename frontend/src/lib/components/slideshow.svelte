@@ -66,6 +66,7 @@
         bubbles.push({
           left: element.offsetLeft,
           top: element.offsetTop,
+          width: element.offsetWidth,
         });
       }
 
@@ -167,12 +168,10 @@
   async function changeSize() {
     if (timeline && !resizing) {
       resizing = true;
-
       await resetSlideCards();
       await new Promise((resolve) => setTimeout(resolve, 400));
       updateTimeLine(slideshowTimeline, slideshowBubbles);
       resizing = false;
-      //global writer count
     }
   }
 </script>

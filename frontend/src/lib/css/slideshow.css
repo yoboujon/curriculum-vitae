@@ -17,6 +17,7 @@
         align-items: center;
         background-color: var(--color-special);
         color: var(--color-background);
+        box-shadow: 0px 8px 18px -1px #0174BE60;
         border: 0;
         transition: all .3s ease 0s;
         cursor: pointer;
@@ -41,16 +42,46 @@
 
 @media screen and (max-width: 1000px) {
     .slideshow_btn {
-        display: none;
+        z-index: 2;
+        position: absolute;
+        margin-right: 1rem;
+        width: 3.5rem;
+        height: 3.5rem;
+        background-color: var(--color-special);
+        box-shadow: 0px 8px 18px -1px #0174BE60;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--color-background);
+        border: 0;
+        transition: all .3s ease 0s;
+        cursor: pointer;
+        top: calc(15rem - 4rem);
+        right: 0;
+        opacity: 0.5;
+    }
+
+    .slideshow_btn_center {
+        top: 15rem;
+    }
+
+    .slideshow_btn_low {
+        top: calc(15rem + 4rem);
+    }
+
+    .slideshow_btn_disabled {
+        opacity: 0;
     }
 }
 
 .slideshow_btn:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0 0.7px 3px -1px rgba(150, 170, 180, 0.5) !important;
+    background-color: var(--color-background);
+    color: var(--color-special);
 }
 
 .slideshow_btn:active {
-    background-color: var(--color-subtitle);
-    transform: translateY(0);
+
+    transform: translateY(3px);
+    box-shadow: 0px 4px 12px -1px #0174BE70;
 }
