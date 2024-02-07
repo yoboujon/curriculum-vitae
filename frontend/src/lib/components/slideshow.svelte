@@ -108,12 +108,6 @@
         if (slideshowTimeline[id] != undefined) {
           slideshowTimeline[id].style.transform =
             `translateX(-${transformValue}px)`;
-          if (slideshow_hidden.includes(id)) {
-            slideshowTimeline[id].style.backgroundColor =
-              "var(--color-background)";
-          } else {
-            slideshowTimeline[id].style.backgroundColor = "";
-          }
         }
       }
     });
@@ -128,7 +122,6 @@
       }
       if (timeline) {
         for (const timeline of slideshowTimeline) {
-          timeline.style.backgroundColor = "";
           timeline.style.transform = "";
         }
       }
