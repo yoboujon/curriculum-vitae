@@ -25,6 +25,7 @@
     "highlightjs-svelte": "^1.0.6",
     "sass": "^1.69.5",
     "simple-icons": "^9.21.0",
+    "svelte-gestures": "^1.5.2",
     "svelte-markdown": "^0.4.1"
   }
 }

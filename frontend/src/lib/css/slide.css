@@ -74,6 +74,10 @@
         justify-content: flex-end;
     }
 
+    .slide-count-container {
+        display: none;
+    }
+
     /* Add it to any text that may overflow. (long texts)*/
     .slide-text {
         font-size: 1.25rem !important;
@@ -160,6 +164,12 @@
         position: absolute;
     }
 
+    .slide-count-container {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+    }
+
     .slide-text {
         font-size: 1rem;
     }
@@ -210,24 +220,37 @@
     background-color: var(--color-special);
     font-family: 'Urbanist', sans-serif;
     font-weight: 700;
-    border: 0.05rem solid;
     border-color: rgba(0, 0, 0, 0);
-    box-shadow: 0px 2px 5px -1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 8px 18px -1px #0174BE60;
     transition: all .3s ease 0s;
     cursor: pointer;
 }
 
 .slide-button:hover {
-    color: var(--color-special);
+    transition: all .3s ease 0s;
     background-color: var(--color-background);
-    box-shadow: 0 0.7px 3px -1px rgba(150,170,180,0.5);
-    border: 0.05rem solid;
-    border-color: var(--color-special);
+    color: var(--color-special);
 }
 
 .slide-button:active {
-    transform: translateY(0.25rem);
-    background-color: var(--color-subtitle);
+    transform: translateY(3px);
+    box-shadow: 0px 4px 12px -1px #0174BE70;
+}
+
+.slide-count {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5rem;
+    color: var(--color-text);
+    background-color: var(--color-code);
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 700;
+    box-shadow: 0px 8px 18px -1px #261C2C60;
 }
 
 /* Timeline stuff */

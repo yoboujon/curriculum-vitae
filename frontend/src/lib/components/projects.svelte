@@ -8,6 +8,8 @@
 
   export let active = false;
   export let data;
+  export let max = 0;
+  export let actualnum = 0;
 
   const title = data.title;
   const short_description = data.short_description;
@@ -54,6 +56,11 @@
         <p class="slide-subtitle slide-text slide-overflow slide-justify">
           {short_description}
         </p>
+      </div>
+      <div class="slide-count-container">
+        <div class="slide-count">
+          {`${actualnum}/${max}`}
+        </div>
       </div>
       <div class="slide-button-container">
         <button class="slide-button" on:click={() => showPopup(true, data.id)}>

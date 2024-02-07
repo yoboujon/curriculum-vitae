@@ -1,4 +1,5 @@
 <script>
+  import { swipe } from "svelte-gestures";
   import SvgIcon from "@jamescoyle/svelte-icon";
   import { mdiArrowRight, mdiArrowLeft, mdiRestore } from "@mdi/js";
   import "$lib/css/slideshow.css";
@@ -16,6 +17,7 @@
   export let type;
   export let timeline = false;
   export let reverse = false;
+  export let show_max_index = false;
   if (reverse) {
     data = data.reverse();
   }
@@ -163,6 +165,12 @@
     });
   }
 
+  // Mobile swipe
+  function mobileSwipe(event) {
+    if (slideshow_index > 0 || event.detail.direction == "left")
+      slideCards(event.detail.direction == "left");
+  }
+
   async function changeSize() {
     if (timeline && !resizing) {
       resizing = true;
@@ -178,7 +186,12 @@
 
 <svelte:window on:resize={changeSize} bind:innerWidth={windowWidth} />
 
-<div class="slideshow" bind:this={slideshow}>
+<div
+  class="slideshow"
+  use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: "pan-y" }}
+  on:swipe={mobileSwipe}
+  bind:this={slideshow}
+>
   <button
     class={slideshow_index >= 1
       ? "slideshow_btn"
@@ -208,10 +221,20 @@
     />
   </button>
   {#each data as selected_data, index (index)}
-    <svelte:component
-      this={type}
-      data={selected_data}
-      active={index == slideshow_index ? true : false}
-    />
+    {#if show_max_index}
+      <svelte:component
+        this={type}
+        data={selected_data}
+        active={index == slideshow_index ? true : false}
+        max={data.length}
+        actualnum={index + 1}
+      />
+    {:else}
+      <svelte:component
+        this={type}
+        data={selected_data}
+        active={index == slideshow_index ? true : false}
+      />
+    {/if}
   {/each}
 </div>

@@ -134,7 +134,7 @@
         reverse="true"
       />
       <Section icon={mdiWrench} title={text.projects} />
-      <SlideShow data={cv.skills.project} type={Projects} />
+      <SlideShow data={cv.skills.project} type={Projects} show_max_index={true} />
       <Section icon={mdiPencil} title={text.skills} />
       <SubSection icon={mdiXml} title={text.programming_languages} />
       <div class="subsection">
