@@ -115,6 +115,14 @@
             <SvgIcon size="23" path={mdiAccount} type="mdi" />
           {/if}
         </button>
+
+        <button
+          class={scrollY <= 53 ? "none" : "topbar-button"}
+          on:click={() => (window.location.href = `/lang=${otherlang}`)}
+        >
+          <span class={`fi fi-${flag} flag-little`}></span>
+        </button>
+
         <h1 class={scrollY <= 53 ? "topbar-name" : "topbar-name-little"}>
           {cv.info.full_name}
         </h1>
@@ -124,6 +132,15 @@
     <!-- MAIN DIV (RIGHT: desktop/CENTER: mobile) -->
     <div class="main">
       {#if innerWidth >= 1000}
+        <div class="lang-btn-container">
+          <button
+            class="footer-btn lang-btn"
+            on:click={() => (window.location.href = `/lang=${otherlang}`)}
+          >
+            <p>{text.lang}</p>
+            <span class={`fi fi-${flag} flag-size`}></span>
+          </button>
+        </div>
         <h1 class="name">{cv.info.full_name}</h1>
       {/if}
       <h2 class="name">{cv.info.title}</h2>
@@ -196,15 +213,7 @@
   <div class="footer" bind:this={footer}>
     <!-- Footer desktop -->
     {#if innerWidth >= 1000}
-      <div class="footer-btn-container">
-        <button
-          class="footer-btn"
-          on:click={() => (window.location.href = `/lang=${otherlang}`)}
-        >
-          <p>{text.lang}</p>
-          <span class={`fi fi-${flag} flag-size`}></span>
-        </button>
-      </div>
+      <div />
       <div class="footer-text">
         <p>
           {text.madewith}
@@ -239,15 +248,6 @@
         <p>{text.copyright} • {new Date().getFullYear()}</p>
       </div>
       <div class="footer-mobile-btn">
-        <div class="footer-btn-container">
-          <button
-            class="footer-btn"
-            on:click={() => (window.location.href = `/lang=${otherlang}`)}
-          >
-            <p>{text.lang}</p>
-            <span class={`fi fi-${flag} flag-size`}></span>
-          </button>
-        </div>
         <div class="footer-btn-container">
           <a
             class="footer-btn footer-github"

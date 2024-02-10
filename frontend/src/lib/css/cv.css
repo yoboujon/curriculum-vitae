@@ -52,6 +52,18 @@
         flex-direction: column;
     }
 
+    .lang-btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin-right: 5rem;
+        margin-top: 1.5rem;
+    }
+
     .footer-text p {
         font-family: 'Urbanist', sans-serif;
         font-weight: 600;
@@ -278,6 +290,16 @@ h2 {
     text-decoration: none;
 }
 
+.lang-btn {
+    background-color: var(--color-background) !important;
+    color: var(--color-text) !important;
+}
+
+.lang-btn:hover {
+    background-color: var(--color-text) !important;
+    color: var(--color-background) !important;
+}
+
 .footer-text svg {
     margin: 0;
 }
@@ -287,10 +309,19 @@ h2 {
     color: var(--color-subtitle);
 }
 
+.footer-btn:active,
 .footer-btn:active {
     transform: translateY(3px);
 }
 
 .footer-btn:hover>img {
     filter: none;
+}
+
+.none {
+    display: none;
+}
+
+.flag-little {
+    width: fit-content;
 }
