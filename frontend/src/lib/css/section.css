@@ -19,6 +19,17 @@
         color: var(--color-subtitle);
         filter: drop-shadow(0px 6px 4px rgba(0, 0, 0, 0.15));
     }
+
+    .section-h1 {
+        margin-left: 2rem;
+        font-size: 2.5rem;
+    }
+    
+    .section-h2 {
+        margin-left: 1rem;
+        font-size: 1.5rem;
+        color: var(--color-subtitle);
+    }
 }
 
 @media screen and (max-width: 1000px)
@@ -43,15 +54,15 @@
         color: var(--color-subtitle);
         filter: drop-shadow(0px 6px 4px rgba(0, 0, 0, 0.15));
     }
-}
 
-.section-h1 {
-    margin-left: 2rem;
-    font-size: 2.5rem;
-}
-
-.section-h2 {
-    margin-left: 1rem;
-    font-size: 1.5rem;
-    color: var(--color-subtitle);
+    .section-h1 {
+        margin-left: 0.5rem;
+        font-size: clamp(1.5rem, 8vh, 2.5rem);
+    }
+    
+    .section-h2 {
+        margin-left: 0.5rem;
+        font-size: clamp(0.8rem, 8vh, 1.2rem);
+        color: var(--color-subtitle);
+    }
 }

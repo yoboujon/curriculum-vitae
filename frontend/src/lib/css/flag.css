@@ -12,6 +12,10 @@
         justify-content: center;
         align-items: center;
     }
+
+    .flag-text p {
+        margin: 0.5rem;
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -33,6 +37,11 @@
         margin-left: 10vw !important;
         margin-right: 10vw;
     }
+
+    .flag-text p {
+        margin: 0.5rem;
+        font-size: 1.25rem;
+    }
 }
 
 .flag-img {
@@ -48,10 +57,6 @@
 
 .flag-bold {
     font-weight: 600;
-}
-
-.flag-text p {
-    margin: 0.5rem;
 }
 
 .flag-size {

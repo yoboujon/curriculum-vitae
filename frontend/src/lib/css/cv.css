@@ -201,7 +201,7 @@
     .footer-text p {
         font-family: 'Urbanist', sans-serif;
         font-weight: 600;
-        font-size: minmax(2dvh, 1.25rem);
+        font-size: clamp(0.5rem, 4vw, 1.25rem);
         color: var(--color-background);
         margin: 0.5rem;
     }
