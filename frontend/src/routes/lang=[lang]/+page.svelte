@@ -88,6 +88,11 @@
       mobileTopBar();
     }
   }}
+  on:resize={() => {
+    if (innerWidth < 1200) {
+      mobileTopBar();
+    }
+  }}
 />
 
 {#if data.status == 0}
@@ -102,7 +107,7 @@
       <Sidebar info={cv.info} {footer} {containerCv} {text} />
     {/if}
     <!-- MOBILE TOP BAR -->
-    {#if innerWidth < 1000}
+    {#if innerWidth < 1200}
       <div id="topbar" bind:this={topbar}>
         <button
           class={scrollY <= 53
@@ -115,14 +120,12 @@
             <SvgIcon size="23" path={mdiAccount} type="mdi" />
           {/if}
         </button>
-
         <button
           class={scrollY <= 53 ? "none" : "topbar-button"}
           on:click={() => (window.location.href = `/lang=${otherlang}`)}
         >
           <span class={`fi fi-${flag} flag-little`}></span>
         </button>
-
         <h1 class={scrollY <= 53 ? "topbar-name" : "topbar-name-little"}>
           {cv.info.full_name}
         </h1>
@@ -131,7 +134,7 @@
     {/if}
     <!-- MAIN DIV (RIGHT: desktop/CENTER: mobile) -->
     <div class="main">
-      {#if innerWidth >= 1000}
+      {#if innerWidth >= 1200}
         <div class="lang-btn-container">
           <button
             class="footer-btn lang-btn"
@@ -143,7 +146,7 @@
         </div>
         <h1 class="name">{cv.info.full_name}</h1>
       {/if}
-      <h2 class="name">{cv.info.title}</h2>
+      <h2 class="name">{@html cv.info.title}</h2>
       <Section icon={mdiSchool} title={text.education} />
       <SlideShow
         data={cv.education}
@@ -163,6 +166,7 @@
         data={cv.skills.project}
         type={Projects}
         show_max_index={true}
+        {text}
       />
       <Section icon={mdiPencil} title={text.skills} />
       <SubSection icon={mdiXml} title={text.programming_languages} />
@@ -212,7 +216,7 @@
   <!-- Footer -->
   <div class="footer" bind:this={footer}>
     <!-- Footer desktop -->
-    {#if innerWidth >= 1000}
+    {#if innerWidth >= 1200}
       <div />
       <div class="footer-text">
         <p>
@@ -220,7 +224,7 @@
           <SvgIcon size="20" path={mdiHeart} type="mdi" />
           {text.usingsvelte}
         </p>
-        <p>{text.copyright} • {new Date().getFullYear()}</p>
+        <p>{new Date().getFullYear()} • {text.copyright}</p>
       </div>
       <div class="footer-btn-container">
         <a
@@ -245,7 +249,7 @@
           <SvgIcon size="20" path={mdiHeart} type="mdi" />
           {text.usingsvelte}
         </p>
-        <p>{text.copyright} • {new Date().getFullYear()}</p>
+        <p>{new Date().getFullYear()} • {text.copyright}</p>
       </div>
       <div class="footer-mobile-btn">
         <div class="footer-btn-container">

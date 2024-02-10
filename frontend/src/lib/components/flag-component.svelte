@@ -13,6 +13,6 @@
     </div>
     <div class="flag-text">
         <p>{lang}</p>
-        <p><span class="flag-bold">Level: </span>{level}</p>
+        <p>{level}</p>
     </div>
 </div>

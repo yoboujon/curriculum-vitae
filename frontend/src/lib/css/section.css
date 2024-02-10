@@ -1,4 +1,4 @@
-@media screen and (min-width: 1000px)
+@media screen and (min-width: 1200px)
 {
     .section-container {
         margin-top: 3rem;
@@ -23,6 +23,7 @@
     .section-h1 {
         margin-left: 2rem;
         font-size: 2.5rem;
+        font-family: 'Gabarito', sans-serif !important;
     }
     
     .section-h2 {
@@ -32,7 +33,7 @@
     }
 }
 
-@media screen and (max-width: 1000px)
+@media screen and (max-width: 1200px)
 {
     .section-container {
         margin-top: 2rem;
@@ -58,6 +59,7 @@
     .section-h1 {
         margin-left: 0.5rem;
         font-size: clamp(1.5rem, 8vh, 2.5rem);
+        font-family: 'Gabarito', sans-serif !important;
     }
     
     .section-h2 {

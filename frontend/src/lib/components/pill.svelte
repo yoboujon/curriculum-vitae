@@ -38,6 +38,7 @@
   let pill_tooltip;
   let main_pill;
   let pill_hitbox;
+  let pill_notification;
 
   // constants and variables
   let innerWidth;
@@ -115,9 +116,18 @@
     }
   }
 
+  function calculateNotification() {
+    // 19 is arbitrary, based on the pill-notification width (which is around 25.6 px) minus a constant
+    pill_notification.style.left = `${
+      main_pill.offsetLeft + main_pill.clientWidth - 19
+    }px`;
+    pill_notification.style.top = `${main_pill.offsetTop}px`;
+  }
+
   onMount(async () => {
     calculateOffsetUp();
     calculateHitbox();
+    calculateNotification();
   });
 </script>
 
@@ -128,6 +138,7 @@
     calculateOffsetUp();
     calculateHitbox();
     calculateOutOfBounds();
+    calculateNotification();
   }}
 />
 
@@ -151,16 +162,25 @@
           <div>
             <span>{td.title}</span>
             {#if td.project_id != null}
-            <div class="pill-last">
-              <button
-                class="pill-view"
-                on:click={() => showPopup(true, td.project_id)}
-                ><SvgIcon size="20" path={mdiPlus} type="mdi" /></button
-              >
-            </div>
+              <div class="pill-last">
+                <button
+                  class="pill-view"
+                  on:click={() => showPopup(true, td.project_id)}
+                  ><SvgIcon size="20" path={mdiPlus} type="mdi" /></button
+                >
+              </div>
             {/if}
           </div>
         {/each}
+      </div>
+      <div
+        class={white
+          ? "pill-notification pill-white"
+          : "pill-notification pill-black"}
+        {style}
+        bind:this={pill_notification}
+      >
+        {tooltip_data.length}
       </div>
     {/if}
     {#if type_icon === "simpleicons"}

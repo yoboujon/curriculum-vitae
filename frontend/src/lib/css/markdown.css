@@ -127,7 +127,7 @@ li {
     border-right: none;
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1200px) {
     .markdown img {
         max-height: 16rem;
         max-width: 40dvh;
@@ -137,7 +137,7 @@ li {
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
     .markdown img {
         max-width: 76dvw;
         max-height: 100%;

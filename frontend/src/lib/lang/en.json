@@ -1,6 +1,6 @@
 {
     "education": "Education",
-    "experience": "Experience",
+    "experience": "Experiences",
     "projects": "Projects",
     "skills": "Skills",
     "programming_languages": "Programming Languages",
@@ -14,7 +14,7 @@
     "lang": "Language",
     "madewith": "Made with",
     "usingsvelte": "using Svelte",
-    "copyright": "All rights reserved, Yohan Boujon",
+    "copyright": "All rights reserved • Yohan Boujon",
     "github": "Github Repo",
 
     "popup_school": "School",
@@ -25,6 +25,8 @@
     "popup_dl_app": "Download App",
     "popup_dl_arc": "Download Archive",
     "popup_dl_rep": "See Report",
+
+    "projects_read": "Read more",
 
     "backend": "This backend",
     "frontend": "This website"

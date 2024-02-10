@@ -1,12 +1,18 @@
 <script>
   import { onMount } from "svelte";
   import SvgIcon from "@jamescoyle/svelte-icon";
-  import { mdiCalendarRange, mdiPlus, mdiAccount, mdiSchool } from "@mdi/js";
+  import {
+    mdiCalendarRange,
+    mdiBookOpenVariant,
+    mdiAccount,
+    mdiSchool,
+  } from "@mdi/js";
   import "$lib/css/slide.css";
   import { formatMonth } from "$lib/js/date.js";
   import { showPopup, popupDatas } from "$lib/js/popup.js";
 
   export let active = false;
+  export let text;
   export let data;
   export let max = 0;
   export let actualnum = 0;
@@ -64,9 +70,9 @@
       </div>
       <div class="slide-button-container">
         <button class="slide-button" on:click={() => showPopup(true, data.id)}>
-          <SvgIcon size="20" path={mdiPlus} type="mdi" />
-          More</button
-        >
+          <SvgIcon size="20" path={mdiBookOpenVariant} type="mdi" />
+          <p class="slide-aftericon slide-button-text">{text.projects_read}</p>
+        </button>
       </div>
     </div>
   </div>

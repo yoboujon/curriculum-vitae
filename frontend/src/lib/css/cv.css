@@ -7,16 +7,7 @@
     #topbar {
         display: none;
     }
-}
 
-@media screen and (max-width: 1200px) {
-    .container-cv {
-        display: flex;
-        flex-direction: column;
-    }
-}
-
-@media screen and (min-width: 1000px) {
     .name {
         text-align: center;
         text-shadow: -15px 5px 20px #00000030;
@@ -89,7 +80,13 @@
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
+    .container-cv {
+        display: flex;
+        flex-direction: column;
+    }
+
+
     #topbar {
         width: 100%;
         position: fixed;
@@ -167,6 +164,10 @@
         font-size: 1.5rem;
         font-weight: 100;
         transition: all .3s ease 0s;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
     }
 
     .name {
@@ -191,7 +192,7 @@
 
     .footer>div {
         padding-top: 2rem;
-        padding-bottom: 2rem;
+        padding-bottom: 1rem;
     }
 
     .footer-mobile-btn {

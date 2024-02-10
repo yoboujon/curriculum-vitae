@@ -1,9 +1,7 @@
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
     .sc-description-little {
-
-        margin-left: 3rem !important;
-        margin-right: 3rem !important;
-
+        margin-left: 6dvh !important;
+        margin-right: 6dvh !important;
     }
 }
 

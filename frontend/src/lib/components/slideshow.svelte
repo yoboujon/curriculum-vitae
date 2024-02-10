@@ -14,6 +14,7 @@
 
   // Exported values
   export let data = [];
+  export let text = null;
   export let type;
   export let timeline = false;
   export let reverse = false;
@@ -220,12 +221,14 @@
         active={index == slideshow_index ? true : false}
         max={data.length}
         actualnum={index + 1}
+        {text}
       />
     {:else}
       <svelte:component
         this={type}
         data={selected_data}
         active={index == slideshow_index ? true : false}
+        {text}
       />
     {/if}
   {/each}

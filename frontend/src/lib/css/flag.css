@@ -1,4 +1,4 @@
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1200px) {
     .flag-main {
         display: flex;
         border-radius: 0.4rem;
@@ -12,13 +12,9 @@
         justify-content: center;
         align-items: center;
     }
-
-    .flag-text p {
-        margin: 0.5rem;
-    }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
     .flag-main {
         display: flex;
         border-radius: 0.4rem;
@@ -28,7 +24,6 @@
         margin-top: 1rem;
         padding: 1rem;
         transition: all .3s ease 0s;
-        justify-content: center;
         align-items: center;
         width: 100%;
     }
@@ -37,11 +32,11 @@
         margin-left: 10vw !important;
         margin-right: 10vw;
     }
+}
 
-    .flag-text p {
-        margin: 0.5rem;
-        font-size: 1.25rem;
-    }
+.flag-text p {
+    margin: 0.5rem;
+    font-size: 1.25rem;
 }
 
 .flag-img {

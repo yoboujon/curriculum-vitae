@@ -8,6 +8,6 @@
 </script>
 
 <div class="subsection-container">
-    <SvgIcon size="40" path={icon} type="mdi" />
+    <SvgIcon size="30" path={icon} type="mdi" />
     <h1 class="section-h2">{title}</h1>
 </div>
