@@ -15,7 +15,8 @@ pub struct Info {
     pub profile_pic: Option<String>,
     pub title: Option<String>,
     pub softskills: Option<String>,
-    pub interests: Option<String>
+    pub interests: Option<String>,
+    pub description: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]

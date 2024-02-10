@@ -3,7 +3,7 @@
         position: absolute;
         width: 15rem;
         transition: all 0s ease 0s;
-        margin-left: 1rem;
+        margin-left: 0.8dvw;
     }
 
     .fake-sidebar {

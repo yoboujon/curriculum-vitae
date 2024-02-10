@@ -8,6 +8,7 @@
     mdiPhone,
     mdiStar,
     mdiClose,
+    mdiInformation,
   } from "@mdi/js";
 
   import SidebarComponent from "$lib/components/sidebar-component.svelte";
@@ -91,10 +92,21 @@
         <SidebarComponent icon={mdiAccount} description={birth_year} />
       {/if}
       {#if info.email != null}
-        <SidebarComponent icon={mdiEmailOutline} description={info.email} maito="true"/>
+        <SidebarComponent
+          icon={mdiEmailOutline}
+          description={info.email}
+          maito="true"
+        />
       {/if}
       {#if info.phone_number != null}
         <SidebarComponent icon={mdiPhone} description={info.phone_number} />
+      {/if}
+      {#if info.softskills != null}
+        <SidebarComponent
+          icon={mdiCogs}
+          title={text.softskills}
+          description={info.softskills}
+        />
       {/if}
       {#if info.interests != null}
         <SidebarComponent
@@ -103,11 +115,12 @@
           description={info.interests}
         />
       {/if}
-      {#if info.interests != null}
+      {#if info.description != null}
         <SidebarComponent
-          icon={mdiCogs}
-          title={text.softskills}
-          description={info.softskills}
+          icon={mdiInformation}
+          title={text.about}
+          description={info.description}
+          little="true"
         />
       {/if}
     </div>
@@ -130,6 +143,13 @@
     {#if info.phone_number != null}
       <SidebarComponent icon={mdiPhone} description={info.phone_number} />
     {/if}
+    {#if info.softskills != null}
+      <SidebarComponent
+        icon={mdiCogs}
+        title={text.softskills}
+        description={info.softskills}
+      />
+    {/if}
     {#if info.interests != null}
       <SidebarComponent
         icon={mdiStar}
@@ -137,11 +157,12 @@
         description={info.interests}
       />
     {/if}
-    {#if info.interests != null}
+    {#if info.description != null}
       <SidebarComponent
-        icon={mdiCogs}
-        title={text.softskills}
-        description={info.softskills}
+        icon={mdiInformation}
+        title={text.about}
+        description={info.description}
+        little="true"
       />
     {/if}
   </div>

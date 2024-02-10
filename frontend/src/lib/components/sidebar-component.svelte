@@ -7,6 +7,7 @@
   export let title = "";
   export let description = "";
   export let maito = false;
+  export let little = false;
   const descriptionArray = description.split(";");
 </script>
 
@@ -21,7 +22,7 @@
     >
   {:else}
     {#each descriptionArray as text}
-      <h2 class="text sc-description">{text}</h2>
+      <h2 class={little ? "text sc-description-little" : "text sc-description"}>{text}</h2>
     {/each}
   {/if}
 </div>
