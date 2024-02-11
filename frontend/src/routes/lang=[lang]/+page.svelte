@@ -81,8 +81,11 @@
 
   // More pill handler
   let pillShowMore = [];
-  let pillInstances = [[], []];
-  $: pillActualIndex=0;
+  let pillInstances = new Array();
+  for (let i = 0; i < cv.skills.length; i++) {
+    pillInstances[i] = new Array();
+  }
+
   async function moreHandler(id) {
     if (pillShowMore[id] === true) {
       // show Less
@@ -99,11 +102,9 @@
     }
   }
 
-  function needMore(skill)
-  {
-    for(const s of skill)
-    {
-      if(!s.is_shown) return true;
+  function needMore(skill) {
+    for (const s of skill) {
+      if (!s.is_shown) return true;
     }
     return false;
   }
@@ -220,17 +221,19 @@
               {/if}
             {/each}
             {#if needMore(skill)}
-            <button
-              class="pill-container pill-more"
-              on:click={() => moreHandler(index)}
-            >
-              <SvgIcon
-                type="mdi"
-                path={pillShowMore[index] === true ? mdiArrowDown : mdiArrowUp}
-                size="20"
-              />
-              <p>{text.more}</p>
-            </button>
+              <button
+                class="pill-container pill-more"
+                on:click={() => moreHandler(index)}
+              >
+                <SvgIcon
+                  type="mdi"
+                  path={pillShowMore[index] === true
+                    ? mdiArrowDown
+                    : mdiArrowUp}
+                  size="20"
+                />
+                <p>{text.more}</p>
+              </button>
             {/if}
           </div>
           <div class={pillShowMore[index] === true ? "subsection" : "none"}>
