@@ -277,38 +277,38 @@
 }
 
 .project-popup-report {
-    background-color: #ed1c23;
-    box-shadow: 0px 8px 18px -1px #ed1c2350;
+    background-color: var(--palette-red);
+    box-shadow: 0px 8px 18px -1px #9A031E50;
 }
 
 .project-popup-report:hover {
-    color: #ed1c23;
+    color: var(--palette-red);
 }
 
 .project-popup-report:active {
-    box-shadow: 0px 4px 12px -1px #ed1c2370;
+    box-shadow: 0px 4px 12px -1px #9A031E70;
 }
 
 .project-popup-github {
-    background-color: #181717;
-    box-shadow: 0px 8px 18px -1px #18171750;
+    background-color: var(--color-text);
+    box-shadow: 0px 8px 18px -1px #261C2C50;
 }
 
 .project-popup-github:hover {
-    color: #181717;
+    color: var(--color-text);
 }
 
 .project-popup-github:active {
-    box-shadow: 0px 4px 12px -1px #18171770;
+    box-shadow: 0px 4px 12px -1px #261C2C70;
 }
 
 .project-popup-archive {
-    background-color: #4B1E78;
+    background-color: var(--palette-purple);
     box-shadow: 0px 8px 18px -1px #4B1E7850;
 }
 
 .project-popup-archive:hover {
-    color: #4B1E78;
+    color: var(--palette-purple);
 }
 
 .project-popup-archive:active {
@@ -316,12 +316,12 @@
 }
 
 .project-popup-application {
-    background-color: #0174BE;
+    background-color: var(--color-special);
     box-shadow: 0px 8px 18px -1px #0174BE50;
 }
 
 .project-popup-application:hover {
-    color: #0174BE;
+    color: var(--color-special);
 }
 
 .project-popup-application:active {

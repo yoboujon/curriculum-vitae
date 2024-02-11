@@ -65,13 +65,24 @@
     box-shadow: 0px 8px 18px -1px #261C2C30;
     display: flex;
     flex-direction: column;
-    padding-left: 1rem;
-    padding-right: 1rem;
     height: fit-content;
     width: fit-content;
+
 }
 
-.pill-tooltip>div {
+.pill-tooltip-content {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 9rem;
+    min-width: 5rem;
+    max-width: 86dvw;
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.pill-tooltip-content>div {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -82,6 +93,10 @@
     margin-bottom: 0.9rem;
     margin-right: 0.5rem;
     white-space: nowrap;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
 }
 
 .pill-tooltip svg {
@@ -151,4 +166,32 @@
     display: flex;
     position: absolute;
     box-shadow: 0px 8px 18px -1px #011e3164 !important;
+}
+
+.pill-tooltip-close {
+    display: flex;
+    margin-left: auto;
+    height: fit-content;
+}
+
+.pill-tooltip-close>button {
+    width: 2rem;
+    height: 2rem;
+    background-color: #00000000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text);
+    border: 0;
+    cursor: pointer;
+    transition: none;
+    margin: 0.2rem;
+    padding: 0.2rem;
+}
+
+.pill-tooltip-close>button:hover {
+    color: var(--color-background);
+    background-color: var(--color-text);
+    box-shadow: 0px 8px 18px -1px #261C2C50;
 }

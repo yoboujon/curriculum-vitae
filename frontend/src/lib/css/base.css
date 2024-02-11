@@ -17,4 +17,12 @@ html {
     --color-background: #F8F1F1;
     --color-code: #ECE6F1;
     --color-pill: #D0D4CA;
+
+    --palette-pink: #ad62aa;
+    --palette-red: #9A031E;
+    --palette-orange: #FF5B22;
+    --palette-yellow: #ff9843;
+    --palette-green: #0d9276;
+    --palette-purple: #4B1E78;
+    --palette-brown: #3c2317;
 }

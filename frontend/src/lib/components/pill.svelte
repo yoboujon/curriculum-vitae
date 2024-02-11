@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import SvgIcon from "@jamescoyle/svelte-icon";
   import "$lib/css/pill.css";
-  import { mdiHelp, mdiPlus } from "@mdi/js";
+  import { mdiHelp, mdiPlus, mdiClose } from "@mdi/js";
   import { shouldColorBeWhite } from "$lib/js/color.js";
   import { showPopup } from "$lib/js/popup.js";
 
@@ -159,20 +159,27 @@
       <div class="pill-arrow pill-arrow-up" bind:this={pill_arrowup} />
       <div class="pill-arrow pill-arrow-down" bind:this={pill_arrowdown} />
       <div class="pill-tooltip" bind:this={pill_tooltip}>
-        {#each tooltip_data as td}
-          <div>
-            <span>{td.title}</span>
-            {#if td.project_id != null}
-              <div class="pill-last">
-                <button
-                  class="pill-view"
-                  on:click={() => showPopup(true, td.project_id)}
-                  ><SvgIcon size="20" path={mdiPlus} type="mdi" /></button
-                >
-              </div>
-            {/if}
-          </div>
-        {/each}
+        <div class="pill-tooltip-close">
+          <button on:click={() => showingTooltip(false)}>
+            <SvgIcon size="30" path={mdiClose} type="mdi" />
+          </button>
+        </div>
+        <div class="pill-tooltip-content">
+          {#each tooltip_data as td}
+            <div>
+              <span>{td.title}</span>
+              {#if td.project_id != null}
+                <div class="pill-last">
+                  <button
+                    class="pill-view"
+                    on:click={() => showPopup(true, td.project_id)}
+                    ><SvgIcon size="20" path={mdiPlus} type="mdi" /></button
+                  >
+                </div>
+              {/if}
+            </div>
+          {/each}
+        </div>
       </div>
       <div
         class={white
