@@ -3,6 +3,7 @@
   import { showSidebar } from "$lib/js/topbar.js";
   import "$lib/css/base.css";
   import "$lib/css/cv.css";
+  import "$lib/css/pill.css";
   import "/node_modules/flag-icons/css/flag-icons.min.css";
 
   // Main
@@ -23,6 +24,8 @@
     mdiAccount,
     mdiEarth,
     mdiHeart,
+    mdiArrowDown,
+    mdiArrowUp,
   } from "@mdi/js";
   import { onMount } from "svelte";
 
@@ -75,6 +78,35 @@
     Sidebar = (await import("/src/lib/components/sidebar.svelte")).default;
     sidebarLoaded = true;
   });
+
+  // More pill handler
+  let pillShowMore = [];
+  let pillInstances = [[], []];
+  $: pillActualIndex=0;
+  async function moreHandler(id) {
+    if (pillShowMore[id] === true) {
+      // show Less
+      pillShowMore[id] = false;
+    } else {
+      // Show More
+      pillShowMore[id] = true;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 30));
+    for (const pills of pillInstances) {
+      for (const p of pills) {
+        p.updatePill();
+      }
+    }
+  }
+
+  function needMore(skill)
+  {
+    for(const s of skill)
+    {
+      if(!s.is_shown) return true;
+    }
+    return false;
+  }
 </script>
 
 <svelte:window
@@ -166,23 +198,58 @@
         {text}
       />
       <Section icon={mdiPencil} title={text.skills} />
-      {#each cv.skills as skill, index (index)}
-        <SubSection icon={cv.categories[index].icon} title={cv.categories[index].name} />
-        <div class="subsection">
-          {#if sidebarLoaded}
-          {#each skill as pilldata, index (index)}
-            <Pill
-              name={pilldata.skill}
-              type_icon={pilldata.type_icon}
-              icon={pilldata.icon}
-              color={pilldata.color}
-              show_tooltip={true}
-              tooltip_data={cv.project_skills[pilldata.id-1]}
-              {text}
-            />
-          {/each}
-          {/if}
-        </div>
+      {#each cv.skills as skill, index}
+        <SubSection
+          icon={cv.categories[index].icon}
+          title={cv.categories[index].name}
+        />
+        {#if sidebarLoaded}
+          <div class="subsection">
+            {#each skill as pilldata, pill_dataindex}
+              {#if pilldata.is_shown}
+                <Pill
+                  bind:this={pillInstances[index][pill_dataindex]}
+                  name={pilldata.skill}
+                  type_icon={pilldata.type_icon}
+                  icon={pilldata.icon}
+                  color={pilldata.color}
+                  show_tooltip={true}
+                  tooltip_data={cv.project_skills[pilldata.id - 1]}
+                  {text}
+                />
+              {/if}
+            {/each}
+            {#if needMore(skill)}
+            <button
+              class="pill-container pill-more"
+              on:click={() => moreHandler(index)}
+            >
+              <SvgIcon
+                type="mdi"
+                path={pillShowMore[index] === true ? mdiArrowDown : mdiArrowUp}
+                size="20"
+              />
+              <p>{text.more}</p>
+            </button>
+            {/if}
+          </div>
+          <div class={pillShowMore[index] === true ? "subsection" : "none"}>
+            {#each skill as pilldata, pill_dataindex}
+              {#if !pilldata.is_shown}
+                <Pill
+                  bind:this={pillInstances[index][pill_dataindex]}
+                  name={pilldata.skill}
+                  type_icon={pilldata.type_icon}
+                  icon={pilldata.icon}
+                  color={pilldata.color}
+                  show_tooltip={true}
+                  tooltip_data={cv.project_skills[pilldata.id - 1]}
+                  {text}
+                />
+              {/if}
+            {/each}
+          </div>
+        {/if}
       {/each}
       <SubSection icon={mdiEarth} title={text.languages} />
       <div class="subsection flag-container end">

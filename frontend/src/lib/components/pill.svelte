@@ -125,10 +125,15 @@
     pill_notification.style.top = `${main_pill.offsetTop}px`;
   }
 
-  onMount(async () => {
+  export function updatePill() {
     calculateOffsetUp();
     calculateHitbox();
+    calculateOutOfBounds();
     calculateNotification();
+  }
+
+  onMount(async () => {
+    updatePill();
   });
 </script>
 
@@ -136,10 +141,7 @@
   bind:innerWidth
   bind:scrollY
   on:resize={() => {
-    calculateOffsetUp();
-    calculateHitbox();
-    calculateOutOfBounds();
-    calculateNotification();
+    updatePill();
   }}
 />
 
