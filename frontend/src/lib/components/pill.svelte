@@ -118,6 +118,7 @@
 
   function calculateNotification() {
     // 19 is arbitrary, based on the pill-notification width (which is around 25.6 px) minus a constant
+    if (!show_tooltip || tooltip_data.length <= 0) return;
     pill_notification.style.left = `${
       main_pill.offsetLeft + main_pill.clientWidth - 19
     }px`;

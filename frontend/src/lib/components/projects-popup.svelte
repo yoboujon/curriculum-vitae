@@ -214,7 +214,7 @@
         <div class="project-popup-link-container project-popup-tag-container">
           {#each filteredTags as tag}
             <Pill
-              name={tag.lang}
+              name={tag.skill}
               type_icon={tag.type_icon}
               icon={tag.icon}
               color="#F8F1F1"

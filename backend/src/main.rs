@@ -11,8 +11,8 @@ use tower_http::cors::CorsLayer;
 
 mod db;
 use db::{
-    AllTags, Education, Experience, Info, LangId, Languages, ProgrammingLanguages, Project,
-    SimpleProject, Softwares, Tags,
+    AllSkills, Categories, CategoriesText, Education, Experience, Id, Info, LangId, Languages,
+    Project, SimpleProject, Skills,
 };
 
 #[tokio::main]
@@ -32,17 +32,11 @@ async fn main() -> Result<()> {
         .route("/education/:lang_id", get(education))
         .route("/experience/:lang_id", get(experience))
         .route("/project/:lang_id", get(projects))
+        .route("/categories/:lang_id", get(categories_text))
         .route("/hard_skills", get(hard_skills))
         .route("/tags/:project_id", get(tags))
         .route("/tags", get(alltags))
-        .route(
-            "/getproject_programming/:programming_id/:lang_id",
-            get(getproject_programming),
-        )
-        .route(
-            "/getproject_software/:software_id/:lang_id",
-            get(getproject_software),
-        )
+        .route("/getproject_programming/:lang_id", get(getproject_skills))
         .with_state(pool)
         .layer(CorsLayer::very_permissive());
 
@@ -80,10 +74,10 @@ async fn info(Path(lang_id): Path<i32>, State(pool): State<PgPool>) -> Json<Vec<
         (SELECT email FROM public.info LIMIT 1) AS email,
         (SELECT birth_year FROM public.info LIMIT 1) AS birth_year,
         (SELECT profile_pic FROM public.info LIMIT 1) AS profile_pic,
-        (SELECT title FROM public.skills WHERE lang_id = $1 LIMIT 1) AS title,
-        (SELECT softskills FROM public.skills WHERE lang_id = $1 LIMIT 1) AS softskills,
-        (SELECT interests FROM public.skills WHERE lang_id = $1 LIMIT 1) AS interests,
-        (SELECT description FROM public.skills WHERE lang_id = $1 LIMIT 1) AS description;",
+        (SELECT title FROM public.info_text WHERE lang_id = $1 LIMIT 1) AS title,
+        (SELECT softskills FROM public.info_text WHERE lang_id = $1 LIMIT 1) AS softskills,
+        (SELECT interests FROM public.info_text WHERE lang_id = $1 LIMIT 1) AS interests,
+        (SELECT description FROM public.info_text WHERE lang_id = $1 LIMIT 1) AS description;",
         lang_id
     )
     .fetch_all(&pool)
@@ -166,37 +160,44 @@ ORDER BY p.date_done DESC;",
     Json(datas)
 }
 
-async fn hard_skills(
+async fn categories_text(
+    Path(lang_id): Path<i32>,
     State(pool): State<PgPool>,
-) -> Json<(Vec<ProgrammingLanguages>, Vec<Softwares>, Vec<Languages>)> {
-    let programming_languages = sqlx::query_as!(
-        ProgrammingLanguages,
-        "SELECT
-        pl.lang,
-        pl.icon,
-        pl.type_icon,
-        pl.color
-    FROM public.programming_languages pl
-    ORDER BY pl.id;"
+) -> Json<Vec<CategoriesText>> {
+    let categories = sqlx::query_as!(
+        Categories,
+        "select
+        c.id,
+        c.name
+    from
+        public.categories c
+    order by
+        c.id;"
     )
     .fetch_all(&pool)
     .await
-    .unwrap_or(vec![]);
+    .unwrap();
 
-    let softwares = sqlx::query_as!(
-        Softwares,
-        "SELECT
-        s.software,
-        s.icon,
-        s.type_icon,
-        s.color
-    FROM public.softwares s
-    ORDER BY s.id;"
-    )
-    .fetch_all(&pool)
-    .await
-    .unwrap_or(vec![]);
+    let mut categories_text: Vec<CategoriesText> = Vec::new();
 
+    for c in categories {
+        let temp_category = sqlx::query_as!(
+            CategoriesText,
+            "SELECT
+            (SELECT icon FROM public.categories where id = $1 LIMIT 1) AS icon,
+            (SELECT type_icon FROM public.categories where id = $1 LIMIT 1) AS type_icon,
+            (SELECT name FROM public.categories_text WHERE category_id = $1 and lang_id = $2 LIMIT 1) AS name;"
+            ,c.id.unwrap(),lang_id
+        ).fetch_all(&pool)
+        .await
+        .unwrap();
+        categories_text.push(temp_category[0].clone());
+    }
+
+    Json(categories_text)
+}
+
+async fn hard_skills(State(pool): State<PgPool>) -> Json<(Vec<Languages>, Vec<Vec<Skills>>)> {
     let languages = sqlx::query_as!(
         Languages,
         "SELECT
@@ -210,23 +211,66 @@ async fn hard_skills(
     .fetch_all(&pool)
     .await
     .unwrap();
-    Json((programming_languages, softwares, languages))
+
+    let categories = sqlx::query_as!(
+        Categories,
+        "select
+        c.id,
+        c.name
+    from
+        public.categories c
+    order by
+        c.id;"
+    )
+    .fetch_all(&pool)
+    .await
+    .unwrap();
+
+    let mut skills: Vec<Vec<Skills>> = Vec::new();
+
+    for c in categories {
+        let skill_list = sqlx::query_as!(
+            Skills,
+            "select
+            s.id,
+            s.skill,
+            s.icon,
+            s.type_icon,
+            s.color,
+            s.is_shown
+        from
+            public.skills s
+        where
+            s.category_id = $1
+        order by
+            s.id;",
+            c.id.unwrap()
+        )
+        .fetch_all(&pool)
+        .await
+        .unwrap();
+        skills.push(skill_list);
+    }
+
+    Json((languages, skills))
 }
 
-async fn tags(Path(project_id): Path<i32>, State(pool): State<PgPool>) -> Json<Vec<Tags>> {
+async fn tags(Path(project_id): Path<i32>, State(pool): State<PgPool>) -> Json<Vec<Skills>> {
     let datas = sqlx::query_as!(
-        Tags,
-        "SELECT lang, icon, type_icon, color
-        FROM public.programming_languages pl
-        JOIN public.project_tags pt ON pl.id = pt.programming_languages_id
-        WHERE pt.project_id = $1
-        
-        UNION ALL
-        
-        SELECT software, icon, type_icon, color
-        FROM public.softwares s
-        JOIN public.project_tags pt ON s.id = pt.softwares_id
-        WHERE pt.project_id = $1;",
+        Skills,
+        "select
+        s.id,
+        s.skill,
+        s.icon,
+        s.type_icon,
+        s.color,
+        s.is_shown
+    from
+        public.skills s
+    join public.project_tags pt on
+        s.id = pt.skills_id
+    where
+        pt.project_id = $1",
         project_id
     )
     .fetch_all(&pool)
@@ -235,19 +279,22 @@ async fn tags(Path(project_id): Path<i32>, State(pool): State<PgPool>) -> Json<V
     Json(datas)
 }
 
-async fn alltags(State(pool): State<PgPool>) -> Json<Vec<AllTags>> {
+async fn alltags(State(pool): State<PgPool>) -> Json<Vec<AllSkills>> {
     let datas = sqlx::query_as!(
-        AllTags,
-        "SELECT project_id, lang, icon, type_icon, color
-        FROM public.programming_languages pl
-        JOIN public.project_tags pt ON pl.id = pt.programming_languages_id
-        
-        UNION ALL
-        
-        SELECT project_id, software, icon, type_icon, color
-        FROM public.softwares s
-        JOIN public.project_tags pt ON s.id = pt.softwares_id
-        ORDER BY project_id;"
+        AllSkills,
+        "select
+        pt.project_id,
+        s.skill,
+        s.icon,
+        s.type_icon,
+        s.color,
+        s.is_shown
+    from
+        public.skills s
+    join public.project_tags pt on
+        s.id = pt.skills_id
+    order by
+        pt.project_id;"
     )
     .fetch_all(&pool)
     .await
@@ -255,48 +302,49 @@ async fn alltags(State(pool): State<PgPool>) -> Json<Vec<AllTags>> {
     Json(datas)
 }
 
-async fn getproject_programming(
-    Path(ids): Path<(i32,i32)>,
+async fn getproject_skills(
+    Path(lang_id): Path<i32>,
     State(pool): State<PgPool>,
-) -> Json<Vec<SimpleProject>> {
-    let (programming_id, lang_id) = ids;
-    let datas = sqlx::query_as!(
-        SimpleProject,
-        " SELECT
-        pt.project_id,
-        pt.title
-    FROM public.project_text pt
-    JOIN public.project_tags pta ON (pt.project_id = pta.project_id) AND (pt.lang_id = $1) 
-    WHERE pta.programming_languages_id = $2
-    ORDER BY pt.project_id;",
-        lang_id,
-        programming_id
+) -> Json<Vec<Vec<SimpleProject>>> {
+    let project_ids = sqlx::query_as!(
+        Id,
+        "select
+        s.id
+    from
+        public.skills s
+    order by
+        s.id;"
     )
     .fetch_all(&pool)
     .await
     .unwrap();
-    Json(datas)
-}
 
-async fn getproject_software(
-    Path(ids): Path<(i32,i32)>,
-    State(pool): State<PgPool>,
-) -> Json<Vec<SimpleProject>> {
-    let (software_id, lang_id) = ids;
-    let datas = sqlx::query_as!(
-        SimpleProject,
-        " SELECT
-        pt.project_id,
-        pt.title
-    FROM public.project_text pt
-    JOIN public.project_tags pta ON (pt.project_id = pta.project_id) AND (pt.lang_id = $1) 
-    WHERE pta.softwares_id = $2
-    ORDER BY pt.project_id;",
-        lang_id,
-        software_id
-    )
-    .fetch_all(&pool)
-    .await
-    .unwrap();
-    Json(datas)
+    let mut project_skills: Vec<Vec<SimpleProject>> = Vec::new();
+
+    for p in project_ids {
+        project_skills.push(
+            sqlx::query_as!(
+                SimpleProject,
+                "select
+            pt.project_id,
+            pt.title
+        from
+            public.project_text pt
+        join public.project_tags pta on
+            (pt.project_id = pta.project_id)
+            and (pt.lang_id = $1)
+        where
+            pta.skills_id = $2
+        order by
+            pt.project_id;",
+                lang_id,
+                p.id.unwrap(),
+            )
+            .fetch_all(&pool)
+            .await
+            .unwrap(),
+        );
+    }
+
+    Json(project_skills)
 }

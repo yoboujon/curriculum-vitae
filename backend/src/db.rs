@@ -57,19 +57,26 @@ pub struct Project {
 }
 
 #[derive(Deserialize, Serialize)]
-pub struct ProgrammingLanguages {
-    pub lang: Option<String>,
+pub struct Categories {
+    pub id: Option<i32>,
+    pub name: Option<String>
+}
+
+#[derive(Deserialize,Serialize,Clone)]
+pub struct CategoriesText {
     pub icon: Option<String>,
     pub type_icon: Option<String>,
-    pub color: Option<String>
+    pub name: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]
-pub struct Softwares {
-    pub software: Option<String>,
+pub struct Skills {
+    pub id: Option<i32>,
+    pub skill: Option<String>,
     pub icon: Option<String>,
     pub type_icon: Option<String>,
-    pub color: Option<String>
+    pub color: Option<String>,
+    pub is_shown: Option<bool>
 }
 
 #[derive(Deserialize, Serialize)]
@@ -81,24 +88,22 @@ pub struct Languages {
 }
 
 #[derive(Deserialize, Serialize)]
-pub struct Tags {
-    pub lang: Option<String>,
-    pub icon: Option<String>,
-    pub type_icon: Option<String>,
-    pub color: Option<String>
-}
-
-#[derive(Deserialize, Serialize)]
-pub struct AllTags {
+pub struct AllSkills {
     pub project_id: Option<i32>,
-    pub lang: Option<String>,
+    pub skill: Option<String>,
     pub icon: Option<String>,
     pub type_icon: Option<String>,
-    pub color: Option<String>
+    pub color: Option<String>,
+    pub is_shown: Option<bool>
 }
 
 #[derive(Deserialize, Serialize)]
 pub struct SimpleProject {
     pub project_id: Option<i32>,
     pub title: Option<String>
+}
+
+#[derive(Deserialize,Serialize)]
+pub struct Id {
+    pub id: Option<i32>
 }

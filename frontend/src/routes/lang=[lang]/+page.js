@@ -57,13 +57,11 @@ export async function load(context) {
     }
   }
 
-  // Gathering data from databse
+  // Gathering data from database
   const infos = [];
-  const project_software = [];
-  const project_programming = [];
   const dataToGather = [
     `info/${lang_id}`, `education/${lang_id}`, `experience/${lang_id}`,
-    `project/${lang_id}`, 'hard_skills', 'tags'
+    `project/${lang_id}`, 'hard_skills', 'tags', `getproject_programming/${lang_id}`, `categories/${lang_id}`
   ];
   for (const url of dataToGather) {
     const res = await fetchData(url);
@@ -77,45 +75,18 @@ export async function load(context) {
     }
   }
 
-  // infos[4] = hardskills
-  // infos[4][1] = Softwares
-  for (let i = 0; i < infos[4][1].length; i++) {
-    const res = await fetchData(`getproject_software/${i + 1}/${lang_id}`);
-    if (res.status == 0) {
-      project_software.push(res.data);
-    } else {
-      return {
-        status: res.status
-      }
-    }
-  }
-  // infos[4][0] = Programming Languages
-  for (let i = 0; i < infos[4][0].length; i++) {
-    const res = await fetchData(`getproject_programming/${i + 1}/${lang_id}`);
-    if (res.status == 0) {
-      project_programming.push(res.data);
-    } else {
-      return {
-        status: res.status
-      }
-    }
-  }
-
   return {
     status: 0,
     lang: lang,
-    info: infos[0],
+    info: infos[0][0],
     education: infos[1],
     experience: infos[2],
-    skills: {
-      project: infos[3],
-      programming_languages: infos[4][0],
-      softwares: infos[4][1],
-      languages: infos[4][2],
-    },
+    project: infos[3],
+    languages: infos[4][0],
+    skills: infos[4][1],
     tags: infos[5],
-    project_programming: project_programming,
-    project_software: project_software,
+    project_skills: infos[6],
+    categories: infos[7],
     text: text,
   };
 }

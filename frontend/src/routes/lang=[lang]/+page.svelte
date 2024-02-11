@@ -1,6 +1,5 @@
 <script>
   import SvgIcon from "@jamescoyle/svelte-icon";
-  import { processData } from "$lib/js/processdata.js";
   import { showSidebar } from "$lib/js/topbar.js";
   import "$lib/css/base.css";
   import "$lib/css/cv.css";
@@ -22,8 +21,6 @@
     mdiWrench,
     mdiPencil,
     mdiAccount,
-    mdiXml,
-    mdiApplication,
     mdiEarth,
     mdiHeart,
   } from "@mdi/js";
@@ -31,14 +28,14 @@
 
   export let data;
   // Database
-  const cv = data.status == 0 ? processData(data) : undefined;
+  const cv = data.status == 0 ? data : undefined;
 
   // Language specifications
   const text = data.text;
   let flag;
   let otherlang;
   if (data.status == 0) {
-    for (const lang of cv.skills.languages) {
+    for (const lang of cv.languages) {
       if (lang.url_name == data.lang) flag = lang.icon_alpha;
       else otherlang = lang.url_name;
     }
@@ -156,54 +153,40 @@
       />
       <Section icon={mdiBriefcase} title={text.experience} />
       <SlideShow
-        data={cv.experiences}
+        data={cv.experience}
         type={Experience}
         timeline="true"
         reverse="true"
       />
       <Section icon={mdiWrench} title={text.projects} />
       <SlideShow
-        data={cv.skills.project}
+        data={cv.project}
         type={Projects}
         show_max_index={true}
         {text}
       />
       <Section icon={mdiPencil} title={text.skills} />
-      <SubSection icon={mdiXml} title={text.programming_languages} />
-      <div class="subsection">
-        {#if sidebarLoaded}
-          {#each cv.skills.programming_languages as pilldata, index (index)}
+      {#each cv.skills as skill, index (index)}
+        <SubSection icon={cv.categories[index].icon} title={cv.categories[index].name} />
+        <div class="subsection">
+          {#if sidebarLoaded}
+          {#each skill as pilldata, index (index)}
             <Pill
-              name={pilldata.lang}
+              name={pilldata.skill}
               type_icon={pilldata.type_icon}
               icon={pilldata.icon}
               color={pilldata.color}
               show_tooltip={true}
-              tooltip_data={cv.project_programming[index]}
+              tooltip_data={cv.project_skills[pilldata.id-1]}
               {text}
             />
           {/each}
-        {/if}
-      </div>
-      <SubSection icon={mdiApplication} title={text.software} />
-      <div class="subsection">
-        {#if sidebarLoaded}
-          {#each cv.skills.softwares as pilldata, index (index)}
-            <Pill
-              name={pilldata.software}
-              type_icon={pilldata.type_icon}
-              icon={pilldata.icon}
-              color={pilldata.color}
-              show_tooltip={true}
-              tooltip_data={cv.project_software[index]}
-              {text}
-            />
-          {/each}
-        {/if}
-      </div>
+          {/if}
+        </div>
+      {/each}
       <SubSection icon={mdiEarth} title={text.languages} />
       <div class="subsection flag-container end">
-        {#each cv.skills.languages as langdata}
+        {#each cv.languages as langdata}
           <FlagComponent
             lang={langdata.lang}
             level={langdata.level}
