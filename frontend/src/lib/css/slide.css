@@ -66,6 +66,7 @@
         margin-left: 2.25rem !important;
         margin-right: 2.25rem !important;
         box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5) !important;
+        opacity: 20%;
     }
 
     /* For button at the end of the container*/
@@ -193,6 +194,7 @@
     .slide-unactive {
         scale: 0.9;
         box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5) !important;
+        opacity: 0%;
     }
 
     /* For button at the end of the container*/

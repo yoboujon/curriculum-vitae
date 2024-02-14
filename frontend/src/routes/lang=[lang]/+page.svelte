@@ -15,6 +15,7 @@
   import SlideShow from "$lib/components/slideshow.svelte";
   import FlagComponent from "$lib/components/flag-component.svelte";
   import ProjectsPopup from "$lib/components/projects-popup.svelte";
+  import Suggest from "$lib/components/suggest.svelte";
   import Pill from "$lib/components/pill.svelte";
   import {
     mdiSchool,
@@ -26,6 +27,7 @@
     mdiHeart,
     mdiArrowDown,
     mdiArrowUp,
+    mdiFileDocumentOutline,
   } from "@mdi/js";
   import { onMount } from "svelte";
 
@@ -127,6 +129,7 @@
 
 {#if data.status == 0}
   <ProjectsPopup tags={cv.tags} {text} />
+  <Suggest url={cv.info.pdf_url} {text} />
   <!-- TOPBAR DIV (POPUP: mobile) -->
   {#if innerWidth < 1200 && sidebarLoaded}
     <Sidebar info={cv.info} bind:sidebarContainer {text} />
@@ -270,7 +273,16 @@
   <div class="footer" bind:this={footer}>
     <!-- Footer desktop -->
     {#if innerWidth >= 1200}
-      <div />
+      <div class="footer-btn-container">
+        <a
+          class="footer-btn footer-github"
+          href={cv.info.pdf_url}
+          target="_blank"
+        >
+          <SvgIcon size="30" path={mdiFileDocumentOutline} type="mdi" />
+          <p>{text.suggest_button}</p>
+        </a>
+      </div>
       <div class="footer-text">
         <p>
           {text.madewith}
@@ -318,6 +330,16 @@
               alt="github"
             />
             <p>{text.github}</p>
+          </a>
+        </div>
+        <div class="footer-btn-container">
+          <a
+            class="footer-btn footer-github"
+            href={cv.info.pdf_url}
+            target="_blank"
+          >
+            <SvgIcon size="30" path={mdiFileDocumentOutline} type="mdi" />
+            <p>{text.suggest_button}</p>
           </a>
         </div>
       </div>

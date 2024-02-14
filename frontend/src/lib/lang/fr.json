@@ -25,6 +25,10 @@
     "popup_dl_arc": "Archive ZIP",
     "popup_dl_rep": "Voir le Rapport",
 
+    "suggest_title": "Vous préférez un simple fichier ?",
+    "suggest_subtext": "Il est possible de directement voir mon CV ici !",
+    "suggest_button": "Voir CV",
+
     "projects_read": "Lire plus",
 
     "backend": "Ce serveur",

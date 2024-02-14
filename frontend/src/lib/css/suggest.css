@@ -1,0 +1,124 @@
+.suggest-main {
+    position: fixed;
+    width: 50dvw;
+    left: 25dvw;
+    background-color: var(--color-text);
+    color: var(--color-background);
+    z-index: 2;
+    bottom: 2rem;
+    border-radius: 0.4rem;
+    box-shadow: 0px 8px 18px -1px #1e1226a0;
+    transition: all .3s ease 0s;
+    opacity: 0;
+}
+
+.suggest-main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 12rem;
+}
+
+.suggest-close {
+    right: 0;
+    position: absolute;
+    margin: 0.5rem;
+}
+
+.suggest-close>button {
+    display: flex;
+    border-radius: 50%;
+    border: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.4rem;
+    cursor: pointer;
+    color: var(--color-background);
+    background-color: #ffffff00;
+    transition: all .3s ease 0s;
+}
+
+.suggest-close>button:hover {
+    box-shadow: 0px 8px 18px -1px #1e1226a0;
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+.suggest-close>button:active {
+    transform: translateY(3px);
+    box-shadow: 0px 4px 12px -1px #1e1226a0;
+}
+
+.suggest-container {
+    padding: 1rem;
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.suggest-container>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+.suggest-center {
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    padding-right: 2rem;
+    min-width: 10rem;
+}
+
+.suggest-h1 {
+    font-size: 1.8rem;
+    font-family: 'Gabarito', sans-serif !important;
+    color: var(--color-background);
+    margin-bottom: 0;
+    margin-top: 1.5rem;
+}
+
+.suggest-text {
+    margin-bottom: 1.5rem;
+    font-family: 'Gabarito', sans-serif;
+}
+
+.suggest-download {
+    padding: 1rem;
+    margin: 0;
+}
+
+.suggest-download>svg {
+    padding-right: 0.6rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .suggest-main {
+        width: 80dvw;
+        left: 10dvw;
+    }
+
+    .suggest-h1 {
+        font-size: clamp(0.9rem, 4vw, 2rem);
+    }
+
+    .suggest-text {
+        font-size: clamp(0.8rem, 2vw, 1rem);
+    }
+
+    .suggest-download {
+        font-size: 0.6rem;
+        padding: 0.5rem;
+    }
+
+    .suggest-download>svg {
+        margin-left: 0;
+        padding-right: 0.3rem;
+    }
+
+    .suggest-center {
+        min-width: 8rem;
+        padding-right: 1rem;
+    }
+}

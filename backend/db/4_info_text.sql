@@ -10,5 +10,6 @@ CREATE TABLE public.info_text (
 	lang_id int4 NOT NULL,
 	title text NULL,
 	description text NULL,
+	pdf_url text NULL,
 	CONSTRAINT skills_languages_fk FOREIGN KEY (lang_id) REFERENCES public.languages(id)
-);;
+);

@@ -22,6 +22,7 @@
   export let containerCv = null;
   export let sidebarContainer;
   let sidebar;
+  let fakeSidebar;
   let birth_year;
   if (info.birth_year != null) {
     birth_year = formatDate(info.birth_year);
@@ -62,6 +63,9 @@
   }
 
   onMount(async () => {
+    fakeSidebar.style.opacity = `${1}`;
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    sidebar.style.opacity = `${1}`;
     sidebarScrollingHandler();
   });
 </script>
@@ -170,5 +174,5 @@
       />
     {/if}
   </div>
-  <div class="fake-sidebar" />
+  <div class="fake-sidebar" bind:this={fakeSidebar} />
 {/if}

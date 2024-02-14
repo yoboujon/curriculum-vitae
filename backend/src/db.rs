@@ -16,7 +16,8 @@ pub struct Info {
     pub title: Option<String>,
     pub softskills: Option<String>,
     pub interests: Option<String>,
-    pub description: Option<String>
+    pub description: Option<String>,
+    pub pdf_url: Option<String>
 }
 
 #[derive(Deserialize, Serialize)]

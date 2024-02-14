@@ -25,6 +25,10 @@
     "popup_dl_arc": "Download Archive",
     "popup_dl_rep": "See Report",
 
+    "suggest_title": "Want to Simplify Your Experience?",
+    "suggest_subtext": "You can directly view my Portfolio as a pdf file!",
+    "suggest_button": "View Portfolio",
+
     "projects_read": "Read more",
 
     "backend": "This backend",

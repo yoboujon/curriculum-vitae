@@ -77,7 +77,8 @@ async fn info(Path(lang_id): Path<i32>, State(pool): State<PgPool>) -> Json<Vec<
         (SELECT title FROM public.info_text WHERE lang_id = $1 LIMIT 1) AS title,
         (SELECT softskills FROM public.info_text WHERE lang_id = $1 LIMIT 1) AS softskills,
         (SELECT interests FROM public.info_text WHERE lang_id = $1 LIMIT 1) AS interests,
-        (SELECT description FROM public.info_text WHERE lang_id = $1 LIMIT 1) AS description;",
+        (SELECT description FROM public.info_text WHERE lang_id = $1 LIMIT 1) AS description,
+        (SELECT pdf_url FROM public.info_text WHERE lang_id = $1 LIMIT 1) AS pdf_url;",
         lang_id
     )
     .fetch_all(&pool)
