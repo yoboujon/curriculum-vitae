@@ -6,7 +6,7 @@
 
 CREATE TABLE public.skills (
 	id serial4 NOT NULL,
-	category_id int4 DEFAULT nextval('skills_category_seq'::regclass) NOT NULL,
+	category_id int4 NOT NULL,
 	skill text NULL,
 	icon text NULL,
 	type_icon text NULL,

@@ -18,7 +18,7 @@
   // Special data on pill
   import st_misc from "$lib/misc/special_tooltip.json";
   for (const st in st_misc) {
-    if (st == name)
+    if (st == name && show_tooltip)
       tooltip_data.push({
         title: text[st_misc[st]],
       });

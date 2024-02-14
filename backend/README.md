@@ -18,9 +18,18 @@ sudo /usr/bin/postgresql-setup --initdb
 
 ### ⚠️ Be sure to modify your config file to access the postgres database ⚠️
 
+#### For Fedora/CentOS Based Linux
+
 ```bash
 sudo nano /var/lib/pgsql/data/pg_hba.conf
 ```
+
+#### For Debian Based Linux
+
+```bash
+sudo nano /etc/postgresql/13/main/pg_hba.conf
+```
+
 Then check if those lines are correct:
 ```
 # IPv4 local connections:

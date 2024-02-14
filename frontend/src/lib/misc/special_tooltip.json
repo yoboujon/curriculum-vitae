@@ -7,5 +7,6 @@
     "JavaScript": "frontend",
     "VS Codium": "frontend",
     "Github": "frontend",
-    "DBeaver": "backend"
+    "DBeaver": "backend",
+    "Nginx": "backend"
 }

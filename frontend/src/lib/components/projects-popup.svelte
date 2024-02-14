@@ -44,7 +44,7 @@
   let report_link;
   let github_link;
   let archive_link;
-  let application_link;
+  let app_link;
   let id = 0;
 
   async function popupShowed(data) {
@@ -66,7 +66,7 @@
       report_link = data.report_link;
       github_link = data.github_link;
       archive_link = data.archive_link;
-      application_link = data.application_link;
+      app_link = data.app_link;
       filteredTags = filterTag(tags, id);
 
       // Active set to true after the await to avoid conflict when clicking outside while the popup hasn't showed yet.
@@ -157,7 +157,7 @@
         </div>
       {/if}
       <!-- Links -->
-      {#if report_link != null || github_link != null || archive_link != null || application_link != null}
+      {#if report_link != null || github_link != null || archive_link != null || app_link != null}
         <div class="popup-subtitle-container">
           <SvgIcon size="35" path={mdiLink} type="mdi" />
           <p class="slide-subtitle slide-aftericon">{text.popup_links}</p>
@@ -193,10 +193,10 @@
               <p>{text.popup_dl_arc}</p>
             </a>
           {/if}
-          {#if application_link != null}
+          {#if app_link != null}
             <a
               class="project-popup-download project-popup-application"
-              href={application_link}
+              href={app_link}
               target="_blank"
             >
               <SvgIcon size="20" path={mdiDownload} type="mdi" />
