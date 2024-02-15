@@ -47,7 +47,7 @@
         target="_blank"
       >
         <SvgIcon
-          size={innerWidth < 1200 ? "15" : "20"}
+          size={innerWidth < 1000 ? "15" : "20"}
           path={mdiFileDocumentOutline}
           type="mdi"
         />

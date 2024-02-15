@@ -93,7 +93,7 @@
     padding-right: 0.6rem;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
     .suggest-main {
         width: 80dvw;
         left: 10dvw;
@@ -104,7 +104,7 @@
     }
 
     .suggest-text {
-        font-size: clamp(0.8rem, 2vw, 1rem);
+        font-size: clamp(0.7rem, 2vw, 1rem);
     }
 
     .suggest-download {
@@ -118,7 +118,13 @@
     }
 
     .suggest-center {
-        min-width: 8rem;
-        padding-right: 1rem;
+        min-width: 7rem;
+        padding-right: 1rem !important;
+        padding-left: 0 !important;
+    }
+
+    .suggest-container {
+        padding-left: 1rem;
+        padding-right: 0;
     }
 }
