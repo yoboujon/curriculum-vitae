@@ -1,0 +1,5 @@
+*               linguist-language=Plain Text
+*.sh            linguist-language=Shell
+*.rs            linguist-language=Rust
+*.svelte        linguist-language=Svelte
+*.js            linguist-language=JavaScript
